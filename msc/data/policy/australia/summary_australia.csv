@@ -1,0 +1,10 @@
+﻿Topic,Count,Name,Representation,Topic_Label
+-1,6,-1_O,['O'],O
+0,45,0_A,['A'],A
+1,42,1_C,['C'],C
+2,32,2_W,['W'],W
+3,30,3_T,['T'],T
+4,23,4_W,['W'],W
+5,21,5_F,['F'],F
+6,15,6_A,['A'],A
+7,13,7_C,['C'],C
