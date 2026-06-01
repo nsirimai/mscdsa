@@ -1,0 +1,35 @@
+# Oireachtas Joint Committee on Artificial Intelligence 18 November 2025
+
+Submission of Prof Muiris MacCarthaigh , Professor of Politics and Public Policy and Director of the Centre for Public Policy and Administration, Queen's University Belfast; and Dr Deepak Padmanabhan , Senior Lecturer in Computer Science at the School of Electronics, Electrical Engineering and Computer Science, Queen's University Belfast.
+
+We would like to make three key points in our opening statement.
+
+## The use of AI in Government
+
+With the widespread popularity and rapid penetration of AI into contemporary social and economic life, governments have come under significant public pressure to incorporate AI within their operations. It is purported that AI will bring efficiency and productivity to government activities, bring new insights to bear on policy problems, while also enhancing capacity for objective and data-driven decision making. A recent report by the OECD 1 on AI use by governments, while identifying many risks, also noted the risk of not engaging with AI to yield benefits and develop capacities.
+
+Although there is greater recognition of the different types of AI (e.g. symbolic, deep learning, generative), AI is primarily a data-driven technology that operates by distilling patterns from large historical datasets into decisions. This implicitly encodes a decisionmaking paradigm that is underpinned by historical records, one that seeks to ensure continuity and consistency. These attributes make it more appropriate for some policy sectors than others. In sectors with a volatile policy context, such as policing, trade or immigration, the logic of AI may not be as applicable compared to sectors such as education, health and housing.
+
+An uncritical or inappropriate adoption of AI across government may precipitate unintended, undesirable or even harmful consequences. The adoption of AI should be informed by a careful consideration of the trade-offs between reliance on historical decision-making patterns and sensitivity to the concrete circumstances around individual decisions.
+
+1 OECD (2025), Governing with Artificial Intelligence: The State of Play and Way Forward in Core Government Functions, OECDPublishing, Paris, https://doi.org/10.1787/795de142-en.
+
+## AI leading to changing modes of decision-making and accountability
+
+Major advances in the scale and pace of government operations during the twentieth and into the twenty-first century were, in general, transparent and subject to public accountability mechanisms. AI stands in contrast to this as, by design, it offers recommendations based on complex data patterns, with the underpinning logic of the recommendation being more opaque than transparent. This presents obvious challenges for the role of public servants, especially as ever-more consequential decisions are subject to AI-informed considerations. Public servants may find themselves having to explain why they do not agree with an AI recommendation and there is the danger that the pathway of least resistance is to uncritically accept AIgenerated decisions.
+
+It is important to recall that the design of AI has emerged from within the corporate sector. With the market economy being driven by logics of utilitarianism - the greatest good for the greatest number - rather than democratic inclusion, AI technologies embed the utilitarian calculus in their operation. For example, the training process of deep neural networks seeks to minimize average error, a paradigm that does nothing to prevent a small number of cases from being heavily disadvantaged.
+
+The opacity of AI-based decision making also poses some fundamental problems for democratic accountability. The government, and by extension public services, is accountable to both the parliament and the people at large. This encompasses the ability to ensure that each decision holds up to public scrutiny, including the process of how the decision was arrived at. Different forms of AI present different challenges to this, but essentially there are issues concerning how information is generated, and how it is used. This necessitates focusing attention on forms of AI that are sufficiently transparent in both regards to address the needs of public accountability.
+
+## Regulation of AI
+
+Ensuring effective regulation of AI is a challenge faced by most governments today, not least as large technology companies have global presence which makes jurisdictionspecific regulation hard to institute and enforce. While the EU has pioneered legislations such as GDPR and EU AI Act that have significant implications to big tech, they remain only preliminary steps towards ensuring that AI serves the public good. GDPR is motivated primarily by individualised data privacy considerations, whereas the EU AI Act seeks to prevent manifest risk. These ought to be widened and deepened.
+
+Efforts towards AI regulation ought to include transparency mandates for usage within critical sectors so key decisions remain amenable to scrutiny, challenge and rectification as necessary. The influence that AI firms wield presents a lopsided power equation where citizens may feel caught in a binary - finding themselves caught between using AI subject to terms they may not find acceptable, or to not use it at all. Governments around the world have found it difficult to hold AI firms to account, and such is the pace of technological change it has been a case of catching-up rather than setting the regulatory frameworks and democratic guardrails within which AI must operate.
+
+## Summary
+
+The AI age poses serious questions of substantive significance to Ireland. The growing pressure to adopt AI within governments poses risks which have several facets. The AI decision-making paradigm is grounded in historical data, one that engenders significant risk if used in volatile policy domains. The reliance on large datasets, while useful in its own ways, can also entrench inattention to the complexity of many public policy problems. The utilitarian values embedded in AI raise questions about democratic inclusion, and there is the associated risk of democratic backsliding through weak or no accountability.
+
+All of these issues call for significant attention to AI regulation generally, and its use across the many tasks which modern governments undertake. In the absence of a global consensus on AI usage and regulation, governments around the world may find it convenient to err on the side of inaction, not least in the context of challenges to multlateral co-operation. In this context, Ireland, and through the work of this Committee, may be uniquely positioned to be a leader in this work through targeted efforts at developing roadmaps that pioneer greater democratic consensus on AI development, usage and regulation.
