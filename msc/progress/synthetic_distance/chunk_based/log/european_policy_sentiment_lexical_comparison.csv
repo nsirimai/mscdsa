@@ -1,0 +1,3 @@
+comparison,unigram_js_divergence,bigram_js_divergence,tfidf_centroid_cosine
+european_policy_vs_original_sentiment,0.32968463098859696,0.7321911543906012,0.5412064494408297
+european_policy_vs_balanced_sentiment,0.33830276132642567,0.7472416980649578,0.5001960442721716
