@@ -1,0 +1,4 @@
+corpus,source_type,synthetic_type,documents,total_characters,total_words,avg_characters,avg_words
+policy,original,,56,3306541,478997,59045.375,8553.517857142857
+sentiment,original,,17,842718,129535,49571.64705882353,7619.705882352941
+sentiment,synthetic,,53,385364,57589,7271.018867924528,1086.5849056603774
