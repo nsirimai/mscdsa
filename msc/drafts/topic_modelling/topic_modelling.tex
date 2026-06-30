@@ -274,14 +274,15 @@ separated and not too imbalanced.
 
 \subsection{Policy BERTopic outcome}
 
-For the global policy corpus, the BERTopic search selected nine topics. The selected
-model had coherence 0.1060, cosine silhouette 0.1370, a largest topic share of 0.204
-and a smallest topic share of 0.038. Figure~\ref{fig:bertopic-policy-combined}
-shows the topic-number search on the left and the country-level topic distribution on
-the right. Although the ten-topic model achieved slightly higher coherence and
-balance, the nine-topic model obtained the strongest combined selection score because
-it gave the best separation while avoiding excessive fragmentation, as shown in
-Table~\ref{tab:bertopic-policy-global-topics}.
+For the global policy corpus, the BERTopic search selected nine
+topics (see the GitHub link\footnote{\href{https://github.com/nsirimai/mscdsa/blob/main/msc/progress/topic_modelling/bertopic/policy/bert_topic_modelling.ipynb}{\texttt{github.com/nsirimai/mscdsa/blob/main/msc/progress/topic\_modelling/bertopic/policy/bert\_topic\_modelling.ipynb}}}).
+The selected model had coherence 0.1060, cosine silhouette 0.1370, a largest topic
+share of 0.204 and a smallest topic share of 0.038.
+Figure~\ref{fig:bertopic-policy-combined} shows the topic-number search on the left
+and the country-level topic distribution on the right. Although the ten-topic model
+achieved slightly higher coherence and balance, the nine-topic model obtained the
+strongest combined selection score because it gave the best separation while avoiding
+excessive fragmentation, as shown in Table~\ref{tab:bertopic-policy-global-topics}.
 
 \begin{figure}[h]
     \centering
@@ -354,26 +355,26 @@ whereas others require more granular models.
 
 \subsection{Sentiment BERTopic outcome and synthetic robustness}
 
-The sentiment BERTopic pipeline used the same modelling logic, but synthetic data was
-used only as a robustness tool. The original sentiment chunks were used to fit the
-empirical BERTopic model. Synthetic sentiment chunks were then assigned to the
-learned topic space in order to test whether the discovered structure was stable
-under artificial perturbation. This follows the same rule introduced in the LDA
-stage: synthetic text can support stress testing and data augmentation research, but
-it must be kept analytically separate from empirical evidence
+The sentiment BERTopic
+pipeline\footnote{\href{https://github.com/nsirimai/mscdsa/blob/main/msc/progress/topic_modelling/bertopic/sentiment/bert_topic_modelling.ipynb}{\texttt{github.com/nsirimai/mscdsa/blob/main/msc/progress/topic\_modelling/bertopic/sentiment/bert\_topic\_modelling.ipynb}}}
+used the same modelling logic, but synthetic data was used only as a robustness tool.
+The original sentiment chunks were used to fit the empirical BERTopic model.
+Synthetic sentiment chunks were then assigned to the learned topic space in order to
+test whether the discovered structure was stable under artificial perturbation. This
+follows the same rule introduced in the LDA stage: synthetic text can support stress
+testing and data augmentation research, but it must be kept analytically separate
+from empirical evidence
 \cite{halterman2025synthetic,chen2023empirical,chim2025evaluating}.
 
-For the original sentiment corpus, the topic-number search selected nine topics. The
-selected model had coherence 0.0538, cosine silhouette 0.1418, a largest topic share
+For the original sentiment corpus, the topic search selected nine topics. The
+model had coherence 0.0538, cosine silhouette 0.1418, a largest topic share
 of 0.231 and balance 0.769. Figure~\ref{fig:bertopic-sentiment-search} shows why the
-nine-topic model was retained: the ten-topic model had slightly stronger silhouette
-and balance, but the nine-topic model produced the highest combined selection score
-because it was substantially more coherent. The resulting sentiment topics mainly
-capture concern, teacher adaptation, learning experience, ethics, implementation
-risks, social harm and public hopes or fears around AI in education. The topic shares
-and SLM-generated phrases are summarised in
-Table~\ref{tab:bertopic-sentiment-topics}. This provides a more fine-grained
-sentiment map than the LDA baseline while preserving topic-level interpretability.
+nine-topic model was kept: the ten-topic model had slightly stronger silhouette
+and balance, but the nine-topic model had the best combined score because its topics
+were clearer. The topics mainly show concern, teacher change, learning, ethics,
+use risks, social harm and public hopes or fears around AI in schools. The topic
+shares and SLM phrases are shown in Table~\ref{tab:bertopic-sentiment-topics}. This
+gives a clearer sentiment map than the LDA baseline.
 
 \begin{figure}[h]
     \centering
@@ -446,10 +447,10 @@ resulting topic weights are explicit, inspectable and easier to aggregate across
 countries, corpora and later policy--sentiment comparisons
 \cite{lee1999learning,xu2003document}.
 
-Unlike BERTopic, which treats topic modelling as clustering, NMF keeps the model close
-to the TF--IDF representation of the cleaned chunks. It therefore provides a stable
-factorisation-based reference after the LDA and BERTopic baselines. As before, the SLM
-was used only after topic modelling to phrase topic titles from keywords and
+Unlike BERTopic, which treats topic modelling as clustering, NMF keeps the model
+close to the TF--IDF representation of the cleaned chunks. It therefore provides a
+stable factorisation-based reference after the LDA and BERTopic baselines. As before,
+the SLM was used only after topic modelling to phrase topic titles from keywords and
 representative documents; it was not used to create the topic assignments.
 
 \begin{verbatim}
@@ -463,25 +464,27 @@ Cleaned chunks
   -> use a small language model only for topic phrasing
 \end{verbatim}
 
-The number of topics was selected using the same model-selection logic as the previous
-pipelines. NPMI coherence was used to measure whether the top words of each topic form
-an interpretable semantic group \cite{roder2015exploring}. Cosine silhouette was used
-to check whether documents assigned to the same dominant topic were closer to each
-other than to documents assigned to other topics \cite{rousseeuw1987silhouettes}.
-Topic diversity was retained to penalise repeated or overlapping topic-word lists
-\cite{dieng2020topic}. Topic balance was used as an internal diagnostic to avoid
-models dominated by one very large topic. The final choice therefore had to balance
-interpretability, separation, diversity and usable topic size.
+The number of topics was selected using the same model-selection logic as the
+previous pipelines. NPMI coherence was used to measure whether the top words of each
+topic form an interpretable semantic group \cite{roder2015exploring}. Cosine
+silhouette was used to check whether documents assigned to the same dominant topic
+were closer to each other than to documents assigned to other topics
+\cite{rousseeuw1987silhouettes}. Topic diversity was retained to penalise repeated or
+overlapping topic-word lists \cite{dieng2020topic}. Topic balance was used as an
+internal diagnostic to avoid models dominated by one very large topic. The final
+choice therefore had to balance interpretability, separation, diversity and usable
+topic size.
 
 \subsection{Policy NMF outcome}
 
-For the global policy corpus, the NMF search selected nine topics. The selected model
-had NPMI coherence 0.0953, cosine silhouette 0.6685, a largest topic share of 0.147,
-a smallest topic share of 0.048, balance 0.853 and diversity 0.917.
-Figure~\ref{fig:nmf-policy-combined} shows the topic-number search on the left and
-the country-level distribution on the right. The nine-topic model was retained because
-it gave the strongest overall quality within the selected range while avoiding the
-large dominant topic produced by smaller models.
+For the global policy corpus, the NMF search selected nine topics as
+well\footnote{\href{https://github.com/nsirimai/mscdsa/blob/main/msc/progress/topic_modelling/nmf/policy/nmf_topic_modelling.ipynb}{\texttt{github.com/nsirimai/mscdsa/blob/main/msc/progress/topic\_modelling/nmf/policy/nmf\_topic\_modelling.ipynb}}}.
+The selected model had NPMI coherence 0.0953, cosine silhouette 0.6685, a largest
+topic share of 0.147, a smallest topic share of 0.048, balance 0.853 and diversity
+0.917. Figure~\ref{fig:nmf-policy-combined} shows the topic-number search on the left
+and the country-level distribution on the right. The nine-topic model was retained
+because it gave the strongest overall quality within the selected range while
+avoiding the large dominant topic produced by smaller models.
 
 \begin{figure}[h]
     \centering
@@ -538,8 +541,7 @@ topic space in order to test whether the discovered sentiment structure was stab
 under artificial perturbation. As in the LDA and BERTopic stages, synthetic data is
 therefore treated as robustness evidence, not as final empirical evidence
 \cite{halterman2025synthetic,chen2023empirical,chim2025evaluating}.
-
-For the original sentiment corpus, the final selected NMF model used nine topics. The
+For the original sentiment corpus, the final selected NMF model used nine topics\footnote{\href{https://github.com/nsirimai/mscdsa/blob/main/msc/progress/topic_modelling/nmf/sentiment/nmf_topic_modelling.ipynb}{\texttt{github.com/nsirimai/mscdsa/blob/main/msc/progress/topic\_modelling/nmf/sentiment/nmf\_topic\_modelling.ipynb}}}. The
 selected model had NPMI coherence 0.0191, cosine silhouette 0.7417, a largest topic
 share of 0.198, a smallest topic share of 0.064, balance 0.802 and diversity 0.917.
 Figure~\ref{fig:nmf-sentiment-search} shows the topic-number search. Although smaller
@@ -548,7 +550,7 @@ sentiment map while still satisfying the balance and minimum-share constraints.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.38]{images/sentiment_nmf_topic_selection_metrics.png}
+    \includegraphics[scale=0.35]{images/sentiment_nmf_topic_selection_metrics.png}
     \caption{Sentiment NMF topic-number search using normalised coherence, cosine silhouette, diversity, balance and the combined selection score.}
     \label{fig:nmf-sentiment-search}
 \end{figure}
