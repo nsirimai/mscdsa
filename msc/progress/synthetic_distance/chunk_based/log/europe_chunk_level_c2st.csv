@@ -1,0 +1,2 @@
+comparison,accuracy_mean,accuracy_std,f1_mean,f1_std,roc_auc_mean,roc_auc_std
+original_sentiment_vs_selected_synthetic_sentiment_chunks,0.9527777777777778,0.012036245621339616,0.9502294197031039,0.013314415598142944,0.9950243902439023,0.0066466393421724

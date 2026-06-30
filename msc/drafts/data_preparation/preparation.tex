@@ -1,0 +1,322 @@
+\documentclass{article}
+\usepackage{ITB_MSCe}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{bold-extra} % bold tt
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{latexsym}
+\usepackage{upgreek}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{nicefrac}
+\usepackage{pifont}
+\usepackage{marvosym}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage[numbers]{natbib}
+\usepackage{eso-pic}
+\usepackage{textcomp}
+\usepackage{fancyvrb}
+\usepackage{mwe}
+\usepackage{lastpage}
+\usepackage{listings, xcolor}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+\usepackage{array}
+\usepackage{ragged2e}
+%\bibpunct{}{}{;}{a}{,}{,}
+
+\input{images/rgb}
+
+\lstdefinestyle{python_code}{%
+  language=Python, basicstyle=\ttfamily, columns=fullflexible,
+  keywordstyle=\color{blue}, commentstyle=\itshape\color{green!50!black},
+  stringstyle=\color{magenta}, showstringspaces=false,
+  morekeywords={as,@staticmethod}, }
+
+\lstset{ style=python_code }
+
+\newsavebox{\sclbox}
+
+\newcolumntype{L}[1]{>{\RaggedRight}p{#1}}
+
+
+
+\newenvironment{declaration}
+  {\noindent\textbf{Declaration:}} {\par}
+
+\title{Explaining the policy--practice gap in AI education governance using
+multi-layered NLP: A comparative study}
+
+\author{
+\normalsize
+\begin{tabular}[t]{c@{\extracolsep{1em}}c} Mariem NSIRI & Geraldine GRAY\\
+Technological University Dublin & Technological University Dublin\\
+B00177462@myTUDublin.ie & supervisor.name@tudublin.ie
+\end{tabular}
+}
+
+%\date{\today}
+
+\begin{document}
+
+\section{Data Preparation and Corpus Construction}
+
+\subsection{PDF-to-Markdown Conversion}
+
+
+The first preparation step was to convert the collected PDF documents into Markdown
+files. This was done with two Docling-based pipelines: one for the policy corpus and
+one for the European sentiment
+corpus.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/progress/markdown_extraction}}
+A direct PDF-to-CSV extraction approach, for example using tools such as
+\texttt{pdfplumber}, would have been less suitable at this stage. Such tools can
+extract text, but the result is often close to a flat text dump, where headings,
+sections, figure captions, tables, page layout, and reading order are harder to
+preserve. This would make later chunking, inspection, and interpretation more
+difficult.
+
+Markdown was therefore used as an intermediate format. It is easier to read, correct,
+inspect, and transform than raw PDF output, while still preserving useful structure
+such as titles, sections, lists, paragraphs, and some table or figure content.
+Docling is a document-conversion toolkit that supports PDF understanding, layout
+analysis, table structure recognition, and export to Markdown \cite{auer2024docling}.
+Docling can also extract visual elements such as images and figures. Selected
+figures, charts, screenshots, and visual summaries were then converted into textual
+descriptions with ChatGPT and manually inserted into the Markdown files at the
+relevant places. This helped preserve information that could be lost in a direct
+PDF-to-CSV extraction. Markdown is therefore used here as a practical bridge between
+raw PDFs and the structured textual datasets used for NLP.
+
+A light Markdown cleaning step was then applied before creating the structured
+datasets.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/progress/markdown_cleaning}}
+This step did not rewrite or simplify the documents. It mainly removed technical
+extraction noise, such as HTML comments, broken Markdown image links, raw local image
+paths, isolated page numbers, table-of-contents artefacts, repeated headings,
+decorative separators, and excessive blank spaces. Normal tables, headings, numbers,
+section structure, and meaningful document content were preserved. The raw extracted
+Markdown files and the cleaned Markdown files are available in the project repository
+under the raw Markdown
+folder\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/markdown/raw}}
+and cleaned Markdown
+folder\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/markdown/cleaned}},
+respectively.
+
+
+\subsection{Generation of Synthetic Sentiment Markdown Files}
+
+Because the European sentiment corpus was smaller than the policy corpus, a synthetic
+sentiment corpus was created as a support dataset for robustness
+testing.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/markdown/synthetic/sentiment}}
+The aim was not to create new evidence about public opinion, but to test whether the
+NLP pipeline remains stable when the sentiment side is closer in size to the France
+and Ireland policy corpus. This follows work showing that synthetic text can be
+useful in limited-data settings, especially when the generated data is clearly
+separated from the original corpus and used for controlled methodological purposes
+rather than as a substitute for real observations
+\cite{halterman2025synthetically,chen2023empirical}. The generation also reflects a
+wider point in synthetic-data research: synthetic data may have practical utility,
+but its value depends on how it is used, labelled, and evaluated
+\cite{snoke2018general,chim2025evaluating}. A ChatGPT prompt was therefore used to
+generate synthetic Markdown files in two simple styles: public-sentiment comments and
+press-release-like
+texts.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/prompts}} The
+content focused on themes already present in the European sentiment corpus, including
+AI literacy, teacher training, privacy, trust, transparency, student support,
+responsible use, equity, and public confidence.
+
+Several constraints were enforced to avoid contaminating the empirical data. The
+synthetic files were not allowed to include numbers, percentages, fake survey
+results, tables, or artificial quantitative claims. This was important because the
+original sentiment reports contain real survey evidence, and invented figures could
+be misleading if mixed with empirical results. The synthetic corpus was therefore
+designed as qualitative auxiliary material, useful for corpus balance, sensitivity
+checks, and pipeline stress testing. It was not designed to replace the original
+sentiment evidence or to be fused with it as empirical data. This is consistent with
+recent work on synthetic text evaluation, which argues that generated text should be
+assessed through meaning preservation, divergence, fidelity, and downstream
+usefulness before it is used in analysis \cite{chim2025evaluating,tari2026privacy}.
+
+The main limitation is that the generated texts remain synthetic and can still be
+distinguished from the original reports. This was confirmed through the validation
+pipeline, especially the classifier two-sample test. This limitation is not treated
+as a failure, but as a transparency signal. It confirms that the synthetic corpus
+must remain labelled in the metadata and analytically separate from the original
+corpus. The synthetic data is therefore used only in robustness analysis and
+corpus-balance experiments. It is not used to make claims about real public opinion,
+real survey frequencies, or actual respondents.
+
+
+
+\subsection{Markdown-to-CSV Conversion}
+
+
+After the Markdown files were cleaned and the synthetic sentiment Markdown files were
+generated, the next step was to convert all Markdown documents into CSV
+files.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/progress/csv_creator}}
+This made the corpus easier to inspect and analyse with Python and NLP tools. This
+step did not apply heavy cleaning or modify the document content. Its role was mainly
+to organise each Markdown file into a structured row with metadata, including the
+document identifier, corpus type, country, source type, file path, character count,
+and word count. Keeping the full text in one CSV field made it easier to compare
+document sizes, check the corpus structure, prepare later chunked datasets, and keep
+a clear link between each text and its original Markdown file. The CSV files
+therefore act as a structured bridge between the cleaned and synthetic Markdown
+corpora and the later NLP pipelines. The raw CSV outputs are available in the project
+repository.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/csvs/raw}}
+
+
+\subsection{Data Chunking}
+
+After the Markdown files were converted into CSV format, the next step was to create
+a chunked version of the
+corpus.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/progress/csv_chunker}}
+The purpose of this step was not to clean or rewrite the documents, but to create
+smaller and more comparable text units for NLP analysis. The policy reports and
+sentiment reports are long and often contain several topics in the same document. If
+a whole document is represented as one TF-IDF vector, embedding, or topic-modelling
+input, different themes may be averaged together. This design is consistent with
+earlier work on text segmentation, where long texts are divided into multi-paragraph
+passages that correspond to subtopics \cite{hearst1997texttiling}. It is also
+consistent with recent work on chunk embeddings, which notes that dense vector
+retrieval can benefit from shorter text segments because long texts may be
+over-compressed into a single embedding
+\cite{gunther2024latechunking,duarte2024lumberchunker}. For this reason, the chunking
+pipeline split the documents into heading-aware and size-controlled chunks, while
+preserving the original document metadata. 
+
+The chunker used Markdown headings as local context and stored this information in a
+\texttt{heading\_context} field. It also preserved metadata such as \texttt{doc\_id},
+corpus type, country, source type, file path, chunk index, character count, and word
+count. The chunks were created around a target size of 350 words, with an overlap of
+50 words and a minimum size threshold. The aim was to keep enough local context while
+avoiding very long text units that could mix several themes. This is useful for later
+embedding-based analysis, because Sentence-BERT represents texts as dense semantic
+vectors that can be compared using cosine similarity \cite{reimers2019sentence}.
+Applying embeddings to shorter chunks reduced the risk of merging unrelated themes
+into one vector. The chunk-level comparison was therefore used as a practical design
+choice to reduce over-compression of long, multi-topic documents into a single
+representation. The generated chunked CSV files are available in the project
+repository.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/csvs/chunked}}
+
+
+
+The main strength of chunking is that it improves comparability between different
+document types. Long policy reports, sentiment reports, and synthetic Markdown files
+can be analysed using more similar units of text. It also improves traceability,
+because each chunk remains linked to its source document and section context. This
+supports a mixed computational and qualitative workflow: the model can operate on
+manageable text units, while the researcher can still return to the original document
+when interpretation is needed. This interpretive step remains important in
+policy-text analysis, where topic modelling should support, not replace, qualitative
+judgement \cite{isoaho2021topic}.
+
+The main limitation is that chunking is not neutral. A chunk boundary can sometimes
+split an argument, and overlap can repeat some text across neighbouring chunks. This
+can slightly increase the chunk-level character count and may influence
+frequency-based methods. G{\"u}nther et al. make a similar point in their work on
+contextual chunk embeddings: standard chunking can lose information from the
+surrounding context, so chunk size and overlap remain practical compromises rather
+than perfect solutions \cite{gunther2024latechunking}. For this reason, the full
+document-level CSV files were preserved alongside the chunked dataset.
+
+\subsection{Synthetic Sentiment Distance Evaluation}
+
+Before using the synthetic sentiment corpus in robustness experiments, its distance
+from the original sentiment corpus was evaluated. The aim was not to prove that the
+synthetic texts were identical to the original reports. Instead, the aim was to check
+whether they were close enough to be useful as labelled auxiliary data, while still
+keeping them separate from the empirical sentiment corpus. This follows recent work
+on synthetic text evaluation, which argues that generated data should be assessed
+through fidelity, divergence, and downstream usefulness rather than assumed to be
+equivalent to real data \cite{chim2025evaluating,tari2026privacy}.
+
+The validation used several complementary distance measures. Lexical similarity was
+measured with unigram and bigram Jensen--Shannon divergence, which provides a
+symmetric way to compare probability distributions \cite{endres2003new}. TF-IDF
+centroid cosine similarity was also used to compare the vocabulary space of the
+original and synthetic chunks, following the general vector-space model logic used in
+information retrieval \cite{salton1988term}. Semantic similarity was measured with
+sentence embeddings, using Sentence-BERT-style representations that can be compared
+with cosine similarity \cite{reimers2019sentence}. To compare the broader embedding
+distributions, the pipeline also used Fréchet embedding distance, inspired by
+distributional evaluation in generative modelling \cite{heusel2017gans}, and Maximum
+Mean Discrepancy, a kernel-based two-sample distance \cite{gretton2012kernel}.
+
+A classifier two-sample test C2ST was also included. In this test, a classifier is
+trained to distinguish original sentiment chunks from synthetic sentiment chunks. If
+the classifier performs close to chance, the two samples are difficult to
+distinguish; if it performs well, the synthetic corpus still contains detectable
+differences. This follows the classifier two-sample testing framework proposed by
+Lopez-Paz and Oquab \cite{lopez2016revisiting}. In this work, the C2ST result was
+treated as a transparency signal. A high score does not automatically invalidate the
+synthetic corpus, but it confirms that the synthetic data must remain labelled and
+analytically separate from the original data.
+
+The same pipeline also compared the European policy corpus with the original
+sentiment corpus, and then with the balanced sentiment corpus made of original plus
+selected synthetic sentiment chunks. This made it possible to check whether adding
+synthetic sentiment data changed the policy--sentiment distance. The synthetic corpus
+is therefore used only for robustness and sensitivity analysis. It is not used to
+make claims about real public opinion, survey frequencies, or actual respondents.
+
+
+\subsubsection*{Outcome of the Distance Evaluation}
+
+The distance evaluation was mainly applied to the chunked
+data.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/progress/synthetic_distance/chunk_based}}
+The validation shows that the synthetic sentiment corpus reached a close
+character-level balance with the France and Ireland policy corpus at chunk level. The
+balanced sentiment corpus contains 1,323,166 characters, compared with 1,324,951
+characters in the European policy corpus, leaving only a small difference of 1,785
+characters. The original and synthetic sentiment chunks show moderate lexical
+similarity, with a TF-IDF cosine score of 0.572, but stronger semantic similarity,
+with an embedding centroid cosine of 0.951 and a low MMD value of 0.000391. This
+suggests that the synthetic chunks cover a similar semantic space to the original
+sentiment corpus, even if they do not reproduce the same surface wording.
+
+The C2ST still shows high distinguishability, with an accuracy of 0.953 and a ROC-AUC
+of 0.995. This confirms that the synthetic corpus is not identical to the original
+corpus and should remain labelled and analytically separate. The European policy
+comparison also shows that adding synthetic sentiment data does not artificially make
+the sentiment corpus closer to policy language, since the TF-IDF cosine decreases
+from 0.541 to 0.500. Overall, the outcome supports the intended use of the synthetic
+sentiment corpus as auxiliary data for robustness and sensitivity testing, not as
+empirical evidence about public opinion.
+
+\subsubsection*{Comparison with Document-Level Validation}
+
+A document-level validation was also run as a supplementary
+check.\footnote{\url{https://github.com/nsirimai/mscdsa/tree/main/msc/progress/synthetic_distance/doc_based}}
+At document level, the synthetic corpus showed weaker lexical and semantic alignment
+with the original sentiment corpus than in the chunk-level pipeline. For example, the
+TF-IDF cosine increased from 0.489 at document level to 0.572 at chunk level, while
+the embedding centroid cosine increased from 0.877 to 0.951. The Fréchet embedding
+distance also decreased from 0.821 to 0.342, and MMD decreased from 0.000757 to
+0.000391. These results suggest that chunking gives a more faithful view of local
+semantic similarity, because long documents often mix several themes in one
+representation. However, both pipelines showed high classifier distinguishability,
+with document-level ROC-AUC of 1.000 and chunk-level ROC-AUC of 0.995. This confirms
+the same methodological conclusion: the synthetic sentiment corpus is useful for
+robustness and balance testing, but it remains distinguishable from the original
+corpus and must stay labelled and analytically separate.
+
+
+
+
+
+
+
+\newpage
+\bibliographystyle{abbrv}
+\bibliography{bibliography}
+
+\end{document}

@@ -1,0 +1,38 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.6)  13 APR 2015 14:49
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**abstract.tex
+(./abstract.tex
+LaTeX2e <2011/06/27>
+Babel <3.9f> and hyphenation patterns for 78 languages loaded.
+
+./abstract.tex:6: LaTeX Error: Environment abstracts undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.6 \begin{abstracts}
+                             %this creates the heading for the abstract page
+? 
+./abstract.tex:6: Emergency stop.
+ ...                                              
+                                                  
+l.6 \begin{abstracts}
+                             %this creates the heading for the abstract page
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+ 
+Here is how much of TeX's memory you used:
+ 7 strings out of 493315
+ 279 string characters out of 6137904
+ 52158 words of memory out of 5000000
+ 3558 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 5i,0n,4p,100b,16s stack positions out of 5000i,500n,10000p,200000b,80000s
+./abstract.tex:6:  ==> Fatal error occurred, no output PDF file produced!

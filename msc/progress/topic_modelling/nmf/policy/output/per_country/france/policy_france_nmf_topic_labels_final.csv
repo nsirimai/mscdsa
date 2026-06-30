@@ -1,0 +1,71 @@
+﻿topic,topic_label,topic_prototype,policy_area,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,National AI Curriculum Development and School Coordination,The French government plans to develop an AI curriculum for schools while coordinating efforts across different levels of administration.,AI in Education,True,False,Merge with 'National AI Curriculum Development and School Coordination',"déploiement, établissements, place, acteurs, mise, niveau, cadre, sein, outils, mise place, usage, entre","```json
+{
+  ""label"": ""National AI Curriculum Development and School Coordination"",
+  ""prototype"": ""The French government plans to develop an AI curriculum for schools while coordinating efforts across different levels of administration."",
+  ""policy_area"": ""AI in Education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with 'National AI Curriculum Development and School Coordination'""
+}
+```"
+1,France's National AI Strategy and Funding,France invests heavily in AI through strategic planning and significant funding.,AI Strategy and Funding,True,False,Investment in AI includes both public and private sectors.,"investment, research, strategy, compute, public, fund, company, phase, economic, power, european, global","```json
+{
+  ""label"": ""France's National AI Strategy and Funding"",
+  ""prototype"": ""France invests heavily in AI through strategic planning and significant funding."",
+  ""policy_area"": ""AI Strategy and Funding"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Investment in AI includes both public and private sectors.""
+}
+```"
+2,AI in Education and Pédagogical Practices,"Éduquer à l'IA : comprendre les enjeux éducatifs et éthiques, maîtriser l'utilisation et l'évaluation des outils IA, respecter les droits des jeunes et garantir la sécurité numérique.",Éducation et pédagogie,True,False,"Utilisez ce label pour aborder les aspects éducatifs et pédagogiques concernant l'IA, y compris la formation des enseignants, l'utilisation des outils IA, et la protection des droits des élèves.","données, usage, outils, utilisation, évaluation, critique, cadre, pédagogique, ressources, risques, utiliser, génératives","```json
+{
+  ""label"": ""AI in Education and Pédagogical Practices"",
+  ""prototype"": ""Éduquer à l'IA : comprendre les enjeux éducatifs et éthiques, maîtriser l'utilisation et l'évaluation des outils IA, respecter les droits des jeunes et garantir la sécurité numérique."",
+  ""policy_area"": ""Éducation et pédagogie"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Utilisez ce label pour aborder les aspects éducatifs et pédagogiques concernant l'IA, y compris la formation des enseignants, l'utilisation des outils IA, et la protection des droits des élèves.""
+}
+```"
+3,Large Language Models in Educational Technology,Exploring the role of large language models in enhancing educational technology.,Education,True,False,"Focus on how these models can improve teaching methods, accessibility, and personalized learning experiences.","language, chatgpt, teach, source, assessment, large, task, user, module, response, prompt, word","```json
+{
+  ""label"": ""Large Language Models in Educational Technology"",
+  ""prototype"": ""Exploring the role of large language models in enhancing educational technology."",
+  ""policy_area"": ""Education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Focus on how these models can improve teaching methods, accessibility, and personalized learning experiences.""
+}
+```"
+4,French AI Law and Regulation,France's approach to regulating AI through legal precedents and court rulings.,AI Law and Regulation,True,False,,"court, legal, patent, precedent, protect, regulation, decision, cnil, creative, protection, intellectual, property","```json
+{
+  ""label"": ""French AI Law and Regulation"",
+  ""prototype"": ""France's approach to regulating AI through legal precedents and court rulings."",
+  ""policy_area"": ""AI Law and Regulation"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+5,"AI in French Schools: Usage, Responses, and Challenges",French schools implementing AI tools and their impact on teaching methods.,Education,True,False,Merge with 'AI in School Management Systems',"répondants, questionnaire, réponses, oui, extrait, manque, usage, temp, répondants répondants, extrait questionnaire, freins, sais","```json
+{
+  ""label"": ""AI in French Schools: Usage, Responses, and Challenges"",
+  ""prototype"": ""French schools implementing AI tools and their impact on teaching methods."",
+  ""policy_area"": ""Education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with 'AI in School Management Systems'""
+}
+```"
+6,Academic Digital Transformation Leadership in France,France's approach to integrating digital technologies into academic leadership roles.,Academic Governance,True,False,Focus on the role of directors and deputy-directors in implementing digital strategies.,"numérique, recherche, académique, unesco, directeur, adjoint, billet, billet recherche, académie, directrice, délégué, lycée","```json
+{
+  ""label"": ""Academic Digital Transformation Leadership in France"",
+  ""prototype"": ""France's approach to integrating digital technologies into academic leadership roles."",
+  ""policy_area"": ""Academic Governance"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Focus on the role of directors and deputy-directors in implementing digital strategies.""
+}
+```"

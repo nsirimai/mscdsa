@@ -1,0 +1,6 @@
+﻿country,documents,chunks,mean_chunk_words,median_chunk_words,min_chunk_words,max_chunk_words
+australia,17,353,230.23796033994336,216.0,41,651
+france,7,312,257.0897435897436,272.5,8,701
+ireland,15,435,260.6183908045977,298.0,7,554
+unesco,2,204,267.0686274509804,314.5,80,437
+usa,15,539,236.17068645640074,218.0,8,1500

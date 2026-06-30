@@ -1,0 +1,81 @@
+﻿topic,topic_label,topic_prototype,policy_area,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,National AI Strategy Implementation in Education Institutions,"The French government has implemented a national strategy on artificial intelligence in education, focusing on deploying AI technologies across various levels of educational institutions.",Education,True,False,"Merge with existing topics related to AI in education, national strategies, and institutional implementation.","déploiement, acteurs, établissements, place, mise, sein, académiques, entre, niveau, stratégie, cadre, nationale","```json
+{
+  ""label"": ""National AI Strategy Implementation in Education Institutions"",
+  ""prototype"": ""The French government has implemented a national strategy on artificial intelligence in education, focusing on deploying AI technologies across various levels of educational institutions."",
+  ""policy_area"": ""Education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with existing topics related to AI in education, national strategies, and institutional implementation.""
+}
+```"
+1,AI in French School Curriculum and Teacher Training,French schools are implementing AI tools to enhance learning experiences while ensuring ethical considerations.,school curriculum and teacher training,True,False,Merge with 'AI in French Education and Youth Development',"outils, données, utilisation, risques, apprentissages, critique, évaluation, devoir, travail, pédagogique, aide, compétences","```json
+{
+  ""label"": ""AI in French School Curriculum and Teacher Training"",
+  ""prototype"": ""French schools are implementing AI tools to enhance learning experiences while ensuring ethical considerations."",
+  ""policy_area"": ""school curriculum and teacher training"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with 'AI in French Education and Youth Development'""
+}
+```"
+2,AI Integration in French School Curriculum,French schools integrating artificial intelligence into their curricula through various initiatives.,school curriculum integration,True,False,Consider merging with 'AI in Education' if broader context of AI in educational policies is needed.,"recherche, comprendre, prompt, venir, numérique, données, étapes, ressources, unesco, fraternite, utiliser, billet","```json
+{
+  ""label"": ""AI Integration in French School Curriculum"",
+  ""prototype"": ""French schools integrating artificial intelligence into their curricula through various initiatives."",
+  ""policy_area"": ""school curriculum integration"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with 'AI in Education' if broader context of AI in educational policies is needed.""
+}
+```"
+3,AI-Powered Personalized Learning Systems in French Schools,French schools increasingly rely on AI-powered personalized learning systems to enhance the learning experience.,education,True,False,Consider merging with topics related to AI in education and school governance.,"language, teach, source, response, ethical, user, assessment, task, knowledge, natural, content, chatgpt","```json
+{
+  ""label"": ""AI-Powered Personalized Learning Systems in French Schools"",
+  ""prototype"": ""French schools increasingly rely on AI-powered personalized learning systems to enhance the learning experience."",
+  ""policy_area"": ""education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with topics related to AI in education and school governance.""
+}
+```"
+4,French AI Research and Innovation Funding,France allocates significant funds through various initiatives to promote AI research and innovation.,AI Research and Innovation,True,False,"Merge with topics related to AI investment, research, and funding.","investment, research, economic, company, compute, strategy, global, power, public, market, fund, phase","```json
+{
+  ""label"": ""French AI Research and Innovation Funding"",
+  ""prototype"": ""France allocates significant funds through various initiatives to promote AI research and innovation."",
+  ""policy_area"": ""AI Research and Innovation"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with topics related to AI investment, research, and funding.""
+}
+```"
+5,France's AI Regulation and Intellectual Property Framework,Recent French AI regulations emphasize strict adherence to existing data protection laws while fostering a balanced approach to intellectual property.,AI Regulation and Intellectual Property,True,False,,"court, legal, patent, protect, precedent, creative, intellectual, decision, regulation, property, cnil, gdpr","```json
+{
+  ""label"": ""France's AI Regulation and Intellectual Property Framework"",
+  ""prototype"": ""Recent French AI regulations emphasize strict adherence to existing data protection laws while fostering a balanced approach to intellectual property."",
+  ""policy_area"": ""AI Regulation and Intellectual Property"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+6,AI in French School Curriculum and Teacher Training,French schools increasingly integrate AI into their curricula and teacher training programs.,school curriculum and teacher training,True,False,Consider merging with 'AI in French Education Curriculum',"répondants, questionnaire, extrait, manque, réponses, oui, réserves, freins, temp, sais, territorial, montre","```json
+{
+  ""label"": ""AI in French School Curriculum and Teacher Training"",
+  ""prototype"": ""French schools increasingly integrate AI into their curricula and teacher training programs."",
+  ""policy_area"": ""school curriculum and teacher training"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with 'AI in French Education Curriculum'""
+}
+```"
+7,Academic Leadership in Digital Education,The French academic leadership plays a crucial role in shaping educational policies related to digital technologies.,education,True,False,Merge with 'Academic Leadership in Digital Education',"adjoint, directeur, académique, délégué, directrice, régional, proviseur, académie, adjointe, secrétaire, collège, lycée","```json
+{
+  ""label"": ""Academic Leadership in Digital Education"",
+  ""prototype"": ""The French academic leadership plays a crucial role in shaping educational policies related to digital technologies."",
+  ""policy_area"": ""education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with 'Academic Leadership in Digital Education'""
+}
+```"

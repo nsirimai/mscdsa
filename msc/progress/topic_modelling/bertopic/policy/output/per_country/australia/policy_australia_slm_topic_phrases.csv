@@ -1,0 +1,41 @@
+﻿topic,topic_label,topic_prototype,policy_area,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,AI Integration and Student Learning Oversight,Guidance on responsible AI integration in Australian schools.,school governance,True,False,Consider merging with 'Student Privacy and Academic Integrity' if both topics align closely.,"staff, assessment, content, generate, help, task, personal, academic, teach, privacy, guideline, feedback","```json
+{
+  ""label"": ""AI Integration and Student Learning Oversight"",
+  ""prototype"": ""Guidance on responsible AI integration in Australian schools."",
+  ""policy_area"": ""school governance"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with 'Student Privacy and Academic Integrity' if both topics align closely.""
+}
+```"
+1,AI Governance and Child Rights,The Australian government has established an AI ethics framework aimed at ensuring the safe and fair use of AI technologies.,AI Governance,True,False,Consider merging with 'AI Ethics Guidelines for Youth Privacy',"principle, ethical, accountability, framework, transparency, child, privacy, fairness, wellbeing, guidance, safety, teach","```json
+{
+  ""label"": ""AI Governance and Child Rights"",
+  ""prototype"": ""The Australian government has established an AI ethics framework aimed at ensuring the safe and fair use of AI technologies."",
+  ""policy_area"": ""AI Governance"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with 'AI Ethics Guidelines for Youth Privacy'""
+}
+```"
+2,Cognitive Offloading and Metacognition in Digital Learning,The Australian Network for Quality Digital Education addresses the challenges of AI and harmful cognitive offloading through strategic deployment of AI and educational design.,Education,True,False,,"cognitive, load, offload, metacognitive, study, critical, learner, performance, knowledge, thinking, memory, effect","```json
+{
+  ""label"": ""Cognitive Offloading and Metacognition in Digital Learning"",
+  ""prototype"": ""The Australian Network for Quality Digital Education addresses the challenges of AI and harmful cognitive offloading through strategic deployment of AI and educational design."",
+  ""policy_area"": ""Education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+3,AI Integration in School Assessments and Curriculum,Submission recommendations suggest incorporating AI into assessment practices while ensuring academic integrity.,school assessments and curriculum,True,False,Merge with other related topics focusing on AI in education.,"submission, recommendation, inquiry, tension, analysis, evidence, body, group, public, value, university, theme","```json
+{
+  ""label"": ""AI Integration in School Assessments and Curriculum"",
+  ""prototype"": ""Submission recommendations suggest incorporating AI into assessment practices while ensuring academic integrity."",
+  ""policy_area"": ""school assessments and curriculum"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with other related topics focusing on AI in education.""
+}
+```"

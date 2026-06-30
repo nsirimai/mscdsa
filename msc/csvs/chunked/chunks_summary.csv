@@ -1,0 +1,4 @@
+corpus,source_type,synthetic_type,chunks,documents,total_words,avg_words,total_chars,avg_chars
+policy,original,,2052,56,514694,250.82553606237818,3549030,1729.546783625731
+sentiment,original,,536,17,138115,257.67723880597015,912510,1702.4440298507463
+sentiment,synthetic,,212,53,66406,313.2358490566038,446667,2106.919811320755

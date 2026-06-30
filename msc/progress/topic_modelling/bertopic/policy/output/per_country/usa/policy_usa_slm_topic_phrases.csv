@@ -1,0 +1,91 @@
+﻿topic,topic_label,topic_prototype,policy_area,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,AI-Powered Learning and Teacher Support,The integration of AI technologies in educational settings enhances learning outcomes while providing personalized support to educators.,EdTech and Teacher Training,True,False,,"research, formative, learner, assessment, context, recommendation, edtech, feedback, people, journal, tutor, pattern","```json
+{
+  ""label"": ""AI-Powered Learning and Teacher Support"",
+  ""prototype"": ""The integration of AI technologies in educational settings enhances learning outcomes while providing personalized support to educators."",
+  ""policy_area"": ""EdTech and Teacher Training"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+1,AI-Policy Oversight and Child Privacy,The US government has implemented policies to ensure the ethical use of AI in educational settings.,school governance,True,False,Consider merging with 'AI-Policy Oversight and Student Rights' for more comprehensive coverage.,"medium, synthetic, child, privacy, deepfakes, act, chatgpt, user, content, optimisation, material, potential","```json
+{
+  ""label"": ""AI-Policy Oversight and Child Privacy"",
+  ""prototype"": ""The US government has implemented policies to ensure the ethical use of AI in educational settings."",
+  ""policy_area"": ""school governance"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with 'AI-Policy Oversight and Student Rights' for more comprehensive coverage.""
+}
+```"
+2,District AI Use Guidelines and Oversight,District-level guidelines and oversight frameworks for integrating artificial intelligence into K-12 education.,AI Use in Schools,True,False,Consider merging with existing AI governance topics if there are overlapping themes.,"literacy, guidance, framework, educator, toolkit, leader, guide, equitable, integration, integrate, ethical, ospi","```json
+{
+  ""label"": ""District AI Use Guidelines and Oversight"",
+  ""prototype"": ""District-level guidelines and oversight frameworks for integrating artificial intelligence into K-12 education."",
+  ""policy_area"": ""AI Use in Schools"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with existing AI governance topics if there are overlapping themes.""
+}
+```"
+3,AI Policy Guidance for Educators,Developing guidelines for integrating AI tools into educational practices while ensuring ethical considerations.,Educational Practices,True,False,Consider merging with existing policies related to digital learning environments.,"english, write, think, thing, class, high, know, assignment, time, alec, kind, midwest","```json
+{
+  ""label"": ""AI Policy Guidance for Educators"",
+  ""prototype"": ""Developing guidelines for integrating AI tools into educational practices while ensuring ethical considerations."",
+  ""policy_area"": ""Educational Practices"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with existing policies related to digital learning environments.""
+}
+```"
+4,Academic Integrity and AI Utilization Policies,Current policies regarding the use of AI in education and its impact on academic integrity.,Academic Integrity,True,False,"Merge with existing AI and education policy topics focusing on transparency, consent, and oversight.","staff, trust, pupils, academic, integrity, guideline, acceptable, responsible, protection, approve, safeguard, affiliate","```json
+{
+  ""label"": ""Academic Integrity and AI Utilization Policies"",
+  ""prototype"": ""Current policies regarding the use of AI in education and its impact on academic integrity."",
+  ""policy_area"": ""Academic Integrity"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with existing AI and education policy topics focusing on transparency, consent, and oversight.""
+}
+```"
+5,AI Integration in School Curriculum and Teacher Training,Districts implement AI integration into curricula and teacher training programs.,school curriculum and teacher training,True,False,Merge with topics related to AI in education and teacher training.,"achievement, disadvantage, effect, math, socioeconomic, regression, inequality, elementary, comparison, professor, caaspp, gap","```json
+{
+  ""label"": ""AI Integration in School Curriculum and Teacher Training"",
+  ""prototype"": ""Districts implement AI integration into curricula and teacher training programs."",
+  ""policy_area"": ""school curriculum and teacher training"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with topics related to AI in education and teacher training.""
+}
+```"
+6,AI Integration and Equity in School Practices,Local policies aim to integrate AI in schools while addressing structural biases and ensuring equitable access.,school AI governance and institutional accountability,True,False,Combine with 'AI Ethics and Transparency' for more comprehensive coverage.,"step, action, focus, ethical, reflection, integrity, forward, design, divide, literacy, transparency, share","```json
+{
+  ""label"": ""AI Integration and Equity in School Practices"",
+  ""prototype"": ""Local policies aim to integrate AI in schools while addressing structural biases and ensuring equitable access."",
+  ""policy_area"": ""school AI governance and institutional accountability"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Combine with 'AI Ethics and Transparency' for more comprehensive coverage.""
+}
+```"
+7,AI Integration and Compliance Oversight,Ensures AI integration aligns with legal and regulatory requirements while maintaining transparency and accessibility.,AI Integration and Compliance Oversight,True,False,,"legal, compliance, procurement, accessibility, focus, team, financial, oversight, review, transparency, leadership, operational","```json
+{
+  ""label"": ""AI Integration and Compliance Oversight"",
+  ""prototype"": ""Ensures AI integration aligns with legal and regulatory requirements while maintaining transparency and accessibility."",
+  ""policy_area"": ""AI Integration and Compliance Oversight"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+8,Guidebook on AI Integration in School Policies,This guidebook provides essential guidance for integrating AI into educational policies.,School AI Governance and Institutional Accountability,True,False,,"guidebook, best, try, arrival, interview, lab, justin, reich, convey, mit, teach, wait","```json
+{
+  ""label"": ""Guidebook on AI Integration in School Policies"",
+  ""prototype"": ""This guidebook provides essential guidance for integrating AI into educational policies."",
+  ""policy_area"": ""School AI Governance and Institutional Accountability"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"

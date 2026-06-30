@@ -1,0 +1,5 @@
+﻿country,documents_used,selected_topics,largest_topic_share,output_folder,image_folder
+australia,396,3,0.543,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/per_country/australia,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/img/per_country/australia
+france,326,7,0.334,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/per_country/france,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/img/per_country/france
+ireland,417,4,0.324,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/per_country/ireland,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/img/per_country/ireland
+usa,532,7,0.203,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/per_country/usa,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/img/per_country/usa

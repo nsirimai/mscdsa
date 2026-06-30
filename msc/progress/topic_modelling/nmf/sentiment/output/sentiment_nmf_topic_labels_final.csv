@@ -1,0 +1,82 @@
+﻿topic,topic_label,topic_prototype,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,Young People's AI Impact on Education and Well-being,The article discusses the influence of AI on young people's education and overall well-being.,True,False,,"young, young people, people, child, social, impact, health, support, medium, mental, mental health, game","```json
+{
+  ""label"": ""Young People's AI Impact on Education and Well-being"",
+  ""prototype"": ""The article discusses the influence of AI on young people's education and overall well-being."",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+1,Student Engagement and Teacher Adaptation to AI in Classrooms,This study explores how students' engagement with AI tools impacts teacher adaptation strategies.,True,False,Merge with 'Teacher Training Programs on AI Integration',"student, teacher, teach, class, student student, help, increase, teacher student, grade, need, potential, mention","```json
+{
+  ""label"": ""Student Engagement and Teacher Adaptation to AI in Classrooms"",
+  ""prototype"": ""This study explores how students' engagement with AI tools impacts teacher adaptation strategies."",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with 'Teacher Training Programs on AI Integration'""
+}
+```"
+2,GenAI Detection and Assessment Confusion Among Learners and Staff,A study examining confusion among learners and staff regarding the use of GenAI in assessment and its reliability.,True,False,Merge with studies focusing on GenAI's impact on educational practices.,"learner, staff, extremely, assessment, unsure, likely, course, staff learner, provider, academic, guidance, extremely likely","```json
+{
+  ""label"": ""GenAI Detection and Assessment Confusion Among Learners and Staff"",
+  ""prototype"": ""A study examining confusion among learners and staff regarding the use of GenAI in assessment and its reliability."",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with studies focusing on GenAI's impact on educational practices.""
+}
+```"
+3,Educator Training and Ethical AI Integration,The role of educators in integrating ethical AI into secondary education.,True,False,,"ethical, literacy, ethic, secondary, educator, framework, competence, european, skill, address, potential, need","```json
+{
+  ""label"": ""Educator Training and Ethical AI Integration"",
+  ""prototype"": ""The role of educators in integrating ethical AI into secondary education."",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+4,Youth Workers' Perspectives on AI Integration,This paper explores the perspectives of youth workers regarding the integration of artificial intelligence into their practices.,True,False,,"youth, sector, youth worker, worker, youth sector, european, young people, european youth, young, expert, people, council","```json
+{
+  ""label"": ""Youth Workers' Perspectives on AI Integration"",
+  ""prototype"": ""This paper explores the perspectives of youth workers regarding the integration of artificial intelligence into their practices."",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+5,Teachers' Experience and Knowledge in AI Integration,This document discusses how teachers perceive and integrate artificial intelligence into their educational practices.,True,False,,"teacher, professional, experience, knowledge, element, professional experience, professional teacher, teach, complete, teacher knowledge, mooc, participate","```json
+{
+  ""label"": ""Teachers' Experience and Knowledge in AI Integration"",
+  ""prototype"": ""This document discusses how teachers perceive and integrate artificial intelligence into their educational practices."",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+6,Public Perception of AI in Youth Employment,The public's mixed sentiments towards AI-driven changes in youth employment.,True,False,,"high, public, fear, optimism, perception, public perception, employment, college, sentiment, hope, narrative, age","```json
+{
+  ""label"": ""Public Perception of AI in Youth Employment"",
+  ""prototype"": ""The public's mixed sentiments towards AI-driven changes in youth employment."",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+7,Online Learning Intention Clarity and Classroom Relevance,Participants expressed confusion regarding the clarity of learning intentions during online seminars compared to traditional learning days.,True,False,"Merge with existing topics related to online learning, educational transparency, and classroom practices.","know, think, mooc, suppose, positive, negative, thing, benefit, unclear intention, intention, unclear, useful","```json
+{
+  ""label"": ""Online Learning Intention Clarity and Classroom Relevance"",
+  ""prototype"": ""Participants expressed confusion regarding the clarity of learning intentions during online seminars compared to traditional learning days."",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with existing topics related to online learning, educational transparency, and classroom practices.""
+}
+```"
+8,Impact of Digital Technologies on Youth and Education,How do digital technologies affect young people's education and their future careers?,True,False,Focus on the impact of digital technologies on educational practices and career opportunities.,"positifs, négatifs, positifs négatifs, négatifs sait, sait, effets, entreprises, société, numérique, effets positifs, plutôt, positifs plutôt","```json
+{
+  ""label"": ""Impact of Digital Technologies on Youth and Education"",
+  ""prototype"": ""How do digital technologies affect young people's education and their future careers?"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Focus on the impact of digital technologies on educational practices and career opportunities.""
+}
+```"

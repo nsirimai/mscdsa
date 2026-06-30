@@ -1,0 +1,74 @@
+input_file,output_file,raw_chars,cleaned_chars,removed_chars,raw_lines,cleaned_lines
+markdown/raw/policy/AI competency framework  for students.md,markdown/cleaned/policy/AI competency framework  for students.md,395968,395846,122,880,853
+markdown/raw/policy/AI competency framework  for teachers.md,markdown/cleaned/policy/AI competency framework  for teachers.md,321363,321146,217,890,873
+markdown/raw/policy/australia/AHISA MEMBER SURVEY REPORT Gen AI in Australian independent schools.md,markdown/cleaned/policy/australia/AHISA MEMBER SURVEY REPORT Gen AI in Australian independent schools.md,67965,67910,55,641,608
+markdown/raw/policy/australia/AI systems in teaching and learning_ Principles and practical exa.md,markdown/cleaned/policy/australia/AI systems in teaching and learning_ Principles and practical exa.md,112429,98256,14173,627,571
+markdown/raw/policy/australia/ASC-Artificial-Intelligence-Policy-2025.md,markdown/cleaned/policy/australia/ASC-Artificial-Intelligence-Policy-2025.md,10608,10606,2,156,156
+markdown/raw/policy/australia/Artificial Intelligence Policy.md,markdown/cleaned/policy/australia/Artificial Intelligence Policy.md,23286,23278,8,175,172
+markdown/raw/policy/australia/Australian Framework for Generative AI in Schools.md,markdown/cleaned/policy/australia/Australian Framework for Generative AI in Schools.md,14252,14209,43,171,163
+markdown/raw/policy/australia/DOAI-24-Educator-Guide.md,markdown/cleaned/policy/australia/DOAI-24-Educator-Guide.md,13700,13690,10,173,164
+markdown/raw/policy/australia/Generative_AI_Usage_Policy.md,markdown/cleaned/policy/australia/Generative_AI_Usage_Policy.md,17368,17344,24,262,249
+markdown/raw/policy/australia/Generative_AI_in_the_Australian_education_system_An_open_data_set_of_stakeholder_recommendations_and_emerging_analysis _from_a_public_inquiry.md,markdown/cleaned/policy/australia/Generative_AI_in_the_Australian_education_system_An_open_data_set_of_stakeholder_recommendations_and_emerging_analysis _from_a_public_inquiry.md,98946,96938,2008,629,615
+"markdown/raw/policy/australia/POLICY TITLE: Artificial Intelligence (AI) Usage Policy for Staff, Teachers and Students.md","markdown/cleaned/policy/australia/POLICY TITLE: Artificial Intelligence (AI) Usage Policy for Staff, Teachers and Students.md",17381,17375,6,256,257
+markdown/raw/policy/australia/Review of the Australian Framework for GenAI in Schools.md,markdown/cleaned/policy/australia/Review of the Australian Framework for GenAI in Schools.md,3545,3544,1,22,22
+markdown/raw/policy/australia/TAFE NSW Generative Artificial Intelligence in Education Policy.md,markdown/cleaned/policy/australia/TAFE NSW Generative Artificial Intelligence in Education Policy.md,15750,15735,15,153,141
+markdown/raw/policy/australia/Use-of-Generative-AI-in-DECYP-Schools-Policy.md,markdown/cleaned/policy/australia/Use-of-Generative-AI-in-DECYP-Schools-Policy.md,5079,3686,1393,111,96
+markdown/raw/policy/australia/ai-cognitive-offloading-and-implications-for-education.md,markdown/cleaned/policy/australia/ai-cognitive-offloading-and-implications-for-education.md,152781,152757,24,742,734
+markdown/raw/policy/australia/ai-in-australian-education-snapshot-principles-policy-and-practice_august-2023.md,markdown/cleaned/policy/australia/ai-in-australian-education-snapshot-principles-policy-and-practice_august-2023.md,173009,172782,227,1602,1579
+markdown/raw/policy/australia/brisbanesde-ai-usage-policy.md,markdown/cleaned/policy/australia/brisbanesde-ai-usage-policy.md,20324,12620,7704,228,197
+markdown/raw/policy/australia/generative-artificial-intelligence-guidelines.md,markdown/cleaned/policy/australia/generative-artificial-intelligence-guidelines.md,35215,22900,12315,341,316
+markdown/raw/policy/australia/generative-artificial-intelligence-in-schools-information-for-students-and-parents.md,markdown/cleaned/policy/australia/generative-artificial-intelligence-in-schools-information-for-students-and-parents.md,5857,5856,1,62,62
+markdown/raw/policy/france/AI Policy and  Regulations of France:  Comprehensive Report.md,markdown/cleaned/policy/france/AI Policy and  Regulations of France:  Comprehensive Report.md,58920,58854,66,230,170
+markdown/raw/policy/france/AI Policy and  Regulations of France:  Comprehensive Report_FR.md,markdown/cleaned/policy/france/AI Policy and  Regulations of France:  Comprehensive Report_FR.md,5810,5589,221,53,54
+"markdown/raw/policy/france/L’intelligence artificielle dans les  établissements scolaires, sur le plan  administratif et pédagogique.md","markdown/cleaned/policy/france/L’intelligence artificielle dans les  établissements scolaires, sur le plan  administratif et pédagogique.md",280637,249671,30966,1787,1719
+markdown/raw/policy/france/L’intelligence artificielle en éducation  - Cadre d’usage et de confiance.md,markdown/cleaned/policy/france/L’intelligence artificielle en éducation  - Cadre d’usage et de confiance.md,70807,70552,255,1448,1336
+markdown/raw/policy/france/MEN_DNE_brochure_IA_2024_UK_web.md,markdown/cleaned/policy/france/MEN_DNE_brochure_IA_2024_UK_web.md,119456,117325,2131,1349,1257
+markdown/raw/policy/france/OUR_AI_OUR_AMBITION_FOR_FRANCE.md,markdown/cleaned/policy/france/OUR_AI_OUR_AMBITION_FOR_FRANCE.md,32471,31741,730,209,190
+markdown/raw/policy/france/l-ia-en-ducation---cadre-d-usage.md,markdown/cleaned/policy/france/l-ia-en-ducation---cadre-d-usage.md,31827,31773,54,346,323
+markdown/raw/policy/ireland/2025-11-18_opening-statement-dr-dan-mcquillan-senior-lecturer-in-critical-ai-goldsmiths-university-of-london_en.md,markdown/cleaned/policy/ireland/2025-11-18_opening-statement-dr-dan-mcquillan-senior-lecturer-in-critical-ai-goldsmiths-university-of-london_en.md,4167,4167,0,48,49
+markdown/raw/policy/ireland/2025-11-18_opening-statement-dr-deepak-padmanabhan-senior-lecturer-in-computer-science-at-the-school-of-electronics-electrical-engineering-and-computer-science-et-al-queens-university-belfast_en.md,markdown/cleaned/policy/ireland/2025-11-18_opening-statement-dr-deepak-padmanabhan-senior-lecturer-in-computer-science-at-the-school-of-electronics-electrical-engineering-and-computer-science-et-al-queens-university-belfast_en.md,6814,6813,1,35,36
+markdown/raw/policy/ireland/2025-12-16_first-interim-report_en.md,markdown/cleaned/policy/ireland/2025-12-16_first-interim-report_en.md,77407,73158,4249,497,478
+markdown/raw/policy/ireland/2026-01-20_opening-statement-graham-long-chief-executive-et-al-citizens-information-board_en.md,markdown/cleaned/policy/ireland/2026-01-20_opening-statement-graham-long-chief-executive-et-al-citizens-information-board_en.md,4839,4833,6,21,16
+markdown/raw/policy/ireland/2026-01-20_opening-statement-ruth-kennedy-revenue-commissioner-et-al-office-of-the-revenue-commissioners_en.md,markdown/cleaned/policy/ireland/2026-01-20_opening-statement-ruth-kennedy-revenue-commissioner-et-al-office-of-the-revenue-commissioners_en.md,5211,5211,0,31,32
+markdown/raw/policy/ireland/2026-01-20_opening-statement-sile-maguire-director-general-of-corporate-services-division-et-al-department-of-foreign-affairs-and-trade_en.md,markdown/cleaned/policy/ireland/2026-01-20_opening-statement-sile-maguire-director-general-of-corporate-services-division-et-al-department-of-foreign-affairs-and-trade_en.md,7467,7269,198,21,22
+markdown/raw/policy/ireland/AI+Policy+June+2025.md,markdown/cleaned/policy/ireland/AI+Policy+June+2025.md,41055,34568,6487,462,347
+markdown/raw/policy/ireland/AI-to-Support-Learning-and-Teaching-in-the-RE-Classroom.md,markdown/cleaned/policy/ireland/AI-to-Support-Learning-and-Teaching-in-the-RE-Classroom.md,12535,12164,371,566,355
+markdown/raw/policy/ireland/Guidance_on_Artificial_Intelligence_in_Schools_2025.md,markdown/cleaned/policy/ireland/Guidance_on_Artificial_Intelligence_in_Schools_2025.md,71822,71679,143,754,711
+markdown/raw/policy/ireland/OCO-AI-Policy-Spotlight-report-.md,markdown/cleaned/policy/ireland/OCO-AI-Policy-Spotlight-report-.md,213358,213184,174,1551,1539
+markdown/raw/policy/ireland/Ratified-AI-in-Assessment-Guidelines-for-Learners-v1.1.md,markdown/cleaned/policy/ireland/Ratified-AI-in-Assessment-Guidelines-for-Learners-v1.1.md,31150,30890,260,234,234
+markdown/raw/policy/ireland/Using_Generative_AI.md,markdown/cleaned/policy/ireland/Using_Generative_AI.md,23922,23420,502,133,118
+markdown/raw/policy/ireland/ai-advisory-council-ai-on-education-paper.md,markdown/cleaned/policy/ireland/ai-advisory-council-ai-on-education-paper.md,13477,13471,6,76,77
+markdown/raw/policy/ireland/digital-strategy-for-schools-to-2027.md,markdown/cleaned/policy/ireland/digital-strategy-for-schools-to-2027.md,181813,181441,372,1424,1293
+markdown/raw/policy/ireland/digital-strategy-implementation-plan.md,markdown/cleaned/policy/ireland/digital-strategy-implementation-plan.md,51672,51636,36,323,296
+markdown/raw/policy/usa/AI Resources.md,markdown/cleaned/policy/usa/AI Resources.md,10613,10613,0,90,91
+markdown/raw/policy/usa/AI-Policy-April-2025-v2.md,markdown/cleaned/policy/usa/AI-Policy-April-2025-v2.md,43163,42699,464,387,306
+markdown/raw/policy/usa/AI-Policy-Considerations-for-schools-and-MATs.md,markdown/cleaned/policy/usa/AI-Policy-Considerations-for-schools-and-MATs.md,9957,9947,10,229,220
+markdown/raw/policy/usa/Developing Policy and Protocols for the use of Generative AI in K-12 Classrooms_March 2025.md,markdown/cleaned/policy/usa/Developing Policy and Protocols for the use of Generative AI in K-12 Classrooms_March 2025.md,44374,44372,2,368,367
+markdown/raw/policy/usa/Four States Guiding Principles for AI in Education (2).md,markdown/cleaned/policy/usa/Four States Guiding Principles for AI in Education (2).md,16138,16108,30,206,180
+markdown/raw/policy/usa/Generative Artificial Intelligence (AI) in K-12 Classrooms v2.md,markdown/cleaned/policy/usa/Generative Artificial Intelligence (AI) in K-12 Classrooms v2.md,67044,66216,828,486,455
+markdown/raw/policy/usa/Guidance-for-AI-Policy-Development.md,markdown/cleaned/policy/usa/Guidance-for-AI-Policy-Development.md,24488,24483,5,288,287
+markdown/raw/policy/usa/GuideToAIInSchools.md,markdown/cleaned/policy/usa/GuideToAIInSchools.md,153540,152236,1304,1888,1589
+markdown/raw/policy/usa/K-12 Artificial Intelligence (AI) Use Guidelines.md,markdown/cleaned/policy/usa/K-12 Artificial Intelligence (AI) Use Guidelines.md,44860,36040,8820,429,377
+markdown/raw/policy/usa/Model Policy Artificial Intelligence AI Use in Schools.docx.md,markdown/cleaned/policy/usa/Model Policy Artificial Intelligence AI Use in Schools.docx.md,18717,18678,39,397,398
+"markdown/raw/policy/usa/The New AI Powered Classroom  Implications  for Students, Teachers, and Equity.md","markdown/cleaned/policy/usa/The New AI Powered Classroom  Implications  for Students, Teachers, and Equity.md",120301,120064,237,746,709
+markdown/raw/policy/usa/ai-guidance.md,markdown/cleaned/policy/usa/ai-guidance.md,160641,160308,333,2109,1920
+markdown/raw/policy/usa/ai-guidance_classroom-considerations.md,markdown/cleaned/policy/usa/ai-guidance_classroom-considerations.md,40654,40527,127,429,362
+markdown/raw/policy/usa/ai_report_us_gov.md,markdown/cleaned/policy/usa/ai_report_us_gov.md,230661,204979,25682,1398,1303
+markdown/raw/policy/usa/policy-brief_2024-ai-in-education_pa.md,markdown/cleaned/policy/usa/policy-brief_2024-ai-in-education_pa.md,9420,9136,284,72,73
+markdown/raw/sentiment/051024_Insights into AI and the youth sector.md,markdown/cleaned/sentiment/051024_Insights into AI and the youth sector.md,129435,128139,1296,948,917
+markdown/raw/sentiment/20251119-Les-Francais-lIA.md,markdown/cleaned/sentiment/20251119-Les-Francais-lIA.md,29528,28757,771,427,370
+markdown/raw/sentiment/3RemittancesReview-Volume8-Issue4Saajdmalakand.md,markdown/cleaned/sentiment/3RemittancesReview-Volume8-Issue4Saajdmalakand.md,57343,56103,1240,405,406
+markdown/raw/sentiment/AI is a threat to the essence of education – The Irish Times.md,markdown/cleaned/sentiment/AI is a threat to the essence of education – The Irish Times.md,10722,10716,6,73,68
+markdown/raw/sentiment/AI4T_WP3_D3.3_NR_Ireland.md,markdown/cleaned/sentiment/AI4T_WP3_D3.3_NR_Ireland.md,241758,221644,20114,2355,1928
+markdown/raw/sentiment/AI_views of youth workers.md,markdown/cleaned/sentiment/AI_views of youth workers.md,70881,59210,11671,377,343
+markdown/raw/sentiment/EPRS_ATA(2025)769494_EN.md,markdown/cleaned/sentiment/EPRS_ATA(2025)769494_EN.md,9617,9507,110,51,48
+markdown/raw/sentiment/French digital society_ digital mediation professionals face the challenge of digital remoteness - Labo.md,markdown/cleaned/sentiment/French digital society_ digital mediation professionals face the challenge of digital remoteness - Labo.md,17047,17039,8,109,102
+markdown/raw/sentiment/How are teachers in Europe using AI in the classroom and which country uses it the most_ _ Euronews.md,markdown/cleaned/sentiment/How are teachers in Europe using AI in the classroom and which country uses it the most_ _ Euronews.md,11732,11696,36,326,291
+markdown/raw/sentiment/How do the French relate to artificial intelligence_ - Labo.md,markdown/cleaned/sentiment/How do the French relate to artificial intelligence_ - Labo.md,6318,6312,6,92,87
+markdown/raw/sentiment/Irfan_2023_Sentiments.md,markdown/cleaned/sentiment/Irfan_2023_Sentiments.md,58252,57012,1240,418,419
+"markdown/raw/sentiment/Les jeunes Français face à l’IA générative _ usages, perceptions et appétence pour les formations dédiées - Ifop Group.md","markdown/cleaned/sentiment/Les jeunes Français face à l’IA générative _ usages, perceptions et appétence pour les formations dédiées - Ifop Group.md",9295,9250,45,203,162
+markdown/raw/sentiment/OCO-AI-and-Us-Young-peoples-views-and-understanding-of-Artificial-Intelligence.md,markdown/cleaned/sentiment/OCO-AI-and-Us-Young-peoples-views-and-understanding-of-Artificial-Intelligence.md,26027,25924,103,743,702
+markdown/raw/sentiment/Survey on artificial intelligence for teaching and learning – Results _ European School Education Platform.md,markdown/cleaned/sentiment/Survey on artificial intelligence for teaching and learning – Results _ European School Education Platform.md,19116,19030,86,369,349
+markdown/raw/sentiment/artificial intelligence in classrooms-QA0126065ENN.md,markdown/cleaned/sentiment/artificial intelligence in classrooms-QA0126065ENN.md,47796,46848,948,230,227
+markdown/raw/sentiment/generative artificial intelligence in secondary education-KJ0125604ENN.md,markdown/cleaned/sentiment/generative artificial intelligence in secondary education-KJ0125604ENN.md,194621,144350,50271,886,816
+markdown/raw/sentiment/qqi_generative-artificial-intelligence-survey-report-2025.md,markdown/cleaned/sentiment/qqi_generative-artificial-intelligence-survey-report-2025.md,53563,40738,12825,423,377

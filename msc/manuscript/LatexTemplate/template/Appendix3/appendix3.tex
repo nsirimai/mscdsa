@@ -1,0 +1,69 @@
+\chapter{Extract of code used}
+\label{A3:code}
+ \graphicspath{{Appendix3/Appendix3Figs/PNG/}{Appendix3/Appendix3Figs/PDF/}{Appendix3/Appendix3Figs/}}
+
+Include R code using verbatim
+
+
+%Example of Bootstrap confidence intervals using BCa in R 
+\section[Bootstrap confidence intervals using BCa]{Bootstrap Confidence Intervals using the Bias corrected and accelerated method}   %including a shorting heading for table of contents
+\label{code:BCa}
+\tiny				%change font size
+\begin{verbatim}  %i.e. print as is, do not interpret symbols as latex directives.
+
+
+library(boot)
+
+#Read dataset
+data<-read.csv("FinalDataset.csv",header=TRUE)
+
+#optionally, calculate the bootstrap statistics on a subgroup within the dataset. Below defines subgroups for male and female:
+#1 Males:
+data<-data[data$gender==0,]
+#2: Females
+data<-data[data$gender==1,]
+
+################################################################
+#Select prior academic performance factors for students with leaving cert results
+CAO<-data[data$CAOPoints>0,c("GPA","CAOPoints","MethodicalAverage","HumanitiesAverage","Maths","English","AppliedAverage","age")]
+
+#Verify the correct number of rows are selected:
+nrow(CAO)
+
+#Define a function for each correlation required
+fCAO <- function(CAO, i) cor(CAO[i, 1], CAO[i, 2])
+fMaths <- function(CAO, i) cor(CAO[i, 1], CAO[i, 5])
+fEng <- function(CAO, i) cor(CAO[i, 1], CAO[i, 6])
+fNumerate <- function(CAO, i) cor(CAO[i, 1], CAO[i, 3])
+fHum <- function(CAO, i) cor(CAO[i, 1], CAO[i, 4])
+CAOapplied<-CAO[CAO$AppliedAverage>0,]
+fApp <- function(CAOapplied, i) cor(CAOapplied[i, 1], CAOapplied[i, 7])
+
+#Generate 1999 bootstrap statistics using  correlation functions defined above
+resultCAO<-boot(data = CAO, statistic = fCAO, R = 1999)
+resultMaths<-boot(data = CAO, statistic = fMaths, R = 1999)
+resultEng<-boot(data = CAO, statistic = fEng, R = 1999)
+resultNumerate<-boot(data = CAO, statistic = fNumerate, R = 1999)
+resultHum<-boot(data = CAO, statistic = fHum, R = 1999)
+resultApp<-boot(data = CAOapplied, statistic = fApp, R = 1999)
+
+#Calculate BCa confidence intervals, default is 95% confidence interval (conf=0.95)
+boot.ci(resultCAO, index=1, type="bca")
+boot.ci(resultMaths, index=1, type="bca")
+boot.ci(resultEng, index=1, type="bca")
+boot.ci(resultNumerate, index=1, type="bca")
+boot.ci(resultHum, index=1, type="bca")
+boot.ci(resultApp, index=1, type="bca")
+
+#check other confidence intervals, for example
+boot.ci(resultApp, index=1, type="bca", conf=0.999)
+boot.ci(resultApp, index=1, type="bca", conf=0.99)
+
+
+\end{verbatim}
+
+\normalsize   %return to default font size
+
+
+% ------------------------------------------------------------------------
+

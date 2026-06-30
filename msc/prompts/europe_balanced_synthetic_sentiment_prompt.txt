@@ -1,0 +1,130 @@
+Generate a synthetic sentiment corpus as Markdown files to balance the original sentiment corpus against the European policy corpus only.
+
+Corpus balance target
+
+Use only the European policy corpus for the balance target:
+
+policy/france/
+policy/ireland/
+
+Compute:
+
+required_synthetic_characters =
+characters(policy/france + policy/ireland)
+-
+characters(original sentiment corpus)
+
+Generate exactly the required number of synthetic sentiment characters, or as close as possible without exceeding the target.
+
+Purpose
+
+The synthetic sentiment data is not empirical evidence. It is a labelled auxiliary corpus for robustness, sensitivity, and corpus-balance testing.
+
+The corpus should support experiments such as:
+
+European policy vs original sentiment
+European policy vs original sentiment + synthetic sentiment
+
+Required document types
+
+Generate only two types of Markdown files:
+
+public_sentiment
+press_release
+
+Use filenames such as:
+
+sentiment_public_sentiment_aa.md
+sentiment_press_release_aa.md
+
+The ZIP should be flat, with no folder structure.
+
+Content requirements
+
+The content should discuss public sentiment around AI in education, including:
+
+AI literacy
+teacher training
+student support
+privacy
+data protection
+assessment
+academic integrity
+trust
+transparency
+human oversight
+digital education
+responsible use
+public confidence
+fair access
+policy guidance
+
+The style should be close to qualitative public sentiment and press-release discourse. It should sound human-written or institutionally controlled, not like a description of a generated dataset.
+
+Strict exclusions
+
+Do not include:
+
+numbers
+percentages
+fake survey values
+tables
+Markdown table separators
+long dashed separator lines
+HTML artefacts such as &gt;, &lt;, &amp;
+image paths
+empty figure placeholders
+metadata saying synthetic
+phrases such as generated data, synthetic text, artificial dataset
+
+Do not invent survey results or quantitative claims. Avoid any content that could be mistaken for real empirical public-opinion evidence.
+
+Cleaning constraints
+
+Before final delivery, check that the Markdown content contains no:
+
+digits
+percent signs
+pipe-table characters
+escaped HTML artefacts
+very long separator lines
+raw image paths
+
+Output requirements
+
+Produce:
+
+one flat ZIP file containing only Markdown files
+a short validation report
+
+The report should include:
+
+European policy characters
+original sentiment characters
+required synthetic characters
+generated synthetic characters
+difference after balancing
+number of generated files
+file-type counts
+confirmation that no bad artefacts are present
+
+Validation before delivery
+
+Before delivering the ZIP, run a chunk-level validation pipeline using the same chunking logic as the main project.
+
+Report:
+
+original sentiment chunks
+synthetic sentiment chunks
+balanced evaluation chunk count
+unigram Jensen-Shannon divergence
+bigram Jensen-Shannon divergence
+TF-IDF centroid cosine
+classifier two-sample test accuracy
+classifier two-sample test ROC-AUC
+European policy vs original sentiment TF-IDF cosine
+European policy vs balanced sentiment TF-IDF cosine
+
+Interpretation rule
+
+If C2ST remains high, do not treat this as a failure. Interpret it as evidence that the synthetic corpus remains distinguishable and must stay labelled and analytically separate.

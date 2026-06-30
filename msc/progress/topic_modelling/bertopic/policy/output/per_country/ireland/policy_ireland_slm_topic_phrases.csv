@@ -1,0 +1,41 @@
+﻿topic,topic_label,topic_prototype,policy_area,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,Ireland AI Governance and Public Oversight,The Irish government should establish a comprehensive AI governance framework to oversee ethical AI development and deployment.,AI Governance,True,False,Consider merging with 'Ireland AI Ethics Framework',"people, public, regulation, research, recommender, safety, risk, recommendation, company, disability, parent, social","```json
+{
+  ""label"": ""Ireland AI Governance and Public Oversight"",
+  ""prototype"": ""The Irish government should establish a comprehensive AI governance framework to oversee ethical AI development and deployment."",
+  ""policy_area"": ""AI Governance"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with 'Ireland AI Ethics Framework'""
+}
+```"
+1,Digital Learning Framework Implementation and Teacher Professional Development,This strategy aims to implement the Digital Learning Framework and enhance teacher professional development in Ireland.,education,True,False,Merge with existing policies focusing on digital learning frameworks and teacher professional development.,"learner, teach, leader, progress, skill, professional, curriculum, assessment, framework, competence, infrastructure, pillar","```json
+{
+  ""label"": ""Digital Learning Framework Implementation and Teacher Professional Development"",
+  ""prototype"": ""This strategy aims to implement the Digital Learning Framework and enhance teacher professional development in Ireland."",
+  ""policy_area"": ""education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with existing policies focusing on digital learning frameworks and teacher professional development.""
+}
+```"
+2,Teaching Staff AI Utilization and Academic Responsibility,Staff utilizing AI for teaching purposes while maintaining academic integrity.,Teaching and Learning Resources,True,False,Merge with 'AI in Education' if broader context.,"staff, content, source, generate, bias, academic, accuracy, assessment, response, task, tutor, output","```json
+{
+  ""label"": ""Teaching Staff AI Utilization and Academic Responsibility"",
+  ""prototype"": ""Staff utilizing AI for teaching purposes while maintaining academic integrity."",
+  ""policy_area"": ""Teaching and Learning Resources"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with 'AI in Education' if broader context.""
+}
+```"
+3,Council of Europe Convention on the Protection of Children against Sexual Exploitation and Sexual Abuse,International legal framework addressing child sexual abuse prevention and protection measures.,Children's Rights and Protection,True,False,Merge with existing topics related to child protection laws.,"sexual, abuse, convention, europe, council, adopt, csam, recommendation, environment, exploitation, material, international","```json
+{
+  ""label"": ""Council of Europe Convention on the Protection of Children against Sexual Exploitation and Sexual Abuse"",
+  ""prototype"": ""International legal framework addressing child sexual abuse prevention and protection measures."",
+  ""policy_area"": ""Children's Rights and Protection"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with existing topics related to child protection laws.""
+}
+```"

@@ -1,0 +1,2 @@
+comparison,unigram_js_divergence,bigram_js_divergence,tfidf_centroid_cosine
+original_sentiment_vs_selected_synthetic_sentiment_documents,0.26349351942954835,0.5858690895518434,0.48918637029197043

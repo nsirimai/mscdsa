@@ -1,0 +1,6 @@
+# Public views on AI literacy and digital education
+
+- This seems useful if chatGPT, like other disruptor technologies, went viral within a day, including in education. Work that seemed just a bit too good, too polished, too full of American spellings to be real, started to appear on teachers' desks with increasing regularity. Most worryingly, this is now happening in the case of Leaving Certificate project work.
+- For me, the important point is that - Different ways of drafting strategies, mostly with expert input. - Leading ministries are often responsible for digitalisation, industry, economy, or entrepreneurship. - No identifiable role for the youth sector.
+- Parents and teachers need to know that the education system in Spain is highly decentralised, with responsibilities shared between the national government and autonomous communities. The national government sets general education policies and basic regulations, while regional authorities develop and implement these within their territories, managing their education systems with executive and administrative powers. At a national level, the Ministry for.
+- This seems useful if the YAP want to see young people included as part of this work, as well as parents, experts, 

@@ -1,0 +1,91 @@
+﻿topic,topic_label,topic_prototype,sentiment_dimension,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,Concern Over AI Usage in Education,Some educators and students express concerns about the potential misuse of AI in educational settings.,concern,True,False,,"student, help, administrative, mediation, quote, feedback, task, procedure, support, mediator, think, need","```json
+{
+  ""label"": ""Concern Over AI Usage in Education"",
+  ""prototype"": ""Some educators and students express concerns about the potential misuse of AI in educational settings."",
+  ""sentiment_dimension"": ""concern"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+1,Teacher Adaptation and Classroom AI Use,Teachers are adapting to new AI tools in classrooms.,education impact,True,False,,"teacher, professional, teach, educator, secondary, experience, focus, leader, profession, literacy, student, pre-service","```json
+{
+  ""label"": ""Teacher Adaptation and Classroom AI Use"",
+  ""prototype"": ""Teachers are adapting to new AI tools in classrooms."",
+  ""sentiment_dimension"": ""education impact"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+2,Impact of Learning Experience on Knowledge and Perceptions of AI,Participants discussed the impact of the professional learning experience on their understanding of AI.,education impact,True,False,,"duolingo, day, photomath, mooc, think, class, teacher, know, intention, positive, student, negative","```json
+{
+  ""label"": ""Impact of Learning Experience on Knowledge and Perceptions of AI"",
+  ""prototype"": ""Participants discussed the impact of the professional learning experience on their understanding of AI."",
+  ""sentiment_dimension"": ""education impact"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+3,Ethics Framework Development for AI in Education,The Finnish National Agency for Education and the Ministry of Education and Culture collaborated with stakeholders to create a robust ethical framework for AI in education.,trust,True,False,,"ethic, ethical, framework, european, europe, address, agency, guideline, literacy, union, aim, robust","```json
+{
+  ""label"": ""Ethics Framework Development for AI in Education"",
+  ""prototype"": ""The Finnish National Agency for Education and the Ministry of Education and Culture collaborated with stakeholders to create a robust ethical framework for AI in education."",
+  ""sentiment_dimension"": ""trust"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+4,Concerns and Risks Around AI in Education,People express concerns and worries about how AI will affect their children’s education.,concern,True,False,,"youth, worker, sector, young, people, european, expert, space, democratic, social, impact, participation","```json
+{
+  ""label"": ""Concerns and Risks Around AI in Education"",
+  ""prototype"": ""People express concerns and worries about how AI will affect their children’s education."",
+  ""sentiment_dimension"": ""concern"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+5,Concern Over AI Risks and Social Harm,Young people express concerns over AI risks and social harm.,concern,True,False,,"child, young, people, game, social, medium, parent, harmful, bring, especially, user, view","```json
+{
+  ""label"": ""Concern Over AI Risks and Social Harm"",
+  ""prototype"": ""Young people express concerns over AI risks and social harm."",
+  ""sentiment_dimension"": ""concern"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+6,Concerns Over GenAI Implementation in Education,"Respondents express worries about GenAI's impact on educational practices, particularly regarding its ability to address equity and inclusivity.",concern,True,False,,"learner, staff, extremely, unsure, provider, assessment, course, enrol, likely, workplace, neutral, academic","```json
+{
+  ""label"": ""Concerns Over GenAI Implementation in Education"",
+  ""prototype"": ""Respondents express worries about GenAI's impact on educational practices, particularly regarding its ability to address equity and inclusivity."",
+  ""sentiment_dimension"": ""concern"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+7,public opinion on AI fears and hopes,"The public expresses high levels of fear regarding AI, particularly concerning job displacement.",fear,True,False,Merge with other similar topics focusing on AI public opinion.,"high, public, fear, optimism, limerick, discourse, sentiment, cork, hope, college, narrative, dublin","```json
+{
+  ""label"": ""public opinion on AI fears and hopes"",
+  ""prototype"": ""The public expresses high levels of fear regarding AI, particularly concerning job displacement."",
+  ""sentiment_dimension"": ""fear"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with other similar topics focusing on AI public opinion.""
+}
+```"
+8,Concern over AI Risks and Benefits,People express concerns and opinions regarding the potential risks and benefits of AI technology.,"trust, concern, anxiety",True,False,,"positifs, négatifs, sait, premier, effets, répondants, entreprises, jeunes, français, européenne, société, numérique","```json
+{
+  ""label"": ""Concern over AI Risks and Benefits"",
+  ""prototype"": ""People express concerns and opinions regarding the potential risks and benefits of AI technology."",
+  ""sentiment_dimension"": ""trust, concern, anxiety"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"

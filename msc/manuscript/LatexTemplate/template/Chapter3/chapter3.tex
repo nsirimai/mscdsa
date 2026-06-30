@@ -1,0 +1,28 @@
+\chapter{Data Preparation}
+\label{chpt:prep}
+\graphicspath{{Chapter3/Chapter3Figs/PNG/}{Chapter3/Chapter3Figs/PDF/}{Chapter3/Chapter3Figs/}}
+
+
+\section{Introduction}
+The length of this section will be dataset and project specific. Guidelines can be agreed with your supervisor.  
+
+\section{Select the data}
+If you need to reduce the number of rows or columns in the dataset, discuss the approaches you tried, and what worked best.
+
+\section{Clean Data}If data quality was an issue, discuss the approaches you tried, and what worked best.\section{Construct Data}Detail data transformations you tried, why you thought it would be useful, and how well they work.  The report should get across the iterative nature of this phase, and show that you experimented with a selection of techniques as covered in data pre-processing lectures. It should also be apparent that you used the results of data exploration to inform this phase, rather than randomly trying different techniques in the hope that something would work.  This section can be merged with the next section ? modelling ? if it makes it easier to link preparation techniques with the resulting model accuracy.Note: CRISP-DM has an additional section here of integration, which will probably not be relevant for most of your projects, but if it is, you could include that here or as part of data selection.
+
+\section{Examples of equations}
+
+\begin{equation} \label{eq:lof}
+  LOF_{MinPts^{(p)}} =  \frac{ \sum\limits_{o\in N_{MinPts^{(p)}}} \frac{lrd_{MinPts^{o}}}{lrd_{MinPts^{p}}}}  {|N_{MinPts^{(p)}}|}  
+\end{equation}
+
+\begin{equation} \label{eq:lrd}
+ lrd_{MinPts^{(p)}} = 1 / \left ( \frac{ \sum\limits_{o\in N_{MinPts^{(p)}}} reach\text{-}dist_{MinPts^{(p,o)}} } {|N_{MinPts^{(p)}}|}  \right) 
+\end{equation}
+
+\begin{equation} \label{eq:reach}
+reach\text{-}dist_{k^{(p,o)}} = max\{k\text{-}distance(o), distance(p,o)\}
+\end{equation}
+
+

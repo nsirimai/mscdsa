@@ -1,0 +1,3 @@
+﻿source_type,documents,chunks,mean_chunk_words,median_chunk_words,min_chunk_words,max_chunk_words
+original,17,498,256.49397590361446,257.5,58,1214
+synthetic,53,211,313.06161137440756,340.0,76,359

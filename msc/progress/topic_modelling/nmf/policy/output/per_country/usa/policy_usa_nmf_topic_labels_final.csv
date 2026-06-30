@@ -1,0 +1,71 @@
+﻿topic,topic_label,topic_prototype,policy_area,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,Adaptive Learning and Personalized Instruction in Educational Technology,The focus on personalized instruction through adaptive learning technologies.,EdTech,True,False,Merge with topics related to educational technology and personalization.,"context, research, learner, edtech, recommendation, advance, decision, people, pattern, educator, design, adaptivity","```json
+{
+  ""label"": ""Adaptive Learning and Personalized Instruction in Educational Technology"",
+  ""prototype"": ""The focus on personalized instruction through adaptive learning technologies."",
+  ""policy_area"": ""EdTech"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with topics related to educational technology and personalization.""
+}
+```"
+1,AI-Assisted Learning and Academic Integrity,"Students increasingly rely on AI tools for academic tasks, raising concerns about fairness, originality, and ethical standards.",Academic Integrity and Fairness,True,False,Consider merging with 'AI-Guided Assessment and Evaluation Practices',"write, think, english, high, know, teach, assignment, thing, time, class, come, science","```json
+{
+  ""label"": ""AI-Assisted Learning and Academic Integrity"",
+  ""prototype"": ""Students increasingly rely on AI tools for academic tasks, raising concerns about fairness, originality, and ethical standards."",
+  ""policy_area"": ""Academic Integrity and Fairness"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with 'AI-Guided Assessment and Evaluation Practices'""
+}
+```"
+2,Formative Assessment and Bias in AI-Guided Teaching,The role of AI in enhancing formative assessment while addressing potential biases within educational systems.,Assessment and Fairness in Educational Technology,True,False,Merge into broader themes related to AI in education and its impact on fairness and transparency.,"assessment, formative, formative assessment, feedback, teach, tutor, bias, journal, bias fairness, help, essay, focus","```json
+{
+  ""label"": ""Formative Assessment and Bias in AI-Guided Teaching"",
+  ""prototype"": ""The role of AI in enhancing formative assessment while addressing potential biases within educational systems."",
+  ""policy_area"": ""Assessment and Fairness in Educational Technology"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge into broader themes related to AI in education and its impact on fairness and transparency.""
+}
+```"
+3,Action Planning and Reflection in AI Governance,Guiding principles for implementing AI policies in educational settings.,AI Governance,True,False,Focus on the process of creating actionable plans and reflecting on their implementation.,"step, focus, action step, action, potential action, forward, step forward, legal, team, step step, reflection, share","```json
+{
+  ""label"": ""Action Planning and Reflection in AI Governance"",
+  ""prototype"": ""Guiding principles for implementing AI policies in educational settings."",
+  ""policy_area"": ""AI Governance"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Focus on the process of creating actionable plans and reflecting on their implementation.""
+}
+```"
+4,AI Access and Socioeconomic Disadvantage Effects on Math and ELA Achievement,The impact of AI access on educational outcomes among disadvantaged students.,Education,True,False,,"achievement, math, disadvantage, effect, regression, socioeconomic, math achievement, socioeconomic disadvantage, comparison, inequality, significant, year","```json
+{
+  ""label"": ""AI Access and Socioeconomic Disadvantage Effects on Math and ELA Achievement"",
+  ""prototype"": ""The impact of AI access on educational outcomes among disadvantaged students."",
+  ""policy_area"": ""Education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"
+5,Student Privacy and Digital Technology Oversight,Federal regulations and state laws governing student data privacy and digital technology usage.,Schools and Districts,True,False,"Merge with existing policies related to data protection, online safety, and institutional accountability.","privacy, staff, protection, act, child, trust, security, safety, risk, review, personal, compliance","```json
+{
+  ""label"": ""Student Privacy and Digital Technology Oversight"",
+  ""prototype"": ""Federal regulations and state laws governing student data privacy and digital technology usage."",
+  ""policy_area"": ""Schools and Districts"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with existing policies related to data protection, online safety, and institutional accountability.""
+}
+```"
+6,Massachusetts AI Guidance for K-12 Education,Massachusetts provides guidelines for implementing artificial intelligence in K-12 education.,K-12 AI Implementation,True,False,,"literacy, guidance, educator, framework, integrate, leader, medium, equity, ethical, integration, staff, curriculum","```json
+{
+  ""label"": ""Massachusetts AI Guidance for K-12 Education"",
+  ""prototype"": ""Massachusetts provides guidelines for implementing artificial intelligence in K-12 education."",
+  ""policy_area"": ""K-12 AI Implementation"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": """"
+}
+```"

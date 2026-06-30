@@ -1,0 +1,11 @@
+﻿scope,artifact,path
+global,topic_number_search,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/global/policy_global_nmf_topic_number_search.csv
+global,topic_selection_summary,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/global/policy_global_nmf_topic_selection_summary.csv
+global,topic_info_with_labels,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/global/policy_global_nmf_topic_info_with_labels_final.csv
+global,documents_with_topic_labels,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/global/policy_global_nmf_documents_with_topic_labels_final.csv
+global,representative_documents,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/global/policy_global_nmf_representative_documents.csv
+global,topic_country_distribution,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/global/policy_global_nmf_topic_country_distribution.csv
+global,topic_selection_plot,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/img/global/policy_global_nmf_topic_selection_metrics.png
+global,topic_distribution_plot,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/img/global/policy_global_nmf_topic_distribution.png
+global,topic_by_country_plot,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/img/global/policy_global_nmf_topic_distribution_by_country.png
+per_country,country_model_summary,/home/nsirim/Github/mscdsa/msc/progress/topic_modelling/nmf/policy/output/per_country/policy_country_nmf_model_summary.csv

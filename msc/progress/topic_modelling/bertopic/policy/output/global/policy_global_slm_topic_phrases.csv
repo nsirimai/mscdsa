@@ -1,0 +1,91 @@
+﻿topic,topic_label,topic_prototype,policy_area,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,AI Curriculum Integration and Oversight,"Countries worldwide are implementing AI into their educational systems, but there's a growing concern over its integration and oversight.",education,True,False,"Consider merging with topics related to AI ethics, privacy, and education reform.","submission, public, research, sector, people, principle, unesco, recommendation, large, open, investment, company","```json
+{
+  ""label"": ""AI Curriculum Integration and Oversight"",
+  ""prototype"": ""Countries worldwide are implementing AI into their educational systems, but there's a growing concern over its integration and oversight."",
+  ""policy_area"": ""education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with topics related to AI ethics, privacy, and education reform.""
+}
+```"
+1,AI-Assisted Instructional Policies,"AI-assisted educational systems should have clear guidelines for educator roles, student privacy, and equitable access.",AI-in-education,True,False,Consider merging with existing AI-focused education policies.,"educator, instructional, focus, feedback, literacy, equity, help, learner, guidance, step, leader, equitable","```json
+{
+  ""label"": ""AI-Assisted Instructional Policies"",
+  ""prototype"": ""AI-assisted educational systems should have clear guidelines for educator roles, student privacy, and equitable access."",
+  ""policy_area"": ""AI-in-education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with existing AI-focused education policies.""
+}
+```"
+2,Educational AI Usage Policies,Establishing guidelines for the responsible use of AI in schools.,school governance,True,False,Merge into broader 'AI in Education' if applicable.,"staff, privacy, academic, integrity, responsible, content, security, personal, bias, assessment, guideline, plagiarism","```json
+{
+  ""label"": ""Educational AI Usage Policies"",
+  ""prototype"": ""Establishing guidelines for the responsible use of AI in schools."",
+  ""policy_area"": ""school governance"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge into broader 'AI in Education' if applicable.""
+}
+```"
+3,AI in School Curriculum and Teacher Training,The integration of artificial intelligence into educational curricula and teacher training programs.,education,True,False,Merge with 'AI in School Assessment and Student Privacy',"usage, outils, cadre, données, pédagogique, numérique, pédagogiques, établissements, utilisation, déploiement, enjeux, académique","```json
+{
+  ""label"": ""AI in School Curriculum and Teacher Training"",
+  ""prototype"": ""The integration of artificial intelligence into educational curricula and teacher training programs."",
+  ""policy_area"": ""education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with 'AI in School Assessment and Student Privacy'""
+}
+```"
+4,Competency-Based Education and Assessment,Competency-based education and assessment aim to tailor learning experiences to individual student needs.,education,True,False,"Merge with topics related to educational reforms, curriculum design, and student outcomes.","competency, design, knowledge, progression, skill, ethic, expect, ethical, mindset, social, aspect, pedagogical","```json
+{
+  ""label"": ""Competency-Based Education and Assessment"",
+  ""prototype"": ""Competency-based education and assessment aim to tailor learning experiences to individual student needs."",
+  ""policy_area"": ""education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Merge with topics related to educational reforms, curriculum design, and student outcomes.""
+}
+```"
+5,AI Child Protection and Rights Oversight,International guidelines recommend establishing dedicated bodies to oversee AI applications affecting children’s rights.,AI Child Protection and Rights Oversight,True,False,Consider merging with 'AI Child Protection and Rights Oversight' if there's overlap.,"child, sexual, recommender, abuse, convention, council, act, protection, parent, unicef, safety, youth","```json
+{
+  ""label"": ""AI Child Protection and Rights Oversight"",
+  ""prototype"": ""International guidelines recommend establishing dedicated bodies to oversee AI applications affecting children’s rights."",
+  ""policy_area"": ""AI Child Protection and Rights Oversight"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with 'AI Child Protection and Rights Oversight' if there's overlap.""
+}
+```"
+6,Digital Learning Progression Framework,This strategy outlines a framework for enhancing digital learning progression across various educational levels.,education,True,False,Consider merging with 'Educational Technology Development' if focusing on broader technological advancements.,"strategy, learner, progress, competence, pillar, leader, infrastructure, procurement, skill, professional, assessment, pdst","```json
+{
+  ""label"": ""Digital Learning Progression Framework"",
+  ""prototype"": ""This strategy outlines a framework for enhancing digital learning progression across various educational levels."",
+  ""policy_area"": ""education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider merging with 'Educational Technology Development' if focusing on broader technological advancements.""
+}
+```"
+7,AI in Education and Student Achievement,The integration of AI technologies into educational systems affects student achievement and requires careful consideration of ethical implications.,education,True,False,Considerations for integrating AI in education.,"elementary, math, english, achievement, write, think, disadvantage, high, thing, regression, socioeconomic, know","```json
+{
+  ""label"": ""AI in Education and Student Achievement"",
+  ""prototype"": ""The integration of AI technologies into educational systems affects student achievement and requires careful consideration of ethical implications."",
+  ""policy_area"": ""education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Considerations for integrating AI in education.""
+}
+```"
+8,AI Offloading and Metacognitive Skills in Education,Research indicates that enhancing metacognitive skills among students can mitigate the negative impacts of AI offloading.,Education,True,False,This topic could be merged with 'AI Offloading and Student Learning' if focusing solely on the educational aspect.,"cognitive, offload, load, metacognitive, memory, critical, paradox, performance, study, detrimental, thinking, outsource","```json
+{
+  ""label"": ""AI Offloading and Metacognitive Skills in Education"",
+  ""prototype"": ""Research indicates that enhancing metacognitive skills among students can mitigate the negative impacts of AI offloading."",
+  ""policy_area"": ""Education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""This topic could be merged with 'AI Offloading and Student Learning' if focusing solely on the educational aspect.""
+}
+```"

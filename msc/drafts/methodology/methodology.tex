@@ -1,0 +1,371 @@
+\documentclass{article}
+\usepackage{ITB_MSCe}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{bold-extra} % bold tt
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{latexsym}
+\usepackage{upgreek}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{nicefrac}
+\usepackage{pifont}
+\usepackage{marvosym}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage[numbers]{natbib}
+\usepackage{eso-pic}
+\usepackage{textcomp}
+\usepackage{fancyvrb}
+\usepackage{mwe}
+\usepackage{lastpage}
+\usepackage{listings, xcolor}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+\usepackage{array}
+\usepackage{ragged2e}
+%\bibpunct{}{}{;}{a}{,}{,}
+
+\input{images/rgb}
+
+\lstdefinestyle{python_code}{%
+  language=Python, basicstyle=\ttfamily, columns=fullflexible,
+  keywordstyle=\color{blue}, commentstyle=\itshape\color{green!50!black},
+  stringstyle=\color{magenta}, showstringspaces=false,
+  morekeywords={as,@staticmethod}, }
+
+\lstset{ style=python_code }
+
+\newsavebox{\sclbox}
+
+\newcolumntype{L}[1]{>{\RaggedRight}p{#1}}
+
+
+
+\newenvironment{declaration}
+  {\noindent\textbf{Declaration:}} {\par}
+
+\title{Explaining the policy--practice gap in AI education governance using
+multi-layered NLP: A comparative study}
+
+\author{
+\normalsize
+\begin{tabular}[t]{c@{\extracolsep{1em}}c} Mariem NSIRI & Geraldine GRAY\\
+Technological University Dublin & Technological University Dublin\\
+B00177462@myTUDublin.ie & supervisor.name@tudublin.ie
+\end{tabular}
+}
+
+%\date{\today}
+
+\begin{document}
+
+\section{Methodology}
+
+This study adopts a multi-layered text-as-data methodology to examine the
+policy--practice gap in AI education governance. The purpose is not to evaluate
+NLP methods for their own sake, but to use computational text analysis to
+understand how AI-in-education policies are framed, how public concerns are
+expressed, and where policy discourse and public sentiment align or diverge.
+
+The methodology is structured as a connected analytical pipeline. Each layer
+produces an output that informs the next layer, so the methods are not treated
+as separate experiments. The pipeline begins with the construction of policy and
+public sentiment corpora, prepares these texts for comparison, identifies
+recurring themes, applies model-assisted classification, explores possible
+policy--sentiment relationships, and finally evaluates the credibility of the
+results.
+
+The pipeline is organised into six layers:
+
+\begin{enumerate}[label=\textbf{Layer \arabic*:}, leftmargin=*]
+
+    \item \textbf{Corpus construction:} collects the policy documents and public
+    sentiment sources that form the empirical basis of the study.
+
+    \item \textbf{Preprocessing and segmentation:} transforms long and diverse
+    documents into comparable text segments enriched with \textbf{metadata} such as
+    source type, year, country or region, and thematic category.
+
+    \item \textbf{Theme discovery:} uses topic modelling, clustering, and manual
+    review to identify recurring themes across policy and sentiment texts.
+
+    \item \textbf{Model-assisted classification:} uses SLMs and, where useful,
+    LLM-supported coding to classify sentiment, stance, themes, barriers,
+    enablers, and possible causal claims.
+
+    \item \textbf{Causal NLP-inspired interpretation:} examines whether selected
+    policy themes, such as privacy, regulation, teacher preparedness, equity, or
+    AI literacy, are associated with public trust, concern, uncertainty, or
+    perceived readiness.
+
+    \item \textbf{Evaluation and triangulation:} checks whether the results are
+    reliable, interpretable, and coherent across models, manual judgement,
+    synthetic-data validation, source documents, and the literature review.
+
+\end{enumerate}
+
+This structure keeps the technical methods linked to the research question. The
+corpus layer defines the evidence; preprocessing makes the evidence comparable;
+theme discovery reveals candidate patterns; classification makes these patterns
+more systematic; causal NLP-inspired interpretation explores possible
+explanatory relationships; and evaluation checks whether the findings are
+credible. The final aim is therefore not only to produce topics or model scores,
+but to explain how the policy--practice gap in AI education governance is
+expressed across policy discourse and public sentiment.
+
+\subsection{Corpus construction and preprocessing}
+
+The first two layers of the pipeline establish the empirical basis of the study.
+The policy corpus will include national, European, international, and
+institutional documents on AI in education. These documents will be analysed
+with attention to themes such as:
+
+\begin{itemize}[leftmargin=*]
+    \item responsible and ethical AI;
+    \item teacher preparedness and professional development;
+    \item student AI literacy;
+    \item equity, inclusion, and access;
+    \item privacy, safety, and assessment;
+    \item institutional capacity and implementation readiness.
+\end{itemize}
+
+The public sentiment corpus will include public-facing evidence on attitudes
+towards AI in education and society, such as survey findings, reports,
+consultation materials, and discourse sources where available. Each document or
+text segment will be stored with metadata, including source type, country or
+region where relevant, year, institutional origin, and thematic category.
+
+\textbf{Long documents will be divided} into meaningful text segments so that different
+sources can be compared without losing interpretive context. Text will then be
+cleaned, deduplicated, segmented, and normalised where appropriate. Repeated
+headers, references, and \textbf{non-substantive boilerplate} text will be removed. This
+preprocessing stage will preserve the meaning of the original texts while making
+them suitable for computational analysis.
+
+\subsection{Exploratory topic and sentiment analysis}
+
+After preprocessing, the next layer will identify recurrent themes and sentiment
+patterns across the policy and public sentiment corpora. Topic modelling
+methods, such as BERTopic or embedding-based clustering, will be used to
+discover themes related to the topics mentioned above.
+
+Topic modelling will be treated as a theme-discovery tool rather than a final
+interpretation. \textbf{Generated topics will therefore be manually reviewed},
+renamed, merged, or discarded where necessary. This stage will help identify whether
+policy discourse emphasises the same issues that appear in public sentiment, or
+whether some implementation barriers are underrepresented in formal policy language.
+
+Sentiment and stance analysis will focus on categories that are meaningful for
+AI education governance, including:
+
+\begin{itemize}[leftmargin=*]
+    \item trust and confidence;
+    \item concern, fear, or resistance;
+    \item optimism and perceived benefit;
+    \item uncertainty or lack of readiness;
+    \item perceived risk and perceived fairness.
+\end{itemize}
+
+Where off-the-shelf sentiment models are too general, small language models
+(SLMs) can be prompted for narrower classification tasks. Candidate
+SLMs may include transformer-based classifiers suitable for sentiment, stance,
+theme, or barrier/enabler classification. Their role will be to support scalable
+and repeatable labelling, not to replace human interpretation. Model outputs
+\textbf{will be compared using evaluation measures} such as accuracy, precision, recall,
+F1-score, and confusion matrices where labelled validation data is available.
+
+\subsection{Use of SLMs, LLMs, and synthetic data}
+
+The classification layer will use SLMs, LLM-assisted coding, and synthetic data
+only where they strengthen the analysis. These tools will support theme
+labelling, sentiment classification, stance detection, causal-claim detection,
+and robustness testing, but they will not replace the source documents or human
+interpretation.
+
+Small language models will be used for focused and repeatable tasks. These may
+include sentiment classification, stance detection, theme labelling, causal
+claim detection, and barrier/enabler classification. SLMs are useful where the
+task is narrow, well-defined, and requires consistent labelling across many text
+segments.
+
+Large language models (LLMs) will be used as supporting tools for tasks requiring
+richer language understanding. These may include:
+
+\begin{itemize}[leftmargin=*]
+    \item summarising long policy sections;
+    \item proposing initial qualitative codes;
+    \item refining topic labels;
+    \item identifying possible causal claims;
+    \item generating controlled synthetic or counterfactual examples.
+\end{itemize}
+
+However, LLM outputs will not be treated as independent evidence. All
+\textbf{LLM-assisted outputs will be checked against the source material}, and
+important coding decisions will remain grounded in the corpus and the literature
+review. \textbf{Prompt templates}, model versions, and \textbf{validation procedures}
+will be documented to improve transparency.
+
+Synthetic sentiment data will be used cautiously and only as a support
+mechanism. It will not replace authentic public sentiment evidence. Its main
+purposes will be:
+
+\begin{itemize}[leftmargin=*]
+    \item to address class imbalance;
+    \item to create controlled examples for robustness testing;
+    \item to support counterfactual testing of model behaviour;
+    \item to test whether classifiers respond logically to changes in framing.
+\end{itemize}
+
+For example, synthetic variants may change a sentence from teacher support to
+teacher replacement, or add conditions involving privacy, regulation, training,
+or equity. These counterfactual examples will help test whether classification
+models react consistently to changes in policy framing. They will not be
+interpreted as real public opinion.
+
+The faithfulness of synthetic data will be evaluated before it is used in any
+analysis. Validation will include lexical comparison, semantic similarity using
+sentence embeddings, topic-distribution comparison, sentiment-distribution
+comparison, classifier-based real-versus-synthetic testing, and manual
+inspection. The goal is not to prove that synthetic data is identical to real
+data, but to determine whether it is safe and useful for augmentation,
+robustness testing, and counterfactual model evaluation.
+
+\subsection{Methodological roles, strengths, and limitations}
+
+Table~\ref{tab:methodological_roles} summarises the role, advantages, and
+limitations of the main methodological components. The purpose of the table is
+to clarify which methods are central to the study and which ones act as
+supporting tools.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Methodological roles, strengths, and limitations}
+\label{tab:methodological_roles}
+\begin{tabular}{L{0.19\textwidth} L{0.27\textwidth} L{0.25\textwidth} L{0.22\textwidth}}
+\hline
+\textbf{Method} & \textbf{Role in the study} & \textbf{Main advantage} & \textbf{Main limitation} \\
+\hline
+
+Policy document analysis &
+Identifies how AI in education is framed by institutions and governments. &
+Connects the analysis to governance priorities such as ethics, equity, teacher
+preparedness, and AI literacy. &
+Policy texts may express aspirations rather than actual implementation capacity. \\[.15cm]
+
+Public sentiment analysis &
+Examines how people perceive AI, including trust, concern, optimism, uncertainty,
+and resistance. &
+Shows whether policy priorities correspond to public expectations and concerns. &
+Sentiment can be context-dependent and may be simplified by generic categories. \\[.15cm]
+
+Topic modelling and clustering &
+Discovers recurrent themes across policy and sentiment texts. &
+Helps compare large volumes of text and identify hidden patterns. &
+Topics require manual interpretation and may not always map clearly to policy
+concepts. \\[.15cm]
+
+SLM-based classification &
+Supports repeatable labelling of themes, sentiment, stance, barriers, and
+enablers. &
+Useful for focused, scalable, and consistent classification tasks. &
+Requires validation and may struggle with complex or ambiguous policy language. \\[.15cm]
+
+LLM-assisted analysis &
+Supports summarisation, qualitative coding, theme refinement, and causal-claim
+identification. &
+Can help interpret complex texts and compare meanings across documents. &
+Outputs must be checked and cannot be treated as independent evidence. \\[.15cm]
+
+Synthetic data &
+Supports class balancing, robustness testing, and controlled counterfactual
+examples. &
+Useful for testing whether models react logically to changes in framing. &
+Must not replace real data and must be validated for faithfulness and relevance. \\[.15cm]
+
+Causal NLP-inspired analysis &
+Explores possible relationships between policy themes, implementation barriers,
+and public sentiment. &
+Moves the study from describing themes towards explaining possible links between
+policy and practice. &
+Findings should be presented as exploratory associations, not definitive causal
+proof. \\[.15cm]
+
+Validation metrics &
+Assesses the reliability of models, labels, and synthetic data. &
+Improves transparency and credibility of the computational pipeline. &
+Metrics alone cannot replace qualitative judgement or theoretical interpretation. \\
+
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Causal NLP-inspired interpretation}
+
+The causal NLP-inspired layer builds on the previous classification results. It
+will not claim full causal inference. Instead, it will examine whether themes
+identified in policy and sentiment texts appear to be associated with trust,
+concern, uncertainty, perceived readiness, or implementation barriers.
+
+For example, the study may examine whether:
+
+\begin{itemize}[leftmargin=*]
+    \item privacy-related discourse is associated with stronger concern;
+    \item regulation language is linked to trust or reassurance;
+    \item teacher-preparedness language relates to perceived readiness;
+    \item innovation-focused language corresponds with optimism or anxiety;
+    \item equity discourse is connected to concerns about unequal access.
+\end{itemize}
+
+Possible techniques include causal framing analysis, causal relation extraction,
+and treatment-style comparisons between texts that mention or do not mention
+selected themes. These findings will be presented as exploratory associations
+and plausible explanatory patterns, not as definitive causal effects.
+
+The interpretation stage will integrate the results across the different layers.
+Policy themes will be compared with public sentiment themes to identify points
+of alignment, divergence, and silence. Particular attention will be given to
+teacher preparedness, student AI literacy, institutional readiness, equity,
+privacy, public trust, and implementation barriers. The expected output is
+therefore not only a set of model scores or topics, but an evidence-based
+interpretation of where the AI education policy--practice gap appears, how it is
+expressed, and what factors may help explain it.
+
+\subsection{Evaluation of results}
+
+The evaluation layer checks the reliability and meaning of the results produced
+by the previous layers. It combines quantitative model evaluation, qualitative
+manual review, synthetic-data validation, and triangulation with the source
+documents and literature review.
+
+For classification tasks, model outputs will be assessed using accuracy,
+precision, recall, F1-score, and confusion matrices where labelled validation
+data is available. For topic modelling and clustering, evaluation will focus on
+topic coherence, interpretability, and manual review of whether the generated
+topics correspond to meaningful policy or sentiment themes.
+
+Synthetic data will be evaluated separately before being used for augmentation
+or counterfactual testing. This will include lexical comparison, semantic
+similarity, topic-distribution comparison, sentiment-distribution comparison,
+classifier-based real-versus-synthetic testing, and manual inspection. Synthetic
+data will only be used where it supports robustness testing or model evaluation;
+it will not be treated as evidence of real public opinion.
+
+The final findings will also be evaluated through triangulation. Results from
+topic modelling, sentiment analysis, SLM/LLM-assisted classification, and causal
+NLP-inspired interpretation will be compared against each other and against the
+source documents. A finding will be treated as stronger when it is supported by
+multiple layers of analysis and remains consistent with the literature review.
+This evaluation layer is intended to ensure that the results are not only
+technically measurable, but also meaningful for explaining the policy--practice
+gap in AI education governance.
+\end{document}

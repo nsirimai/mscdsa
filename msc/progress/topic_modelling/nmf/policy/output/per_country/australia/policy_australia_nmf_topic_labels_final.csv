@@ -1,0 +1,31 @@
+﻿topic,topic_label,topic_prototype,policy_area,is_coherent,artifact_topic,merge_hint,keywords,slm_raw_response
+0,AI Ethics Guidelines and Staff Training,Developing ethical guidelines and ensuring staff training on AI ethics principles.,AI Governance and Staff Training,True,False,Consider integrating AI ethics into regular staff training programs.,"principle, privacy, framework, ethical, staff, teach, child, transparency, assessment, guidance, guideline, security","```json
+{
+  ""label"": ""AI Ethics Guidelines and Staff Training"",
+  ""prototype"": ""Developing ethical guidelines and ensuring staff training on AI ethics principles."",
+  ""policy_area"": ""AI Governance and Staff Training"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Consider integrating AI ethics into regular staff training programs.""
+}
+```"
+1,Cognitive Offloading in Education,Exploring how AI can optimize learning processes through cognitive offloading.,Education,True,False,Focus on the benefits and mechanisms of cognitive offloading in educational settings.,"cognitive, offload, load, critical, metacognitive, study, cognitive load, learner, thinking, critical thinking, knowledge, cognitive offload","```json
+{
+  ""label"": ""Cognitive Offloading in Education"",
+  ""prototype"": ""Exploring how AI can optimize learning processes through cognitive offloading."",
+  ""policy_area"": ""Education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""Focus on the benefits and mechanisms of cognitive offloading in educational settings.""
+}
+```"
+2,AI Governance and Stakeholder Engagement in Education,Exploring the role of AI in educational policies and stakeholder engagement.,education,True,False,"This label captures the core themes of AI integration in education, stakeholder involvement, and governance.","submission, recommendation, inquiry, analysis, evidence, tension, body, public, group, value, university, material","```json
+{
+  ""label"": ""AI Governance and Stakeholder Engagement in Education"",
+  ""prototype"": ""Exploring the role of AI in educational policies and stakeholder engagement."",
+  ""policy_area"": ""education"",
+  ""is_coherent"": true,
+  ""artifact_topic"": false,
+  ""merge_hint"": ""This label captures the core themes of AI integration in education, stakeholder involvement, and governance.""
+}
+```"
