@@ -1,0 +1,6 @@
+country,policy_claims,sentiment_claims,coverage_status
+australia,787,0,insufficient evidence
+france,378,34,included
+ireland,988,170,included
+other,538,557,included
+usa,1239,0,insufficient evidence

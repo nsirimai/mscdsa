@@ -1,0 +1,7 @@
+{
+  "cleaning_version": "shared-causal-text",
+  "chunks_all_sha256": "e67b5cbb702a131ff69139834e4c63518322e0fc43641264c1d547edafa6e51f",
+  "inventory_rows": 21591,
+  "inventory_sha256": "59f25d414f8672b5fd0423a5c35ea1452e3d3d051a4d045d2c378c142c40f96a",
+  "shared_cleaning_source": "chunks_all.csv"
+}

@@ -1,0 +1,11 @@
+topic_code,direction,mean_coverage_deficit
+P2,policy_to_sentiment,0.353325754404068
+P4,policy_to_sentiment,0.37292537093162537
+P5,policy_to_sentiment,0.36277034878730774
+P7,policy_to_sentiment,0.33821433782577515
+P8,policy_to_sentiment,0.3960151970386505
+S2,sentiment_to_policy,0.4161279797554016
+S4,sentiment_to_policy,0.3570682108402252
+S6,sentiment_to_policy,0.40295886993408203
+S7,sentiment_to_policy,0.4377291798591614
+S8,sentiment_to_policy,0.3982948362827301

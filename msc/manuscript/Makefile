@@ -10,7 +10,7 @@ view: $(MAIN).pdf
 	$(VIEWER) $(MAIN).pdf
 
 clean: 
-	/bin/rm -f *~ .*~ *.pdf *.out *.idx *.bbl *.blg *.aux *.log *.toc *.nav *.snm *.vrb *.ini _region_.* *.run.xml *-blx.bib *.nlo *.lot *.lof *.ist *.glo *.brf *.ind *.fls *.ilg *.fdb_latexmk *.synctex.gz
+	/bin/rm -f *~ .*~ *.out *.idx *.bbl *.blg *.aux *.log *.toc *.nav *.snm *.vrb *.ini _region_.* *.run.xml *-blx.bib *.nlo *.lot *.lof *.ist *.glo *.brf *.ind *.fls *.ilg *.fdb_latexmk *.synctex.gz
 
 .SUFFIXES: .tex .pdf
 

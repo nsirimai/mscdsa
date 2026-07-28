@@ -1,3 +1,843 @@
 \chapter{Methodology}
 \label{chap:method}
-\graphicspath{Chapter2/img}
+\graphicspath{{Chapter2/img/}}
+\setlength{\emergencystretch}{2em}
+
+This chapter defines the methodological framework used to answer the research
+question introduced in Chapter~\ref{chpt:intro}. The study follows a text-as-data
+approach in which policy documents and sentiment sources were organised into a
+traceable corpus and examined through four complementary analytical layers: thematic
+structure, semantic causal-claim coverage, causal-frame structure, and LLM-assisted
+evidence-grounded gap analysis. These choices follow the computational
+policy-analysis literature discussed in Section~\ref{c1:nlpsa}. The present chapter
+defines the assumptions, analytical procedures, evaluation measures, evidence
+boundaries, and limitations associated with each method. The corresponding software
+components, parameter settings, figures, and numerical results are presented in
+Chapter~\ref{chap:implresults} after each component was implemented and evaluated.
+
+The methodology moves from broad thematic discovery towards increasingly focused
+comparison and explanation. Topic modelling identifies the main themes in the policy
+and sentiment corpora and provides stable thematic spaces for later analysis.
+Semantic causal-claim coverage measures whether causal propositions expressed in one
+corpus are represented in the other, while causal-frame network divergence examines
+whether the corpora organise causes, consequences, requirements, risks, and expected
+outcomes differently. An LLM-assisted method adds an explanatory layer by retrieving
+source passages, formulating structured candidate gaps, and checking whether each
+proposed interpretation is supported by policy and sentiment evidence. Together, the
+methods distinguish missing thematic coverage from differences in semantic
+representation, causal organisation, and the practical meaning of a policy--sentiment
+gap.
+
+Five principles guide the design. First, each analytical unit remains linked to its
+source document and local context so that every computational output can be checked
+against the original material. Second, synthetic sentiment is reserved for robustness
+and sensitivity analysis and is never treated as evidence about real stakeholders.
+Third, topic-number selection combines numerical diagnostics with qualitative
+inspection. \cite{chang2009reading} show that statistically strong topic models are
+not necessarily interpretable, while~\cite{isoaho2021topic} emphasise that
+computational policy-text analysis requires continued engagement with the original
+documents. Fourth, the two causal NLP methods share one cleaned sentence inventory
+but remain independent after that stage, so agreement between their findings is not
+mechanically produced. Fifth, the LLM-assisted analysis remains evidence-grounded: it
+may organise and explain retrieved material, but it cannot introduce unsupported
+claims, use synthetic text as substantive evidence, or replace the quantitative and
+human validation stages.
+
+
+\section{Data Preparation and Corpus Construction}
+\label{sec:method-data-preparation}
+
+\subsection{Source Roles and Evidence Boundaries}
+\label{subsec:method-source-roles}
+
+The corpus is organised into three source classes. Policy documents provide formal
+evidence about governance, implementation, rights, safety, and educational practice.
+Original sentiment reports provide empirical evidence about stakeholder attitudes,
+experiences, concerns, and expectations. Synthetic sentiment forms a separate
+auxiliary corpus whose purpose is limited to robustness and sensitivity testing.
+
+Synthetic text is not used to estimate real frequencies, reconstruct public opinion,
+define the empirical topic structure of either corpus, or support substantive
+policy--sentiment gap claims. \cite{halterman2025synthetic} shows that generated text
+can support supervised text analysis when its role is clearly controlled.
+\cite{chen2023empirical} similarly describe augmentation as a response to limited
+data rather than a substitute for empirical observations. Synthetic user-generated text requires evaluation of fidelity, divergence, and downstream usefulness, as emphasised by \cite{chim2025evaluating}. The methodology therefore keeps synthetic and original sentiment identifiable throughout the complete analytical process.
+
+\subsection{Document Conversion and Structured Representation}
+\label{subsec:method-document-conversion}
+
+The document-preparation procedure converts source PDFs into an intermediate Markdown
+representation before constructing tabular datasets. Markdown serves as the
+intermediate representation because it preserves headings, paragraphs, lists, tables,
+captions, and reading order more clearly than a flat text extraction.
+\cite{auer2024docling} describe Docling as a layout-aware document-conversion
+framework that supports structured PDF understanding and export and was selected for
+implementation in this study.
+
+
+Cleaning at this stage is deliberately conservative. It removes technical extraction
+artefacts, including broken image references, repeated page elements, local file
+paths, isolated page numbers, decorative separators, and duplicated headings. It does
+not summarise, translate, simplify, or rewrite the source material. Meaningful
+headings, sections, subsections,tables, numerical statements, and paragraph structure
+remain available for later interpretation. Relevant visual descriptions may be
+attached to their corresponding passages where a figure contains information that is
+not preserved in the extracted text. Such descriptions are treated as contextual aids
+rather than independent quantitative evidence. Any numerical claim derived from a
+visual element must remain verifiable against the original chart, table, or document.
+
+Each document should be represented with stable provenance metadata. This includes a
+document identifier, corpus role, country, source type, and source location. The
+methodology therefore supports movement in both directions: computational analysis
+can proceed from structured text, while any result can be traced back to its
+documentary source.
+
+\subsection{Heading-Aware Text Segmentation}
+\label{subsec:method-chunking}
+
+Long reports frequently contain several arguments and themes. Representing a complete
+report with one vector can merge unrelated sections and weaken both topic discovery
+and semantic comparison. The methodology therefore divides documents into
+heading-aware, size-controlled passages while retaining local section context. Long
+documents can be segmented into multi-paragraph subtopic passages as demonstrated by
+Hearst~\cite{hearst1997texttiling}. More recent work
+by~\cite{gunther2024latechunking} and~\cite{duarte2024lumberchunker} shows that
+representation quality is affected by the relationship between segment length and
+surrounding context. 
+
+On this basis, the segmentation method balances three requirements intended to
+preserve contextual meaning while maintaining sufficient analytical granularity:
+
+\begin{enumerate}
+    \item each passage must contain enough context to preserve a meaningful argument;
+    \item passages must remain short enough to avoid combining unrelated themes; and
+    \item local overlap may preserve continuity where an argument crosses a boundary.
+\end{enumerate}
+
+Because overlap can repeat material, the causal NLP methods defined in
+Section~\ref{sec:method-causal-nlp} are expected to apply source-aware
+deduplication before substantive comparison. The shared causal-text preparation in
+Subsection~\ref{subsec:method-shared-causal-cleaning} is intended to remove repeated
+cleaned sentences within the same source document, while the causal-frame method in
+Subsection~\ref{subsec:method-frame-network} is expected to exclude repeated
+relations originating from the same source. Document-level representations are
+preserved alongside the segmented corpus so that each claim or frame can remain
+linked to its wider documentary context.
+
+\subsection{Synthetic sentiment validation}
+\label{subsec:method-synthetic-validation}
+
+The methodology evaluates synthetic sentiment against original sentiment using
+complementary lexical, semantic, distributional, and discriminative measures. The
+comparison is conducted separately at document and passage levels because long
+documents may combine several themes within one representation. No individual metric
+is treated as sufficient to establish equivalence between the original and synthetic
+corpora. For vector representations $\mathbf{x}$ and $\mathbf{y}$, cosine similarity is defined by the following equation, where $\lVert\cdot\rVert_2$ is the L2 norm and $\mathbf{x}^{\mathsf T}\mathbf{y}$ is the inner product.
+
+\begin{equation}
+\operatorname{cos}(\mathbf{x},\mathbf{y})=
+\frac{\mathbf{x}^{\mathsf T}\mathbf{y}}
+{\lVert\mathbf{x}\rVert_2\lVert\mathbf{y}\rVert_2}
+\label{eq:method-cosine-general}
+\end{equation}
+
+At each level, equally sized samples are drawn from the original and synthetic
+sentiment corpora. The vector $\mathbf{x}$ denotes the centroid of the original
+representations, while $\mathbf{y}$ denotes the centroid of the synthetic
+representations. The units are cleaned passages at passage level and complete cleaned
+documents at document level. Lexical centroids are computed in a shared TF--IDF space
+to compare patterns of vocabulary use, whereas semantic centroids are computed from
+text embeddings to capture similarity in meaning beyond differences in surface
+wording.
+
+Cosine similarity is a standard vector-space retrieval measure \cite{salton1988term}.
+Larger values indicate greater similarity between the aggregate original and
+synthetic representations, but centroid cosine does not capture distributional
+dispersion, shape, or local correspondence. It is therefore considered alongside
+nearest-neighbour similarity, distributional distances, and a classifier two-sample
+test.
+
+Lexical difference is also measured with Jensen--Shannon divergence. As described
+by~\cite{lin1991divergence}, this measure provides a symmetric comparison between
+distributions, while~\cite{endres2003new} show its metric properties. Here, $P$ and
+$Q$ denote the normalised unigram or bigram distributions of the original and
+synthetic samples, and $M=(P+Q)/2$ denotes their midpoint distribution:
+\begin{equation}
+D_{\mathrm{JS}}(P,Q)=
+\frac{1}{2}D_{\mathrm{KL}}(P\Vert M)
++\frac{1}{2}D_{\mathrm{KL}}(Q\Vert M).
+\label{eq:method-js-general}
+\end{equation}
+Here, $D_{\mathrm{KL}}(P\Vert M)=\sum_i P_i\log_2(P_i/M_i)$ defines the Kullback--Leibler divergence, where $P_i$ and
+$M_i$ denote the probabilities assigned to lexical item $i$. The notation
+$\Vert$ indicates the direction of comparison because Kullback--Leibler divergence
+is not symmetric. The corresponding expression for $D_{\mathrm{KL}}(Q\Vert M)$
+replaces $P_i$ with $Q_i$. With base-two logarithms, $D_{\mathrm{JS}}$ lies in
+$[0,1]$; zero indicates identical lexical distributions, while larger values
+indicate greater divergence.
+
+Maximum Mean Discrepancy compares embedding distributions. As described
+by~\cite{gretton2012kernel}, let $X=\{x_i\}_{i=1}^{m}$ and
+$Y=\{y_j\}_{j=1}^{n}$ denote the original and synthetic samples, with sizes $m$
+and $n$. The pipeline uses the Gaussian kernel
+$k(a,b)=\exp(-\gamma\lVert a-b\rVert_2^2)$, where
+$\lVert a-b\rVert_2^2$ is the squared Euclidean distance,
+$\gamma=1/d$, and $d$ is the embedding dimension. The biased estimate is
+\begin{equation}
+\widehat{\operatorname{MMD}}_{\mathrm{b}}^{\,2}(X,Y)
+=
+\frac{1}{m^2}\sum_{i,i'=1}^{m}k(x_i,x_{i'})
++
+\frac{1}{n^2}\sum_{j,j'=1}^{n}k(y_j,y_{j'})
+-
+\frac{2}{mn}\sum_{i=1}^{m}\sum_{j=1}^{n}k(x_i,y_j).
+\label{eq:method-mmd}
+\end{equation}
+The first two terms measure average similarity within each sample, while the third
+measures similarity between samples. The notation
+$\sum_{i,i'=1}^{m}$ abbreviates a sum over all pairs $(i,i')$. The subscript
+$\mathrm{b}$ indicates that self-comparisons are included. Values closer to zero
+indicate more similar distributions. 
+
+A Fr\'echet-style distance compares distribution moments. The distance between
+probability laws originates in \cite{frechet1957distance}, while the closed-form
+expression for multivariate normal distributions is given by
+\cite{dowson1982frechet}:
+
+\begin{equation}
+D_{\mathrm{F}}(X,Y)
+=
+\lVert\boldsymbol{\mu}_X-\boldsymbol{\mu}_Y\rVert_2^2
++
+\operatorname{tr}\!\left(
+\boldsymbol{\Sigma}_X+\boldsymbol{\Sigma}_Y
+-2(\boldsymbol{\Sigma}_X\boldsymbol{\Sigma}_Y)^{1/2}
+\right).
+\label{eq:method-frechet}
+\end{equation}
+
+For the same samples $X$ and $Y$, $\boldsymbol{\mu}_X$ and
+$\boldsymbol{\mu}_Y$ denote their mean embeddings, while
+$\boldsymbol{\Sigma}_X$ and $\boldsymbol{\Sigma}_Y$ denote their covariance matrices.
+The operator $\operatorname{tr}$ gives the matrix trace, and $(\cdot)^{1/2}$ gives
+the matrix square root. Smaller values indicate more similar distribution moments.
+
+A classifier two-sample test provides a final discriminative assessment. As described
+by~\cite{lopez2016revisiting}, the test treats distribution comparison as a
+classification task in which a model attempts to distinguish observations from the
+two samples. Performance near chance indicates limited distinguishability, whereas
+strong performance suggests systematic differences. Here, distinguishability serves
+as a transparency measure that guides how cautiously synthetic sentiment is used; it
+does not determine whether synthetic data can be treated as empirical evidence.
+
+\section{Topic-Modelling Methodology}
+\label{sec:method-topic-modelling}
+
+Topic modelling provides the thematic reference spaces used by the later causal
+analysis. The methodology compares three complementary approaches. Latent Dirichlet
+Allocation provides a probabilistic lexical baseline. A BERTopic-style method
+provides a clustering-based semantic baseline. Non-negative Matrix Factorisation
+provides an explicit factorisation whose document--topic and topic--term matrices
+support aggregation and downstream projection.
+
+Original policy and sentiment passages define their respective empirical topic
+spaces. Synthetic sentiment remains separate. Depending on the method, it is either
+modelled independently or projected into a topic space fitted only to original
+sentiment. It cannot determine the topics used to describe empirical sentiment.
+
+\subsection{Latent Dirichlet Allocation}
+\label{subsec:method-lda}
+
+As described by~\cite{blei2003latent}, Latent Dirichlet Allocation represents each
+document as a mixture of topics, with each topic defined by a distribution over the
+vocabulary. For document $d$ and token position $n$, the generative process is
+
+\begin{align}
+\boldsymbol{\theta}_d
+&\sim \operatorname{Dirichlet}(\boldsymbol{\alpha}),
+&
+z_{dn}
+&\sim \operatorname{Categorical}(\boldsymbol{\theta}_d),
+&
+w_{dn}
+&\sim \operatorname{Categorical}(\boldsymbol{\beta}_{z_{dn}}).
+\label{eq:method-lda-generative}
+\end{align}
+
+Here, $\sim$ denotes sampling from a probability distribution. The vector
+$\boldsymbol{\theta}_d$ contains the topic proportions for document $d$, while
+$\boldsymbol{\alpha}$ defines its Dirichlet prior. The variable $z_{dn}$ is the
+latent topic assigned to token $w_{dn}$. The vector $\boldsymbol{\beta}_k$ contains
+the word probabilities for topic $k$ and sums to one over the vocabulary. The indices
+$d$, $n$, and $k$ refer respectively to documents, token positions, and topics.
+Candidate topic counts are compared through coherence and topic diversity. As shown
+by~\cite{newman2010automatic,roder2015exploring}, coherence measures approximate the
+semantic interpretability of topic-word lists. Topic diversity identifies repeated
+top words across topics~\cite{dieng2020topic}. Coherence therefore rewards meaningful
+word association, while diversity discourages topics from expressing the same lexical
+pattern.
+
+LDA provides a transparent bag-of-words baseline, but its reliance on word-frequency
+patterns limits its ability to represent context, semantic similarity, and
+differences in how the same vocabulary is used. Passages may therefore appear related
+because they share terms, even when they express distinct meanings, while
+semantically similar passages may remain separated when they use different wording.
+These limitations motivate complementary topic representations that capture both
+lexical structure and contextual meaning.
+
+\subsection{BERTopic-style Semantic Clustering}
+\label{subsec:method-bertopic}
+
+The semantic-clustering method embeds passages in a reduced vector space, groups
+similar passages into candidate topic clusters, and identifies the terms that best
+distinguish each cluster. As described by~\cite{grootendorst2022bertopic}, BERTopic
+combines document embeddings, dimensionality reduction, clustering, and class-based
+TF--IDF. This design captures contextual similarity between passages while retaining
+interpretable lexical descriptions for the resulting topics. For term $t$ in topic
+class $c$, the class-based weight is
+\begin{equation}
+W_{t,c}
+=
+tf_{t,c}
+\log\left(
+1+\frac{A}{tf_t}
+\right).
+\label{eq:method-ctfidf}
+\end{equation}
+Here, $tf_{t,c}$ denotes the frequency of term $t$ in class $c$, $tf_{t}$ denotes its
+frequency across all classes, and $A$ denotes the average number of words per class.
+
+Candidate topic solutions are evaluated using coherence, topic diversity, topic
+balance, and cosine silhouette. As defined by~\cite{rousseeuw1987silhouettes}, the
+silhouette score for item $i$ is
+\begin{equation}
+s(i)=
+\frac{b(i)-a(i)}
+{\max\{a(i),b(i)\}},
+\label{eq:method-silhouette}
+\end{equation}
+where $a(i)$ denotes the mean cosine distance between item $i$ and other items in its
+assigned cluster, while $b(i)$ denotes the smallest mean distance between $i$ and any
+other cluster. Values closer to one indicate stronger separation, values near zero
+indicate overlapping clusters, and negative values suggest possible misassignment.
+
+These measures provide objective criteria for candidate screening rather than
+automatic model selection. A complementary subjective assessment examines fragmented
+clusters, repeated themes, dominant topics, and meaningful distinctions across
+countries, populations, and policy functions. This reflects the finding that
+statistical performance does not necessarily ensure human
+interpretability~\cite{chang2009reading}.
+
+SLMs support the formulation of concise topic labels after cluster assignments are
+established. Their role is limited to wording and does not alter cluster membership,
+topic weights, or the objective evidence used in model evaluation.
+
+\subsection{Non-negative Matrix Factorisation}
+\label{subsec:method-nmf}
+
+As introduced by~\cite{lee1999learning}, Non-negative Matrix Factorisation (NMF)
+approximates a non-negative matrix using two lower-dimensional non-negative
+factors. Its squared-error formulation has been applied to document clustering
+by~\cite{xu2003document}. For a TF--IDF matrix
+$X\in\mathbb{R}_{+}^{n\times v}$ and a candidate number of topics $k$, the
+factorisation is defined as
+\begin{equation}
+\left(W_{k}^{\ast},H_{k}^{\ast}\right)
+=
+\underset{
+\substack{
+W,H\,{\in}\,\mathbb{R}_{+}^{n\times k}, \mathbb{R}_{+}^{k\times v}
+}
+}{\arg\min}
+\,
+\frac{1}{2}\left\lVert X-WH\right\rVert_{F}^{2},
+\qquad
+X\approx W_{k}^{\ast}H_{k}^{\ast}.
+\label{eq:method-nmf}
+\end{equation}
+Here, $n$ and $v$ are the numbers of passages and vocabulary terms.
+$W_{k}^{\ast}$ contains optimal passage--topic weights, whereas $H_{k}^{\ast}$ contains
+optimal topic--term weights. The rows of $W$ support passage assignment and aggregation,
+while those of $H$ identify each topic's terms. The factor space supports the
+causal methods.
+
+
+Candidate values of $k$ are assessed using NPMI coherence, cosine silhouette, topic
+balance, diversity, distinctiveness, and artefact content. Term co-occurrence
+has been used to evaluate topic coherence by~\cite{newman2010automatic}, while
+NPMI coherence was examined by~\cite{roder2015exploring}. For terms $u$ and
+$v$, the measure is
+\begin{equation}
+\operatorname{NPMI}(u,v)
+=
+\frac{
+\log\!\left(\dfrac{p(u,v)}{p(u)p(v)}\right)
+}{
+-\log p(u,v)
+}.
+\label{eq:method-nmf-npmi}
+\end{equation}
+Here, $p(u)$ and $p(v)$ are marginal occurrence probabilities and $p(u,v)$ is
+their co-occurrence probability. Topic coherence averages NPMI across pairs of
+high-weight terms, with larger values indicating stronger association. The
+cosine silhouette in Equation~\ref{eq:method-silhouette} measures separation
+in the normalised passage--topic space.
+
+Following the assignment principle used by~\cite{xu2003document}, passage $i$
+is assigned to $\widehat{z}_i=\arg\max_{1\leq j\leq k}W_{ij}$, and the corpus
+share of topic $j$ is
+$p_j=n^{-1}\sum_{i=1}^{n}\mathbb{I}(\widehat{z}_i=j)$, where
+$\mathbb{I}(\cdot)$ is the indicator function. Let $T_j$ denote the fixed-size
+set of highest-weight terms for topic $j$, and let $\mathcal{A}$ denote a set
+of report and extraction artefact terms. The diagnostics are
+\begin{equation}
+    \begin{aligned}
+        \operatorname{Bal}_{k}
+        &=1-\max_{1\leq j\leq k}p_j,
+        &\qquad
+        \operatorname{Div}_{k}
+        &=
+        \frac{\left|\bigcup_{j=1}^{k}T_j\right|}
+        {\sum_{j=1}^{k}|T_j|},
+        \\
+        \operatorname{Dist}_{k}
+        &=
+        1-\frac{2}{k(k-1)}
+        \sum_{j<\ell}
+        \frac{|T_j\cap T_\ell|}
+        {|T_j\cup T_\ell|},
+        &\qquad
+        \operatorname{Art}_{k}
+        &=
+        \max_{1\leq j\leq k}
+        \frac{|T_j\cap\mathcal{A}|}{|T_j|}.
+    \end{aligned}
+    \label{eq:method-nmf-diagnostics}
+\end{equation}
+
+Balance penalises dominance by one topic, diversity measures the proportion of
+unique terms, and distinctiveness is one minus the mean pairwise Jaccard
+similarity. Larger values are preferable for these three measures, whereas a
+smaller artefact score indicates less report or extraction residue.
+
+The indicators are normalised across candidate values of $k$ and combined into
+the screening score to provide a unified basis for comparing topic solutions.
+\begin{equation}
+Q_k
+=
+\sum_{r=1}^{R}\omega_r\widetilde{M}_{r,k},
+\qquad
+\sum_{r=1}^{R}\omega_r=1,
+\label{eq:method-nmf-selection-score}
+\end{equation}
+where $\widetilde{M}_{r,k}$ is the normalised value of metric $r$ for candidate
+$k$ and $\omega_r$ is its assigned weight. The artefact measure is reversed
+before inclusion so that larger normalised values consistently indicate better
+quality.
+
+Reconstruction error and optimisation iterations are retained as convergence
+diagnostics because increasing $k$ can improve reconstruction without improving
+interpretability. Candidates with dominant, very small, or artefact-heavy topics
+are screened before adjacent solutions on the quality plateau are examined for
+fragmentation, repeated themes, and meaningful additional granularity. The
+candidate range, weights, thresholds, and plateau criterion are specified in
+Chapter~\ref{chap:implresults}.
+
+SLMs are used only to produce concise labels after $k$, $W$, and $H$ are
+established. They do not alter the factorisation, passage assignments, topic
+weights, or selection evidence.
+
+\subsection{Synthetic-Data Robustness Assessment}
+\label{subsec:method-synthetic-robustness}
+
+Synthetic corpora have known thematic structures. Following
+\cite{shi2019evaluation}, they will be used as validation data for both NMF and
+BERTopic, not for model fitting. Synthetic passages will be assigned to topics
+learned from the observed reports. Robustness will be tested by varying topic
+prevalence, vocabulary overlap, passage length, source balance, artefact content,
+and textual noise.
+
+Let \(g\in\{o,s\}\) denote the observed or synthetic corpus, \(n_g\) its number of
+chunks, and \(\widehat{z}_{i}^{(g)}\) the topic assigned to chunk \(i\). Topic
+shares and their total variation distance will be calculated as
+\begin{equation}
+p_{j}^{(g)}
+=
+\frac{1}{n_g}
+\sum_{i=1}^{n_g}
+\mathbb{I}\!\left(\widehat{z}_{i}^{(g)}=j\right),
+\,
+D_{\mathrm{TV}}\!\left(p^{(o)},p^{(s)}\right)
+=
+\frac{1}{2}
+\sum_{j=1}^{k}
+\left|p_{j}^{(o)}-p_{j}^{(s)}\right|.
+\label{eq:method-synthetic-robustness}
+\end{equation}
+
+Following Gibbs and Su~\cite{gibbs2002choosing}, total variation distance measures
+the difference between probability distributions. A value of zero indicates
+identical topic shares, while smaller values indicate closer preservation and larger
+values greater change. The same interpretation applies when topic-share differences
+are averaged and expressed in percentage points. The measure will be calculated for
+NMF and BERTopic, while assignment confidence will provide model-specific evidence.
+
+Controlled perturbations will test whether changes in topic representation affect
+causal methods, separating instability in topic discovery from sensitivity in causal
+analysis. Synthetic evidence will complement evaluation on observed corpus by
+identifying sensitivity and failure conditions. The generation process,
+perturbations, assignment rules, confidence measures, and results are detailed in
+Chapter~\ref{chap:implresults}.
+
+\section{Causal Analysis of Policy--Sentiment Gaps}
+\label{sec:method-causal-nlp}
+
+Topic models identify themes but do not establish whether policy and sentiment
+texts contain semantically corresponding causal claims or organise causes,
+relations, and effects in similar ways. Two independent sentence-level methods
+therefore follow the thematic analysis: i) semantic causal-claim coverage and
+ii) causal-frame network divergence. The first measures whether claims in one corpus
+have close semantic counterparts in the other, while the second compares directed
+cause--relation--effect networks. Frozen topics provide the thematic reference
+for these analyses, but the causal relations are extracted independently of the
+text. Together, they provide complementary views of thematic and causal alignment.
+
+These methods examine expressed causal language and discourse structure; they do
+not estimate real-world causal effects in the potential-outcome or
+structural-causal sense defined by~\cite{rubin1974estimating,pearl2009causality}.
+
+\subsection{Shared Causal-Text Preparation}
+\label{subsec:method-shared-causal-cleaning}
+
+Both methods use the same versioned sentence inventory derived from the combined
+chunk corpus. The preparation procedure decodes encoded text, repairs recurrent
+OCR and extraction fragments, segments chunks into sentences, and removes citation
+markers, list and page prefixes, links, publication material, references, tables,
+code, contact details, and other extraction residue. Sentences outside the defined
+length range are also excluded.
+
+Repeated sentence signatures caused by overlapping chunks are removed within each
+document, while repetition across documents is retained. Each sentence preserves
+its source and chunk metadata and is linked to the frozen topic of its parent
+chunk. Neighbouring chunks are retained as context without changing the sentence
+as the analytical unit. The same preparation is applied to policy, observed
+sentiment, and synthetic sentiment texts.
+
+Preprocessing choices can materially affect text-analysis results
+by~\cite{denny2018preprocessing}, while transparent and reproducible workflows are
+emphasised by~\cite{welbers2017text}. A shared inventory ensures that differences
+between the two methods do not arise from inconsistent cleaning. After preparation,
+the methods extract and analyse causal structures independently and do not use each
+other's outputs.
+
+
+\subsection{Semantic Causal-Claim Coverage}
+\label{subsec:method-semantic-coverage}
+
+The first causal method identifies cleaned sentences in which an ordered English
+or French cue pattern connects plausible cause and effect spans. The first valid
+pattern is retained and assigned a broad relation type. The extracted spans support
+interpretation and auditing, while the complete cleaned sentence forms the claim
+used for semantic comparison.
+
+Each claim $x_i$ is represented by a normalised multilingual sentence vector
+$\mathbf{e}(x_i)$ following the Sentence-BERT approach
+of~\cite{reimers2019sentence}. The cosine similarity defined in
+Equation~\ref{eq:method-cosine-general} is applied to each source--target claim
+pair, giving
+$s_{ij}=\operatorname{cos}\!\left(\mathbf{e}(x_i),\mathbf{e}(y_j)\right)$.
+The exact encoder and any fallback procedure are specified in
+Chapter~\ref{chap:implresults}.
+
+
+For claim $x_i$ in corpus $A$, let $\operatorname{NN}^{B}_{m}(x_i)$ denote its  nearest $m$ claims in corpus $B$. Coverage and deficit are defined by the following formulas
+\begin{equation}
+C_{A\rightarrow B}^{(m)}(x_i)
+=
+\frac{1}{m}
+\sum_{j\in\operatorname{NN}^{B}_{m}(x_i)}s_{ij},
+\qquad
+D_{A\rightarrow B}^{(m)}(x_i)
+=
+1-C_{A\rightarrow B}^{(m)}(x_i).
+\label{eq:method-semantic-coverage}
+\end{equation}
+
+A larger deficit indicates weaker representation of the source claim in the
+target corpus. Using a small neighbourhood reduces dependence on one noisy match
+while retaining a local interpretation. Coverage is calculated in both directions
+because nearest-neighbour relations are asymmetric. Policy and sentiment claims
+also retain their separate frozen topic spaces, so no topic crosswalk changes
+the coverage scores.
+
+
+Outcomes are summarised globally, by native topic, and, where evidence is
+sufficient, by country. The reported metrics include claim counts, mean top-1
+similarity, mean $m$-neighbour similarity, mean coverage deficit, and the share
+of claims below a threshold $\tau$. For $n_A$ source claims, let
+$c_i=C_{A\to B}^{(m)}(x_i)$ and
+$d_i=D_{A\to B}^{(m)}(x_i)=1-c_i$. The corpus-level outcomes are
+\begin{equation}
+    \overline{C}_{A\rightarrow B}
+    =
+    \frac{1}{n_A}\sum_{i=1}^{n_A}c_i,
+    \qquad      
+    \overline{D}_{A\rightarrow B}
+    =
+    \frac{1}{n_A}\sum_{i=1}^{n_A}d_i,
+    \qquad
+    L_{A\rightarrow B}(\tau)
+    =
+    \frac{1}{n_A}\sum_{i=1}^{n_A}
+    \mathbb{I}\!\left(c_i<\tau\right).
+    \label{eq:method-semantic-outcomes}
+\end{equation}
+
+The threshold is calibrated by maximising F1 on reviewed matches and non-matches
+when annotations are available. Otherwise, a lower empirical quantile is retained
+only as a provisional diagnostic; continuous similarity and deficit values remain
+the principal outcomes.
+
+Corpus imbalance is controlled through repeated equal-size sampling without
+replacement. If $\overline{D}^{(r)}_{A\rightarrow B}$ denotes the mean deficit
+in resample $r$, the balanced estimate is defined by the following equation, where $R$ is the number of resamples:
+\begin{equation}
+\overline{D}^{\,\mathrm{bal}}_{A\rightarrow B}
+=
+\frac{1}{R}
+\sum_{r=1}^{R}
+\overline{D}^{(r)}_{A\rightarrow B}.
+\label{eq:method-balanced-semantic}
+\end{equation}
+
+Its standard deviation and empirical $2.5$th and $97.5$th percentiles measure
+sensitivity to claim-pool composition, following the general resampling principle
+of~\cite{efron1979bootstrap}. Balanced estimates are also reported by native topic.
+
+Synthetic claims are used only for sensitivity analysis. For sentiment topic $j$,
+the change relative to policy coverage is
+\begin{equation}
+\Delta D_j
+=
+\overline{D}^{\,\mathrm{syn}}_{j\rightarrow P}
+-
+\overline{D}^{\,\mathrm{obs}}_{j\rightarrow P},
+\label{eq:method-semantic-synthetic-change}
+\end{equation}
+where positive values indicate weaker synthetic coverage. Synthetic claims do not
+replace observed country evidence or support substantive conclusions. The
+neighbourhood size, resampling count, evidence requirements, threshold procedure,
+and synthetic comparisons are detailed in
+Chapter~\ref{chap:implresults}.
+
+
+\subsection{Causal-Frame Network Divergence}
+\label{subsec:method-frame-network}
+
+Graph-based relation representations are established
+by~\cite{horridge2011practical,merono2025knowledge}, while their use for
+analysing causal language in NLP is discussed by~\cite{feder2022causal}. The
+second method represents each extracted frame as
+\begin{equation}
+f_i=(u_i,r_i,v_i),
+\label{eq:method-causal-frame}
+\end{equation}
+where $u_i$ and $v_i$ are the cause and effect spans, and $r_i$ is a normalised
+relation family. The relation vocabulary distinguishes causes or increases,
+reductions or prevention, enabling or support, requirements or dependencies,
+risks or threats, and expected improvements.
+
+English and French cue rules cover forward, reversed, dependency, and purpose
+constructions. Filters reject non-causal uses of cue terms. Reversed relations
+are oriented semantically; if $X$ depends on $Y$, $Y$ is the prerequisite and
+$X$ the outcome. Duplicate frames from overlapping passages are removed within
+each source, retaining the strongest frame per relation family.
+
+Cause and effect spans are projected separately into the frozen policy topic
+space. A hybrid word- and character-based similarity assigns each span when the
+best topic has sufficient similarity and separation from the next candidate;
+otherwise, the parent passage topic provides a fallback. Topic-assignment quality
+is assessed through mean similarity, assignment margin, confidence, and fallback
+share. The exact projection thresholds are specified in
+Chapter~\ref{chap:implresults}.
+
+As shown by~\cite{gentzkow2019text,grimmer2013text}, coding and aggregation
+choices can affect corpus-level findings. Accordingly, each accepted frame
+receives a quality score $q_i$ based on cue reliability, span completeness,
+balance, content, and length. Let $n_{s(i)}$ be the number of frames from source
+$s(i)$, and let $\gamma_i^{u}$ and $\gamma_i^{v}$ denote the cause- and
+effect-topic assignment confidences. The study-specific frame weight is
+\begin{equation}
+w_i
+=
+\frac{q_i}{n_{s(i)}}
+\sqrt{\gamma_i^{u}\gamma_i^{v}}.
+\label{eq:method-frame-weight}
+\end{equation}
+
+The source term limits domination by documents yielding many frames, while the
+geometric mean retains information from both topic assignments. The separate
+effects of source balance, frame quality, and projection confidence are examined
+through alternative specifications.
+
+According to~\cite{gentzkow2019text,grimmer2013text}, weighted aggregation of
+coded textual units can define corpus-level empirical distributions. For cause
+topic $a$, relation $r$, and effect topic $b$, the policy distribution is
+\begin{equation}
+p_{arb}
+=
+\frac{
+\sum_{i\in P}
+w_i\mathbb{I}(a_i=a,r_i=r,b_i=b)
+}{
+\sum_{i\in P}w_i
+},
+\label{eq:method-policy-frame-distribution}
+\end{equation}
+with $q_{arb}$ defined analogously for sentiment. Following
+\cite{lin1991divergence}, let
+$m_{arb}=(p_{arb}+q_{arb})/2$. The structural difference between the two frame
+distributions is
+
+\begin{equation}
+D_{\mathrm{JS}}(P,Q)
+=
+\frac{1}{2}
+\sum_{a,r,b}
+p_{arb}\log_2\frac{p_{arb}}{m_{arb}}
++
+\frac{1}{2}
+\sum_{a,r,b}
+q_{arb}\log_2\frac{q_{arb}}{m_{arb}}.
+\label{eq:method-frame-js}
+\end{equation}
+
+A value of zero indicates identical distributions, while larger values indicate
+differences in how the corpora connect topics through causal relations. Drawing
+on distance comparisons by~\cite{gibbs2002choosing}, edge diagnostics include
+the signed gap $\Delta_{arb}=p_{arb}-q_{arb}$, its magnitude $|\Delta_{arb}|$,
+and the smoothed log ratio
+$\log[(p_{arb}+\varepsilon)/(q_{arb}+\varepsilon)]$, where
+$\varepsilon>0$ prevents undefined ratios. Relation-level gaps aggregate
+absolute differences across topic pairs.
+
+
+As explained by~\cite{gibbs2002choosing}, absolute probability differences also
+underlie total-variation comparisons. The study therefore uses them to identify
+the topics contributing most strongly to structural divergence. The contribution
+of topic $t$ combines its cause- and effect-side gaps:
+\begin{equation}
+G_t
+=
+\sum_{r,b}|p_{trb}-q_{trb}|
++
+\sum_{a,r}|p_{art}-q_{art}|.
+\label{eq:method-topic-gap}
+\end{equation}
+
+Frame counts, source support, mean frame quality, and topic-assignment confidence
+accompany the divergence measures. Country-level networks are compared only when
+both corpora provide sufficient frame and source support.
+
+The primary specification balances source representation, frame quality, and
+topic-assignment confidence. Robustness is examined using source-balanced-only,
+high-quality-only, and direct-projection-only specifications. Following the
+bootstrap method introduced by~\cite{efron1979bootstrap}, source files are
+resampled with replacement. The mean and empirical $2.5$th and $97.5$th
+percentiles of $D_{\mathrm{JS}}$ measure sensitivity to documentary composition
+rather than population uncertainty.
+
+
+Following the multi-metric evaluation of synthetic data presented
+by~\cite{snoke2018general,chim2025evaluating}, synthetic sensitivity is measured
+by comparing policy divergence from observed and synthetic sentiment. Let $P$,
+$Q$, and $S$ denote the policy, observed-sentiment, and synthetic-sentiment frame
+distributions. The global and relation-level changes are
+\begin{equation}
+\Delta_{\mathrm{JS}}^{\mathrm{syn}}
+=
+D_{\mathrm{JS}}(P,S)-D_{\mathrm{JS}}(P,Q),
+\qquad
+\Delta_{r}^{\mathrm{syn}}
+=
+\sum_{a,b}|p_{arb}-s_{arb}|
+-
+\sum_{a,b}|p_{arb}-q_{arb}|.
+\label{eq:method-frame-synthetic-sensitivity}
+\end{equation}
+
+Positive values indicate that synthetic sentiment increases the policy--sentiment
+gap, while negative values indicate reduced divergence. The extraction thresholds,
+weighting constants, evidence requirements, resampling count, and results are
+detailed in Chapter~\ref{chap:implresults}.
+
+\section{LLM-Assisted Evidence-Grounded Gap Analysis}
+\label{sec:method-llm-gap}
+
+Two independent DeepSeek-assisted pipelines identify and explain semantic and
+causal-frame gaps between policy and sentiment texts. Both operate directly on the
+shared cleaned sentence inventory rather than on outputs from the preceding causal
+NLP methods. Only original policy and sentiment sentences support substantive
+findings; synthetic text remains restricted to robustness testing.
+
+For global and sufficiently supported country scopes, source-balanced batches are
+constructed with immutable evidence identifiers. The semantic pipeline compares
+meaning and emphasis, while the causal-frame pipeline restricts the evidence to
+sentences containing explicit English or French causal cues and compares their
+cause, relation, and effect structures. Alignment and insufficient-evidence outcomes
+prevent a gap from being inferred for every comparison.
+
+Each pipeline uses one agent with two prompts. The first performs contrastive analysis
+and returns a structured record containing the gap category, explanation, supporting
+evidence, counterevidence, and confidence. The second receives the record with
+reordered evidence and verifies the cited identifiers, classification,
+counterevidence, and support. For causal-frame findings, it also checks that both
+passages express explicit relations with consistent cause--effect orientation.
+
+The procedure is repeated to assess stability. Semantic findings are matched by
+classification and gap label, while causal-frame findings are matched by
+classification, relation family, cause and effect themes, and supporting evidence.
+Let $M(G_a,G_b)$ denote the number of one-to-one matches between runs $a$ and $b$.
+Stability is measured by
+\begin{equation}
+J_M(G_a,G_b)
+=
+\frac{M(G_a,G_b)}
+{|G_a|+|G_b|-M(G_a,G_b)}.
+\label{eq:method-agent-jaccard}
+\end{equation}
+
+For semantic findings, $M$ denotes exact signature matches; for causal frames, it
+denotes matches above a predefined similarity threshold. A finding is retained only
+when it survives verification, exceeds the confidence and faithfulness thresholds,
+contains no unresolved counterevidence, and recurs across the required runs.
+
+The distinction between evidential support and faithfulness follows
+\cite{es2024ragas}. Structured verification is informed by~\cite{liu2023geval},
+while repeated analysis follows the consistency rationale of
+\cite{wang2023selfconsistency}. Final evaluation uses manually reviewed candidates
+and reports precision, recall, and $F_1$. The prompts, sampling limits, thresholds,
+model settings, and results are reported in Chapter~\ref{chap:implresults}.
+
+\section{Summary}
+
+The methodology combines traceable corpus construction, controlled synthetic-data
+testing, two topic-modelling approaches, two causal NLP methods, and an
+LLM-assisted explanatory analysis. LDA provides a probabilistic lexical baseline,
+while BERTopic-style clustering provides a semantic grouping baseline. Semantic
+coverage measures claim-level representation, and causal-frame networks capture
+structural differences in causal discourse. The single-agent analysis produces
+evidence-grounded explanations while preserving the same empirical boundaries.
+
+The study uses publicly available or institutionally published material and retains
+source provenance throughout. Synthetic material is clearly marked, restricted to
+robustness testing, and excluded from empirical inference. Generated topic labels
+support interpretation but do not determine topic assignments. Country-level
+comparisons are interpreted in relation to the availability and distribution of
+evidence.
+
+The causal NLP outputs identify differences in language, semantic coverage, and
+causal framing; they do not establish that the relationships expressed in the texts
+are true causal mechanisms. Reproducibility requires preserving source metadata,
+intermediate representations, model configurations, evaluation outputs, and the
+evidence passages supporting each interpretation.

@@ -1,0 +1,4 @@
+corpus,frozen_nmf_chunks,raw_linked_chunks,clean_linked_chunks,clean_sentences,raw_linkage_rate
+policy,1888,1888,1819,14944,1.0
+sentiment,455,455,450,3578,1.0
+synthetic_sentiment,202,202,202,2040,1.0

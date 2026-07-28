@@ -1,0 +1,5 @@
+policy_topic,policy_topic_code,sentiment_topic,sentiment_topic_code,forward_weight_share,reverse_weight_share,connection_score,forward_links,reverse_links,mutual_best,connected_for_visualization
+0,P0,1,S1,0.3345198587734133,0.24028704119835356,0.28351505619059203,206,35,True,True
+1,P1,0,S0,0.21145412331192803,0.2532629831748314,0.23141629604372627,57,16,True,True
+3,P3,5,S5,0.26617588818580135,0.22604504383122195,0.2452911337814188,126,17,True,True
+6,P6,3,S3,0.4812781730174851,0.16927103132928295,0.28542328689674706,322,38,True,True

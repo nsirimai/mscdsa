@@ -1,34 +1,31 @@
 ﻿topic,country_display,documents,topic_total,share_within_topic,keywords,topic_label
-0,australia,144,385,0.37402597402597404,"submission, public, research, sector, people, principle, unesco, recommendation, large, open, investment, company",AI Curriculum Integration and Oversight
-0,france,102,385,0.2649350649350649,"submission, public, research, sector, people, principle, unesco, recommendation, large, open, investment, company",AI Curriculum Integration and Oversight
-0,ireland,82,385,0.21298701298701297,"submission, public, research, sector, people, principle, unesco, recommendation, large, open, investment, company",AI Curriculum Integration and Oversight
-0,usa,40,385,0.1038961038961039,"submission, public, research, sector, people, principle, unesco, recommendation, large, open, investment, company",AI Curriculum Integration and Oversight
-0,International / UNESCO,17,385,0.04415584415584416,"submission, public, research, sector, people, principle, unesco, recommendation, large, open, investment, company",AI Curriculum Integration and Oversight
-1,usa,261,330,0.7909090909090909,"educator, instructional, focus, feedback, literacy, equity, help, learner, guidance, step, leader, equitable",AI-Assisted Instructional Policies
-1,australia,53,330,0.1606060606060606,"educator, instructional, focus, feedback, literacy, equity, help, learner, guidance, step, leader, equitable",AI-Assisted Instructional Policies
-1,france,8,330,0.024242424242424242,"educator, instructional, focus, feedback, literacy, equity, help, learner, guidance, step, leader, equitable",AI-Assisted Instructional Policies
-1,ireland,8,330,0.024242424242424242,"educator, instructional, focus, feedback, literacy, equity, help, learner, guidance, step, leader, equitable",AI-Assisted Instructional Policies
-2,australia,104,252,0.4126984126984127,"staff, privacy, academic, integrity, responsible, content, security, personal, bias, assessment, guideline, plagiarism",Educational AI Usage Policies
-2,usa,92,252,0.36507936507936506,"staff, privacy, academic, integrity, responsible, content, security, personal, bias, assessment, guideline, plagiarism",Educational AI Usage Policies
-2,ireland,49,252,0.19444444444444445,"staff, privacy, academic, integrity, responsible, content, security, personal, bias, assessment, guideline, plagiarism",Educational AI Usage Policies
-2,International / UNESCO,6,252,0.023809523809523808,"staff, privacy, academic, integrity, responsible, content, security, personal, bias, assessment, guideline, plagiarism",Educational AI Usage Policies
-2,france,1,252,0.003968253968253968,"staff, privacy, academic, integrity, responsible, content, security, personal, bias, assessment, guideline, plagiarism",Educational AI Usage Policies
-3,france,210,210,1.0,"usage, outils, cadre, données, pédagogique, numérique, pédagogiques, établissements, utilisation, déploiement, enjeux, académique",AI in School Curriculum and Teacher Training
-4,International / UNESCO,189,198,0.9545454545454546,"competency, design, knowledge, progression, skill, ethic, expect, ethical, mindset, social, aspect, pedagogical",Competency-Based Education and Assessment
-4,australia,4,198,0.020202020202020204,"competency, design, knowledge, progression, skill, ethic, expect, ethical, mindset, social, aspect, pedagogical",Competency-Based Education and Assessment
-4,france,3,198,0.015151515151515152,"competency, design, knowledge, progression, skill, ethic, expect, ethical, mindset, social, aspect, pedagogical",Competency-Based Education and Assessment
-4,ireland,1,198,0.005050505050505051,"competency, design, knowledge, progression, skill, ethic, expect, ethical, mindset, social, aspect, pedagogical",Competency-Based Education and Assessment
-4,usa,1,198,0.005050505050505051,"competency, design, knowledge, progression, skill, ethic, expect, ethical, mindset, social, aspect, pedagogical",Competency-Based Education and Assessment
-5,ireland,140,170,0.8235294117647058,"child, sexual, recommender, abuse, convention, council, act, protection, parent, unicef, safety, youth",AI Child Protection and Rights Oversight
-5,usa,14,170,0.08235294117647059,"child, sexual, recommender, abuse, convention, council, act, protection, parent, unicef, safety, youth",AI Child Protection and Rights Oversight
-5,australia,13,170,0.07647058823529412,"child, sexual, recommender, abuse, convention, council, act, protection, parent, unicef, safety, youth",AI Child Protection and Rights Oversight
-5,International / UNESCO,2,170,0.011764705882352941,"child, sexual, recommender, abuse, convention, council, act, protection, parent, unicef, safety, youth",AI Child Protection and Rights Oversight
-5,france,1,170,0.0058823529411764705,"child, sexual, recommender, abuse, convention, council, act, protection, parent, unicef, safety, youth",AI Child Protection and Rights Oversight
-6,ireland,135,143,0.9440559440559441,"strategy, learner, progress, competence, pillar, leader, infrastructure, procurement, skill, professional, assessment, pdst",Digital Learning Progression Framework
-6,australia,4,143,0.027972027972027972,"strategy, learner, progress, competence, pillar, leader, infrastructure, procurement, skill, professional, assessment, pdst",Digital Learning Progression Framework
-6,International / UNESCO,3,143,0.02097902097902098,"strategy, learner, progress, competence, pillar, leader, infrastructure, procurement, skill, professional, assessment, pdst",Digital Learning Progression Framework
-6,france,1,143,0.006993006993006993,"strategy, learner, progress, competence, pillar, leader, infrastructure, procurement, skill, professional, assessment, pdst",Digital Learning Progression Framework
-7,usa,124,128,0.96875,"elementary, math, english, achievement, write, think, disadvantage, high, thing, regression, socioeconomic, know",AI in Education and Student Achievement
-7,australia,2,128,0.015625,"elementary, math, english, achievement, write, think, disadvantage, high, thing, regression, socioeconomic, know",AI in Education and Student Achievement
-7,ireland,2,128,0.015625,"elementary, math, english, achievement, write, think, disadvantage, high, thing, regression, socioeconomic, know",AI in Education and Student Achievement
-8,australia,72,72,1.0,"cognitive, offload, load, metacognitive, memory, critical, paradox, performance, study, detrimental, thinking, outsource",AI Offloading and Metacognitive Skills in Education
+0,usa,174,456,0.3815789473684211,"submission, public, research, recommendation, people, sector, decision, open, achievement, investment, innovation, unesco",Artificial Intelligence Impact on Educational Practices
+0,australia,134,456,0.29385964912280704,"submission, public, research, recommendation, people, sector, decision, open, achievement, investment, innovation, unesco",Artificial Intelligence Impact on Educational Practices
+0,france,75,456,0.16447368421052633,"submission, public, research, recommendation, people, sector, decision, open, achievement, investment, innovation, unesco",Artificial Intelligence Impact on Educational Practices
+0,ireland,58,456,0.12719298245614036,"submission, public, research, recommendation, people, sector, decision, open, achievement, investment, innovation, unesco",Artificial Intelligence Impact on Educational Practices
+0,International / UNESCO,15,456,0.03289473684210526,"submission, public, research, recommendation, people, sector, decision, open, achievement, investment, innovation, unesco",Artificial Intelligence Impact on Educational Practices
+1,usa,194,363,0.5344352617079889,"staff, guidance, principle, privacy, responsible, integrity, ethical, academic, educator, step, review, literacy",AI Teacher Assistant Oversight and Curriculum Alignment
+1,australia,118,363,0.325068870523416,"staff, guidance, principle, privacy, responsible, integrity, ethical, academic, educator, step, review, literacy",AI Teacher Assistant Oversight and Curriculum Alignment
+1,ireland,47,363,0.12947658402203857,"staff, guidance, principle, privacy, responsible, integrity, ethical, academic, educator, step, review, literacy",AI Teacher Assistant Oversight and Curriculum Alignment
+1,International / UNESCO,4,363,0.011019283746556474,"staff, guidance, principle, privacy, responsible, integrity, ethical, academic, educator, step, review, literacy",AI Teacher Assistant Oversight and Curriculum Alignment
+2,usa,146,267,0.5468164794007491,"write, language, generate, chatgpt, task, help, english, content, think, time, prompt, class",AI-Powered Learning Platforms and Student Privacy
+2,australia,53,267,0.19850187265917604,"write, language, generate, chatgpt, task, help, english, content, think, time, prompt, class",AI-Powered Learning Platforms and Student Privacy
+2,ireland,36,267,0.1348314606741573,"write, language, generate, chatgpt, task, help, english, content, think, time, prompt, class",AI-Powered Learning Platforms and Student Privacy
+2,france,31,267,0.11610486891385768,"write, language, generate, chatgpt, task, help, english, content, think, time, prompt, class",AI-Powered Learning Platforms and Student Privacy
+2,International / UNESCO,1,267,0.003745318352059925,"write, language, generate, chatgpt, task, help, english, content, think, time, prompt, class",AI-Powered Learning Platforms and Student Privacy
+3,france,213,213,1.0,"usage, outils, cadre, données, pédagogique, numérique, pédagogiques, enjeux, établissements, utilisation, déploiement, recherche",AI in School Curriculum and Teacher Training
+4,International / UNESCO,190,199,0.9547738693467337,"competency, design, knowledge, progression, skill, ethical, ethic, expect, social, aspect, mindset, apply",AI Competency Framework Design and Ethical Application
+4,australia,5,199,0.02512562814070352,"competency, design, knowledge, progression, skill, ethical, ethic, expect, social, aspect, mindset, apply",AI Competency Framework Design and Ethical Application
+4,france,2,199,0.010050251256281407,"competency, design, knowledge, progression, skill, ethical, ethic, expect, social, aspect, mindset, apply",AI Competency Framework Design and Ethical Application
+4,usa,2,199,0.010050251256281407,"competency, design, knowledge, progression, skill, ethical, ethic, expect, social, aspect, mindset, apply",AI Competency Framework Design and Ethical Application
+5,ireland,144,177,0.8135593220338984,"child, sexual, council, recommender, act, abuse, convention, protection, regulation, parent, europe, safety",AI Child Protection and Digital Education Oversight
+5,usa,15,177,0.0847457627118644,"child, sexual, council, recommender, act, abuse, convention, protection, regulation, parent, europe, safety",AI Child Protection and Digital Education Oversight
+5,australia,12,177,0.06779661016949153,"child, sexual, council, recommender, act, abuse, convention, protection, regulation, parent, europe, safety",AI Child Protection and Digital Education Oversight
+5,International / UNESCO,3,177,0.01694915254237288,"child, sexual, council, recommender, act, abuse, convention, protection, regulation, parent, europe, safety",AI Child Protection and Digital Education Oversight
+5,france,3,177,0.01694915254237288,"child, sexual, council, recommender, act, abuse, convention, protection, regulation, parent, europe, safety",AI Child Protection and Digital Education Oversight
+6,ireland,132,143,0.9230769230769231,"strategy, learner, progress, pillar, competence, infrastructure, leader, skill, procurement, assessment, professional, pdst",AI-Powered Digital Learning Strategies for Youth
+6,International / UNESCO,4,143,0.027972027972027972,"strategy, learner, progress, pillar, competence, infrastructure, leader, skill, procurement, assessment, professional, pdst",AI-Powered Digital Learning Strategies for Youth
+6,australia,4,143,0.027972027972027972,"strategy, learner, progress, pillar, competence, infrastructure, leader, skill, procurement, assessment, professional, pdst",AI-Powered Digital Learning Strategies for Youth
+6,france,2,143,0.013986013986013986,"strategy, learner, progress, pillar, competence, infrastructure, leader, skill, procurement, assessment, professional, pdst",AI-Powered Digital Learning Strategies for Youth
+6,usa,1,143,0.006993006993006993,"strategy, learner, progress, pillar, competence, infrastructure, leader, skill, procurement, assessment, professional, pdst",AI-Powered Digital Learning Strategies for Youth
+7,australia,70,70,1.0,"cognitive, load, offload, metacognitive, memory, critical, paradox, performance, study, thinking, detrimental, learner",AI Offloading and Metacognitive Skills in Education

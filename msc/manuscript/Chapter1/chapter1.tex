@@ -454,80 +454,46 @@ especially important because relevant evidence is distributed across policy
 documents, institutional guidance, stakeholder discourse, public commentary, and
 survey-based sentiment data.
 
-Text-as-data methods provide a way to examine these sources at scale while retaining
-a link with interpretation. Work by \cite{grimmer2013text} argues that automated
-text analysis can make large-scale political and policy text collections
-systematically analysable, while also stressing the need for problem-specific
-validation and close interpretive judgement. Similarly, \cite{gentzkow2019text}
-present text as a major source of empirical evidence for social science research,
-showing how statistical and computational methods can extract structured information
-from unstructured language data. Within policy research, \cite{wilkerson2017large}
-show that large-scale computerised text analysis has been used to study political
-communication, policy agendas, public opinion, and institutional discourse.
+Text-as-data methods, such as \textcolor{blue}{dictionary-based techniques}, can examine these sources at scale while retaining a link with interpretation. Work by \cite{grimmer2013text} argues that automated text analysis can make large-scale political and policy text collections analysable, while also stressing the need for problem-specific validation and close interpretive judgement. Similarly, \cite{gentzkow2019text} present text as a major source of empirical evidence for social science research, showing how statistical and computational methods can extract structured information from unstructured language data. Within policy research, \cite{wilkerson2017large} show that large-scale computerised text analysis has been used to study political communication, policy agendas, public opinion, and institutional discourse.
 
-Topic modelling is particularly important in this tradition because it provides a
-way to identify latent themes across large corpora. The original Latent Dirichlet
-Allocation model by \cite{blei2003latent} remains a key reference for probabilistic
-topic modelling, while structural topic models by \cite{roberts2014structural} and
-\cite{roberts2016model} extend this approach by incorporating document-level
-covariates, making them especially useful for comparing texts across institutions,
-time periods, or policy contexts. In policy studies, \cite{isoaho2021topic}
-position topic modelling as a bridge between computational analysis and qualitative
-interpretation, helping researchers identify recurring themes and discursive
-patterns without replacing close reading.
+\textcolor{blue}{Topic modelling is particularly important in this tradition when the study objective is to identify recurring patterns and latent themes across large and heterogeneous corpora. For collections of policy and public-sentiment texts, it can also reveal, at corpus level, differences in thematic emphasis between formal policy priorities and expressed public concerns across diverse institutional and geographical settings that may be difficult to examine through manual analysis alone.} The original Latent Dirichlet Allocation model by \cite{blei2003latent} remains a key reference for probabilistic topic modelling. Structural topic models developed by \cite{roberts2014structural} and \cite{roberts2016model} build on this approach by incorporating document-level covariates, allowing comparisons across institutions, time periods, and policy contexts. \textcolor{blue}{However, their applications focus mainly on open-ended survey responses and news reports, which are generally shorter and less structurally complex than policy documents. Their relevance to policy-document analysis therefore depends on appropriate segmentation and the careful preservation of contextual and document-level metadata across different policy settings.}
+
+
+
+In policy studies, \cite{isoaho2021topic} argue that topic modelling can enable researchers to apply policy theories and concepts to larger datasets by combining computational and qualitative analysis. \textcolor{blue}{Its value lies in extending textual analysis across extensive corpora while preserving substantive interpretation and supporting systematic engagement with policy concepts at scale. Qualitative interpretation remains necessary to assess whether generated topics are meaningful and appropriately connected directly to their wider policy and institutional context. As the authors emphasise, meaningful results also require an appropriate mixed-method research design and a genuine understanding of the computational method.}
+
+
+
+
 
 \subsubsection*{Preprocessing techniques}
 
-Classical text-as-data methods depend on preprocessing because they usually
-represent documents through tokens, frequencies, dictionaries, or document--term
-matrices. Preprocessing therefore shapes what the model can detect and how results
-are interpreted. Standard steps include removing duplicates, cleaning formatting
-noise, standardising case, tokenising text, removing stop words, handling punctuation
-and numbers, and deciding whether to apply stemming, lemmatisation, or phrase
-detection, as outlined by \cite{welbers2017text}. These choices are not purely
-technical: they can affect whether institutional terms, stakeholder categories,
-negations, or domain-specific expressions remain visible in the corpus.
-\cite{denny2018preprocessing} show that preprocessing decisions can substantially
-affect unsupervised text-analysis results and therefore need to be tested rather than
-treated as neutral defaults. Stop-word removal is particularly consequential, as
-\cite{schofield2017pulling} show that it can change the interpretability and
-coherence of topic-model outputs.
+Classical text-as-data methods depend on preprocessing because they represent documents through tokens, frequencies, dictionaries, or document--term matrices. Preprocessing therefore shapes what the model can detect and how results are interpreted. Standard steps include \textcolor{blue}{removing non-substantive boilerplate}, cleaning noise, standardising case, tokenising text, removing stop words, handling punctuation and numbers, and deciding whether to apply stemming, lemmatisation, or phrase detection, as outlined by \cite{welbers2017text}. These choices are not purely technical: they can affect whether institutional terms, stakeholder categories, negations, or domain-specific expressions remain visible in the corpus. \cite{denny2018preprocessing} show that preprocessing decisions can substantially affect unsupervised text-analysis results \textcolor{blue}{by altering the retained vocabulary, term distributions, topic composition, and the stability and interpretation of the patterns}. Such decisions therefore need to be tested rather than treated as neutral defaults. Stop-word removal is particularly consequential. \cite{schofield2017pulling} find that removing very frequent terms can improve topic presentation and reduce words that dominate probability distributions, but broader or corpus-specific stop lists do not consistently improve topic inference. \textcolor{blue}{Aggressive removal may instead exclude meaningful terms and bias topics towards the analyst's prior assumptions, while apparent gains in interpretability may sometimes result only from hiding unwanted words after modelling.}
 
-The importance of preprocessing is especially clear in policy and education corpora,
-where sources often differ in length, formality, structure, and genre. Policy
-documents may contain headings, legal phrases, bullet points, references, and
-repeated institutional language, while public comments and survey responses may
-contain informal wording, spelling variation, emojis, abbreviations, or short
-expressions of approval and concern. In comparative and policy-oriented text
-analysis, \cite{lucas2015computer} show that document preparation, translation,
-metadata, and source comparability can shape downstream interpretation. For this
-reason, preprocessing should be aligned with the analytical task and corpus
-characteristics. Topic modelling may require careful removal of boilerplate text and
-overly frequent institutional terms, while sentiment analysis requires caution
-because removing negation words or intensifiers can distort the meaning of evaluative
-statements. In this study, preprocessing is therefore treated as part of the research
-design rather than a neutral technical step.
+
+\textcolor{blue}{Preprocessing is important in policy and education corpora because differences in length, structure, formality, and genre can distort comparison. Long policy documents may need segmentation, while headings, references, legal phrases, and repeated institutional language can dominate term frequencies without reflecting key themes.} Public comments and survey responses may contain informal wording, spelling variation, emojis, abbreviations, or brief expressions whose meaning depends on context. In comparative policy analysis, \cite{lucas2015computer} show that document preparation, translation, metadata, and source comparability can shape interpretation. Preprocessing should therefore reflect the analytical task and corpus characteristics. Topic modelling may require removing boilerplate and frequent institutional terms, whereas sentiment analysis requires caution because removing negations or intensifiers can alter meaning. Preprocessing is therefore part of the research design rather than a neutral technical step.
+
 
 \subsection{Language Models for Discourse Analysis}
 
-Recent advances in language modelling have expanded the methods available for
-analysing policy texts, stakeholder discourse, and public sentiment. Earlier
-text-as-data methods, such as dictionary-based analysis, classical classifiers, and
-topic models, remain useful, but they often struggle with context, ambiguity,
-negation, and domain-specific meaning. Smaller transformer-based models, including
-BERT, RoBERTa, and DistilBERT, address some of these limits by producing contextual
-representations of text, as shown by \cite{devlin2019bert}, \cite{liu2019roberta}
-and \cite{sanh2019distilbert}. This makes them useful for sentiment analysis, stance
-detection, document classification, and policy-topic classification, especially
-where views on AI in education are mixed or conditional. Related embedding-based
-approaches have also shaped topic discovery, including BERTopic, which combines
-transformer embeddings with clustering and class-based TF-IDF to generate
-interpretable topic representations, as proposed by \cite{grootendorst2022bertopic}.
-These methods are relevant to AI-in-education governance because they support more
-flexible analysis of heterogeneous sources, including policy texts, consultation
-responses, survey answers, and online discourse. They also help link broad patterns
-in stakeholder discourse with specific governance, implementation, and institutional
-concerns.
+Recent advances in language modelling have expanded the methods available for analysing policy texts, stakeholder discourse, and public sentiment. Traditional text-as-data methods, including dictionary-based analysis, classical classifiers, and topic models, remain useful because they provide transparent and relatively interpretable ways to classify documents, count concepts, or identify recurring themes. However, these methods often struggle with context, ambiguity, negation, and domain-specific meaning. For example, a statement that appears positive at the word level may express concern when read in context, and the same term may have different meanings in policy, classroom, or public-comment settings.
+
+Smaller transformer-based models, including BERT, RoBERTa, and DistilBERT, address some of these limits by producing contextual representations of text, as shown by \cite{devlin2019bert}, \cite{liu2019roberta} and \cite{sanh2019distilbert}. Contextual representations are useful because they encode the meaning of words and sentences in relation to the surrounding text rather than treating terms as isolated features. This makes them relevant for sentiment analysis, stance detection, document classification, and policy-topic classification, especially where views on AI in education are mixed, conditional, or dependent on specific issues such as privacy, assessment, teacher workload, or equity.
+
+Related embedding-based approaches have also shaped topic discovery. BERTopic, for
+example, combines transformer embeddings with clustering and class-based TF--IDF to
+generate interpretable topic representations, as proposed by
+\cite{grootendorst2022bertopic}. In this approach, embeddings help group texts that
+are semantically similar even when they do not use exactly the same vocabulary,
+clustering organises these texts into topic groups, and class-based TF--IDF highlights
+the words that best distinguish each topic from the others. These methods are
+relevant to AI-in-education governance because they support more flexible analysis
+of heterogeneous sources, including policy texts, consultation responses, survey
+answers, and online discourse. They can help identify broad patterns in stakeholder
+discourse, such as recurring concerns about trust, fairness, assessment, teacher
+preparedness, or data protection, and connect these patterns to specific governance,
+implementation, and institutional issues. Their flexibility makes them useful for
+comparing themes across varied institutional and national contexts.
 
 Small Language Models (SLMs) and Large Language Models (LLMs) add a methodological
 layer. Recent work by \cite{lu2024small} and \cite{nguyen2025survey} presents SLMs
@@ -567,48 +533,33 @@ checking, and careful reporting of model choices essential, as discussed by
 sentiment analysis, language models should therefore be treated as assistive
 analytical tools rather than independent sources of evidence.
 
+Overall, language-model-based methods offer several strengths for this study, but their value depends on how they are used. Transformer-based classifiers and embedding models are useful for analysing heterogeneous policy and sentiment sources because they can capture contextual meaning more effectively than purely frequency-based methods. BERTopic-style approaches are especially valuable for exploratory theme discovery, since they can group semantically similar texts and support comparison across policy documents, stakeholder comments, and survey-based evidence. SLMs may be useful where categories are predefined and repeatable classification is needed, while LLMs are more appropriate for exploratory coding, summarisation, weak labelling, and refining thematic categories. However, these methods also have clear limitations: they require validation, may vary across prompts and models, and can reproduce bias or produce interpretations that appear plausible without being sufficiently grounded in the text. For this reason, the most valuable role of language models in this dissertation is not to replace human interpretation, but to support a controlled workflow in which automated outputs are checked against source documents, human judgement, and the research objectives. In this way, language models can help scale the analysis while preserving transparency, critical evaluation, and methodological caution.
+
+
 \subsection{Sentiment Analysis and Stakeholder Attitudes}
 
-Sentiment analysis provides a complementary perspective by focusing on the affective
-and evaluative dimensions of text. Classic work by \cite{pang2008opinion} and
-\cite{liu2012sentiment} established the field as a way to identify polarity,
-subjectivity, and attitudes in textual data. More recent reviews by
-\cite{tan2023survey} and \cite{mao2024sentiment} show that sentiment analysis now
-includes lexicon-based, machine-learning, deep-learning, and hybrid approaches, each
-with different implications for preprocessing, feature extraction, classification,
-and domain adaptation. For policy and education research, this is important because
-stakeholder discourse rarely expresses simple approval or rejection. Teachers,
-students, parents, and the wider public may support AI-assisted learning while also
-expressing concern about privacy, academic integrity, assessment, fairness, teacher
-autonomy, or unequal access.
+Sentiment analysis provides a complementary perspective by focusing on the affective and evaluative dimensions of text. Classic work by \cite{pang2008opinion} and \cite{liu2012sentiment} established the field as a way to identify polarity, subjectivity, and attitudes in textual data. More recent reviews by \cite{tan2023survey} and \cite{mao2024sentiment} show that sentiment analysis now includes lexicon-based, machine-learning, deep-learning, and hybrid approaches, each with different implications for preprocessing, feature extraction, classification, and domain adaptation. For policy and education research, this is important because stakeholder discourse rarely expresses simple approval or rejection. Teachers, students, parents, and the wider public may support AI-assisted learning while also expressing concern about privacy, academic integrity, assessment, fairness, teacher autonomy, or unequal access.
 
-In this context, sentiment analysis should be used cautiously and in combination
-with thematic interpretation. General polarity labels such as positive, negative, and
-neutral may be too coarse to explain how stakeholders evaluate AI use in education.
-For example, a comment may be positive about administrative efficiency but negative
-about assessment integrity, or supportive of personalised learning while expressing
-concern about data protection. This makes aspect-based and context-sensitive
-sentiment analysis more appropriate than treating each document as having a single
-overall sentiment. Work by \cite{hutto2014vader} on social-media sentiment analysis
-also shows that informal language, irony, abbreviations, intensity markers, and
-platform-specific expressions can affect sentiment detection, which is relevant when
-analysing public comments and online discourse. In the present study, sentiment
-analysis is therefore used not as a standalone measure of public opinion, but as a
-way to identify patterns of trust, concern, uncertainty, and resistance that can be
-compared with policy priorities and implementation challenges.
+A particular challenge is the detection of mixed or conditional sentiment. General polarity labels such as positive, negative, and neutral may be too coarse to explain how stakeholders evaluate AI use in education. A single comment may be positive about administrative efficiency but negative about assessment integrity, or supportive of personalised learning while expressing concern about data protection. Methods that can capture this include aspect-based sentiment analysis, stance detection, emotion classification, multi-label classification, and topic--sentiment approaches. Aspect-based sentiment analysis is especially relevant because it links sentiment to a specific issue, such as privacy, workload, assessment, fairness, or teacher autonomy, rather than assigning one overall polarity to the whole document. Stance detection can also be useful where the task is not simply to classify emotion, but to identify whether a stakeholder supports, rejects, questions, or conditionally accepts a policy or technology. Multi-label approaches are useful when a text expresses several attitudes at once, such as trust and concern, or optimism and uncertainty.
 
-Education-focused studies illustrate this value. Recent work on GenAI in education
-uses sentiment analysis alongside topic modelling to examine how public discourse
-frames AI adoption, including perceived benefits, emotional reactions, and concerns
-about educational consequences, as shown by \cite{so2024public},
-\cite{liao2025public}, and \cite{gocen2024public}. These studies show that sentiment
-analysis is most useful when it is linked to the themes, actors, and contexts being
-discussed, rather than reported only as aggregate polarity. For this dissertation, the right use of sentiment analysis is therefore interpretive
-and comparative: it helps reveal whether policy language around responsible,
-ethical, and inclusive AI is aligned with the concerns expressed by stakeholders,
-and where tensions emerge between policy ambition and public or practitioner
-experience across different evidence sources, stakeholder groups, and national
-contexts.
+These methods have been used on several data types, including social media posts,
+online reviews, survey responses, consultation submissions, student feedback, and
+public comments. Their performance is evaluated against human-coded data using
+measures such as accuracy, precision, recall, F1-score, confusion matrices, and,
+where several annotators are involved, inter-annotator agreement. In qualitative or
+mixed-methods settings, evaluation may include manual inspection of model outputs,
+comparison with topic-model results, and checking whether the detected sentiments
+are meaningful in context. Results are stronger when the data is short, clearly
+expressed, and close to the domain on which the model or lexicon was developed. They
+are weaker when texts are long, ambiguous, ironic, highly technical, or express
+several positions at once. This means that sentiment analysis can be useful for
+identifying broad patterns, but its outputs require validation and interpretation
+rather than being treated as direct measurements of public opinion.
+
+Work by \cite{hutto2014vader} on social-media sentiment analysis also shows that informal language, irony, abbreviations, intensity markers, and platform-specific expressions can affect sentiment detection, which is relevant when analysing public comments and online discourse. In the present study, sentiment analysis is therefore used not as a standalone measure of public opinion, but as a way to identify patterns of trust, concern, uncertainty, acceptance, and resistance that can be compared with policy priorities and implementation challenges. This requires a context-sensitive approach in which sentiment is interpreted alongside the themes, actors, and issues being discussed.
+
+Education-focused studies illustrate this value. Recent work on GenAI in education uses sentiment analysis alongside topic modelling to examine how public discourse frames AI adoption, including perceived benefits, emotional reactions, and concerns about educational consequences, as shown by \cite{so2024public}, \cite{liao2025public}, and \cite{gocen2024public}. These studies show that sentiment analysis is most useful when it is linked to the themes and contexts of discussion rather than reported only as aggregate polarity. For this dissertation, the most appropriate use of sentiment analysis is therefore interpretive and comparative: it helps reveal whether policy language around responsible, ethical, and inclusive AI is aligned with stakeholder concerns, and where tensions emerge between policy ambition and public or practitioner experience.
+
 
 \subsection{Synthetic Data and Faithfulness Evaluation}
 
@@ -640,40 +591,19 @@ stakeholder concern remain visible in the corpus. Synthetic data is therefore us
 only as a supplementary layer for exploratory and comparative analysis, with all
 findings interpreted against the original empirical evidence.
 
-The literature suggests that the faithfulness of synthetic text should be assessed
-through a multi-level distance framework rather than a single similarity score.
-Lexical similarity can be examined using vocabulary statistics and Jensen--Shannon
-distance over word distributions, while semantic similarity can be assessed with
-sentence embeddings and cosine similarity using Sentence-BERT-style representations,
-as proposed by \cite{reimers2019sentence}. Distributional alignment can also be
-examined in embedding space using Maximum Mean Discrepancy (MMD), a kernel-based
-two-sample measure introduced by \cite{gretton2012kernel}, and Fréchet-style
-embedding distance, following the broader logic of distributional evaluation in
-generative modelling by \cite{heusel2017gans}. A further option is the classifier
-two-sample test (C2ST) by \cite{lopez2016revisiting}, where a classifier is trained
-to distinguish real from synthetic texts; performance close to chance suggests
-stronger similarity, while higher accuracy indicates detectable synthetic artefacts.
-In this view, faithfulness is understood in terms of usefulness rather than identity:
-synthetic data is valuable only insofar as it preserves task-relevant sentiment
-patterns, thematic structure, and semantic meaning while making the limits of
-generated evidence explicit, following \cite{snoke2018general}.
+The purpose of similarity assessment in this study is to evaluate whether synthetic texts are sufficiently close to the original empirical corpus to be useful for analysis, while still remaining diverse enough not to be simple duplicates. The comparison is therefore made at two levels. At the example level, similarity scores can help identify near-duplicate synthetic items or texts that are semantically unrelated to the study. At the corpus level, they can help assess whether the synthetic data preserves the main sentiment patterns and topics found in the real data, such as trust, concern, uncertainty, privacy, assessment, teacher preparedness, equity, and implementation challenges. The aim is not to prove that synthetic texts are identical to real stakeholder evidence, but to check whether they remain faithful to the themes and evaluative positions that the study seeks to analyse.
+
+The literature suggests that this kind of faithfulness should be assessed through a multi-level distance framework rather than a single similarity score. Lexical similarity can be examined using vocabulary statistics and Jensen--Shannon distance over word distributions, which helps show whether real and synthetic texts use broadly similar terms. Semantic similarity can be assessed with sentence embeddings and cosine similarity using Sentence-BERT-style representations, as proposed by \cite{reimers2019sentence}, which helps determine whether texts are close in meaning even when they use different wording. Distributional alignment can also be examined in embedding space using Maximum Mean Discrepancy (MMD), a kernel-based two-sample measure introduced by \cite{gretton2012kernel}, and Fréchet-style embedding distance, following the broader logic of distributional evaluation in generative modelling by \cite{heusel2017gans}. A further option is the classifier two-sample test (C2ST) by \cite{lopez2016revisiting}, where a classifier is trained to distinguish real from synthetic texts; performance close to chance suggests stronger distributional similarity, while higher accuracy indicates detectable synthetic artefacts.
+
+In this view, similarity scores are used to support quality control rather than to replace interpretation. They help test whether synthetic data reflects the same broad topics and sentiment orientations as the original corpus, but the results still require manual inspection and comparison with the source evidence. Faithfulness is therefore understood in terms of usefulness rather than identity: synthetic data is valuable only insofar as it preserves task-relevant sentiment patterns, thematic structure, and semantic meaning while making the limits of generated evidence explicit, following \cite{snoke2018general}.
+
 
 \subsection{Causal NLP and Relational Analysis}
 
-Causal NLP builds on a wider causal inference tradition that distinguishes causal
-claims from simple associations. Foundational work by \cite{rubin1974estimating}
-introduced the potential-outcomes framework for estimating treatment effects in
-randomised and non-randomised studies, while \cite{pearl2009causality} developed a
-structural causal modelling approach for reasoning about causal assumptions,
-interventions, and confounding. These foundations matter for text-based research
-because policy and sentiment corpora can reveal associations between language,
-attitudes, and implementation concerns, but they do not automatically establish
-causal effects. Work by \cite{egami2022causal} adapts this problem to text-as-data
-research by showing how text can be used as a treatment, outcome, confounder, or
-discovered measure in causal inference. Their framework is especially relevant here
-because it stresses careful research design, validation of text-derived measures, and
-the separation between measurement and estimation before any causal interpretation is
-attempted from textual evidence and linked back to the research question.
+Causal NLP builds on a wider causal inference tradition that distinguishes causal claims from simple associations. Foundational work by \cite{rubin1974estimating} introduced the potential-outcomes framework for estimating treatment effects in randomised and non-randomised studies, while \cite{pearl2009causality} developed a structural causal modelling approach for reasoning about causal assumptions, interventions, and confounding variables. In this context, confounding variables are factors that may influence both a possible cause and a possible outcome, making it difficult to determine whether an observed relationship is causal or only associative. These foundations matter for text-based research because policy and sentiment corpora can reveal associations between language, attitudes, and implementation concerns, but they do not automatically establish causal effects.
+
+Work by \cite{egami2022causal} adapts this problem to text-as-data research by showing how text can be used as a treatment, outcome, confounder, or discovered measure in causal inference. Their framework is especially relevant here because it stresses careful research design, validation of text-derived measures, and the separation between measurement and estimation before any causal interpretation is attempted. For this dissertation, this distinction is important because policy documents, public sentiment, and implementation concerns may appear related in the corpus, but such relationships should not be presented as causal without clear assumptions, suitable data, and appropriate validation.
+
 
 In AI-in-education governance, causal NLP is useful because the policy--practice gap
 is not only a matter of identifying themes or sentiment labels, but also of exploring

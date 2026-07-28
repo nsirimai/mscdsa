@@ -1,2 +1,2 @@
-﻿selected_n_topics,statistical_selected_n_topics,slm_selected_n_topics,selection_source,slm_selection_reason,granularity_plateau_ratio,max_dominant_topic_share,min_topic_share
-9,9,,statistical_score,,0.8,0.45,0.02
+﻿selected_n_topics,objective_best_n_topics,statistical_selected_n_topics,quality_plateau_candidates,slm_selected_n_topics,selection_source,selection_reason,granularity_plateau_ratio,max_dominant_topic_share,min_topic_share
+9,7,9,"5,7,8,9",,objective_plus_qualitative_review,"Nine topics retained after objective screening and qualitative review of clarity, overlap, fragmentation, and interpretability.",0.8,0.45,0.02

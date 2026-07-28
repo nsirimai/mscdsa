@@ -1,0 +1,4 @@
+corpus,source_type,clean_sentences,documents,chunks
+policy,original,15281,56,1930
+sentiment,original,4182,17,522
+sentiment,synthetic,2128,53,212

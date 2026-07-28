@@ -1,0 +1,8 @@
+filename,exists,size_bytes,readable,mode,width,height
+semantic_similarity_histogram.png,True,23504,True,RGB,1608,743
+global_semantic_coverage_distribution.png,True,23504,True,RGB,1608,743
+balanced_semantic_deficit_histogram.png,True,26500,True,RGB,1248,707
+global_semantic_deficit_by_topic_id.png,True,35703,True,RGB,1428,828
+country_policy_to_sentiment_deficit_by_topic_id.png,True,29250,True,RGB,1226,827
+country_sentiment_to_policy_deficit_by_topic_id.png,True,34109,True,RGB,1226,827
+synthetic_semantic_sensitivity_by_topic_id.png,True,22371,True,RGB,1068,587

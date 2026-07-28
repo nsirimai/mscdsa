@@ -1,0 +1,4 @@
+corpus,frames,minimum_frame_quality,mean_frame_quality,source_residue_rows,within_document_duplicate_rows,maximum_sentence_words
+policy,3196,0.40428571428571425,0.7065348330561396,0,0,109
+sentiment,655,0.41329670329670326,0.7327848073123718,0,0,105
+synthetic_sentiment,674,0.4243333333333333,0.6161990802728485,0,0,89

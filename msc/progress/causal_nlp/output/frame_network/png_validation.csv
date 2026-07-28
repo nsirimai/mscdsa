@@ -1,0 +1,9 @@
+filename,exists,readable,mode,width,height,size_bytes
+global_policy_causal_frame_matrix.png,True,True,RGB,1235,1103,41494
+global_sentiment_causal_frame_matrix.png,True,True,RGB,1235,1103,42269
+global_causal_frame_gap_matrix.png,True,True,RGB,1244,1102,44117
+global_causal_frame_relation_types.png,True,True,RGB,1982,984,67613
+global_causal_frame_gap_by_topic_id.png,True,True,RGB,1822,975,43476
+causal_frame_network_bootstrap_histogram.png,True,True,RGB,1662,911,40253
+country_causal_frame_gap_by_topic_id.png,True,True,RGB,1617,1103,41320
+synthetic_causal_frame_sensitivity.png,True,True,RGB,1821,857,61545

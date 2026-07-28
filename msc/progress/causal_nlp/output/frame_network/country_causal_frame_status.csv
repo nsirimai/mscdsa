@@ -1,0 +1,6 @@
+country,policy_frames,sentiment_frames,policy_sources,sentiment_sources,coverage_status
+australia,640,0,17,0,insufficient evidence
+france,325,27,6,3,included
+ireland,770,148,15,3,included
+other,453,480,2,9,included
+usa,1008,0,15,0,insufficient evidence

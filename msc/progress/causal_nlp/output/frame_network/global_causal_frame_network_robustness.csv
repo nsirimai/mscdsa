@@ -1,0 +1,5 @@
+specification,policy_frames,sentiment_frames,jensen_shannon_divergence
+quality_weighted_primary,3196,655,0.25963009898677436
+source_balanced_only,3196,655,0.24248751053784456
+high_quality_only,2513,547,0.27379469710562065
+projected_only,1540,294,0.29644044125179236

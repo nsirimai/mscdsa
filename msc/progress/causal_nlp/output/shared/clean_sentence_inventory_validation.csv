@@ -1,0 +1,5 @@
+check,value,status
+sentence_rows,21591,passed
+source_residue_rows,0,passed
+within_document_duplicate_rows,0,passed
+cleaning_version_values,1,passed
