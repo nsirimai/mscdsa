@@ -3,136 +3,136 @@
 \graphicspath{{Chapter4/img/}}
 \setlength{\emergencystretch}{2em}
 
-This chapter interprets the causal NLP results reported in
-Section~\ref{sec:impl-causal-nlp}. Data preparation, synthetic validation,
-exploratory analysis, and topic modelling are not repeated as independent analytical
-sections because they do not establish the policy--sentiment causal gap. Their role
-was to define the evidence boundary, preserve provenance, construct comparable units,
-and provide the frozen NMF topic spaces used by the causal pipelines. They form the
-measurement foundation for the analysis rather than separate answers to the research
-question.
+% This chapter interprets the causal NLP results reported in
+% Section~\ref{sec:impl-causal-nlp}. Data preparation, synthetic validation,
+% exploratory analysis, and topic modelling are not repeated as independent analytical
+% sections because they do not establish the policy--sentiment causal gap. Their role
+% was to define the evidence boundary, preserve provenance, construct comparable units,
+% and provide the frozen NMF topic spaces used by the causal pipelines. They form the
+% measurement foundation for the analysis rather than separate answers to the research
+% question.
 
-The term causal gap refers here to differences in causal language and discourse
-organisation. It does not establish real-world causal effects or policy failure.
-The analysis asks whether policy and original sentiment express comparable causal
-claims and whether they connect related topics through similar causes, mechanisms,
-requirements, and outcomes.
+% The term causal gap refers here to differences in causal language and discourse
+% organisation. It does not establish real-world causal effects or policy failure.
+% The analysis asks whether policy and original sentiment express comparable causal
+% claims and whether they connect related topics through similar causes, mechanisms,
+% requirements, and outcomes.
 
-\section{Interpretation of the Policy--Sentiment Causal Gap}
-\label{sec:analysis-gap}
+% \section{Interpretation of the Policy--Sentiment Causal Gap}
+% \label{sec:analysis-gap}
 
-\subsection{Semantic coverage}
+% \subsection{Semantic coverage}
 
-The balanced global deficits were 0.3585 for policy-to-sentiment coverage and 0.3675
-in the reverse direction. Their difference of approximately 0.0089 is too small to
-support a strong directional asymmetry. The more important result is that both
-corpora contain broad semantic overlap alongside a persistent residual gap: many
-causal claims have related counterparts, but the correspondence is incomplete in
-both directions.
+% The balanced global deficits were 0.3585 for policy-to-sentiment coverage and 0.3675
+% in the reverse direction. Their difference of approximately 0.0089 is too small to
+% support a strong directional asymmetry. The more important result is that both
+% corpora contain broad semantic overlap alongside a persistent residual gap: many
+% causal claims have related counterparts, but the correspondence is incomplete in
+% both directions.
 
-The topic-level results locate this gap more clearly. P8, covering AI curriculum
-development and school oversight, had the largest policy-topic deficit at 0.3960.
-P0, covering AI-assisted learning and assessment protocols, followed at 0.3763 and
-was supported by 604 claims from 29 documents. P4 reached 0.3729 but drew on only six
-documents, so it is a narrower lead. P3 had the lowest deficit at 0.3079, indicating
-the closest semantic correspondence. Among sentiment topics, the largest deficits
-occurred for online-learning clarity, GenAI assessment confusion, and public
-perceptions of AI and youth employment. The semantic gap is therefore concentrated
-around curriculum oversight, assessment, and selected experiences rather than being
-uniform across the corpora.
+% The topic-level results locate this gap more clearly. P8, covering AI curriculum
+% development and school oversight, had the largest policy-topic deficit at 0.3960.
+% P0, covering AI-assisted learning and assessment protocols, followed at 0.3763 and
+% was supported by 604 claims from 29 documents. P4 reached 0.3729 but drew on only six
+% documents, so it is a narrower lead. P3 had the lowest deficit at 0.3079, indicating
+% the closest semantic correspondence. Among sentiment topics, the largest deficits
+% occurred for online-learning clarity, GenAI assessment confusion, and public
+% perceptions of AI and youth employment. The semantic gap is therefore concentrated
+% around curriculum oversight, assessment, and selected experiences rather than being
+% uniform across the corpora.
 
-\subsection{Causal-frame organisation}
+% \subsection{Causal-frame organisation}
 
-The frame network provides stronger evidence of organisational difference. The
-primary Jensen--Shannon divergence was 0.2596, while the source-balanced,
-high-quality-only, and directly projected-span specifications ranged from 0.2425 to
-0.2964. The gap therefore remained visible when source contribution, frame quality,
-and projection reliability changed. Although approximately 31--35\% of span
-assignments used document-topic fallback, the directly projected specification
-produced the largest divergence, showing that fallback use alone does not explain
-the result.
+% The frame network provides stronger evidence of organisational difference. The
+% primary Jensen--Shannon divergence was 0.2596, while the source-balanced,
+% high-quality-only, and directly projected-span specifications ranged from 0.2425 to
+% 0.2964. The gap therefore remained visible when source contribution, frame quality,
+% and projection reliability changed. Although approximately 31--35\% of span
+% assignments used document-topic fallback, the directly projected specification
+% produced the largest divergence, showing that fallback use alone does not explain
+% the result.
 
-The relation shares clarify the nature of the difference. Causes/increases accounted
-for 36.8\% of sentiment frame weight but 24.7\% of policy weight. Policy placed more
-weight on enables/supports (41.9\% versus 37.2\%), expected improvement (12.9\%
-versus 6.3\%), and requirements/dependencies (9.4\% versus 6.8\%). Risk/threat
-shares were similar. Policy discourse is therefore organised more around
-institutional mechanisms, obligations, and intended outcomes, whereas sentiment
-discourse gives more weight to experienced causes and consequences. The distinction
-is not simply positive policy language versus negative opinion; it concerns the
-causal role assigned to related themes.
+% The relation shares clarify the nature of the difference. Causes/increases accounted
+% for 36.8\% of sentiment frame weight but 24.7\% of policy weight. Policy placed more
+% weight on enables/supports (41.9\% versus 37.2\%), expected improvement (12.9\%
+% versus 6.3\%), and requirements/dependencies (9.4\% versus 6.8\%). Risk/threat
+% shares were similar. Policy discourse is therefore organised more around
+% institutional mechanisms, obligations, and intended outcomes, whereas sentiment
+% discourse gives more weight to experienced causes and consequences. The distinction
+% is not simply positive policy language versus negative opinion; it concerns the
+% causal role assigned to related themes.
 
-At topic level, P0 had the largest structural gap at 0.3109, followed by P2 at
-0.3099 and P8 at 0.2959. P3 again had the smallest gap at 0.1301. The recurrence of
-P0 and P8 across the semantic and frame pipelines provides the strongest convergent
-evidence: these topics differ both in claim-level coverage and in how their causes
-and effects are organised.
+% At topic level, P0 had the largest structural gap at 0.3109, followed by P2 at
+% 0.3099 and P8 at 0.2959. P3 again had the smallest gap at 0.1301. The recurrence of
+% P0 and P8 across the semantic and frame pipelines provides the strongest convergent
+% evidence: these topics differ both in claim-level coverage and in how their causes
+% and effects are organised.
 
-\subsection{Cross-method interpretation}
+% \subsection{Cross-method interpretation}
 
-\begin{table}[!htbp]
-\centering
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{
->{\centering\arraybackslash}p{0.07\linewidth}
->{\raggedright\arraybackslash}p{0.25\linewidth}
->{\raggedright\arraybackslash}p{0.25\linewidth}
->{\raggedright\arraybackslash}p{0.33\linewidth}
-}
-\hline
-Topic & Semantic evidence & Frame evidence & Interpretation \\
-\hline
-P8 & Largest policy-topic deficit & Third-largest structural gap &
-Convergent gap in curriculum development and school oversight. \\
-P0 & Second-largest deficit with broad support & Largest structural gap &
-Strongest combined gap in learning and assessment protocols. \\
-P2 & Less prominent semantic gap & Second-largest structural gap &
-Related claims exist, but their causal organisation differs. \\
-P4 & High deficit with narrow support & Lower structural prominence &
-Focused semantic lead requiring source-level inspection. \\
-P3 & Lowest semantic deficit & Lowest structural gap &
-Strongest alignment across both causal measures. \\
-\hline
-\end{tabular}
-\caption{Cross-method interpretation of the principal policy-topic gaps.}
-\label{tab:analysis-causal-synthesis}
-\end{table}
+% \begin{table}[!htbp]
+% \centering
+% \small
+% \setlength{\tabcolsep}{4pt}
+% \begin{tabular}{
+% >{\centering\arraybackslash}p{0.07\linewidth}
+% >{\raggedright\arraybackslash}p{0.25\linewidth}
+% >{\raggedright\arraybackslash}p{0.25\linewidth}
+% >{\raggedright\arraybackslash}p{0.33\linewidth}
+% }
+% \hline
+% Topic & Semantic evidence & Frame evidence & Interpretation \\
+% \hline
+% P8 & Largest policy-topic deficit & Third-largest structural gap &
+% Convergent gap in curriculum development and school oversight. \\
+% P0 & Second-largest deficit with broad support & Largest structural gap &
+% Strongest combined gap in learning and assessment protocols. \\
+% P2 & Less prominent semantic gap & Second-largest structural gap &
+% Related claims exist, but their causal organisation differs. \\
+% P4 & High deficit with narrow support & Lower structural prominence &
+% Focused semantic lead requiring source-level inspection. \\
+% P3 & Lowest semantic deficit & Lowest structural gap &
+% Strongest alignment across both causal measures. \\
+% \hline
+% \end{tabular}
+% \caption{Cross-method interpretation of the principal policy-topic gaps.}
+% \label{tab:analysis-causal-synthesis}
+% \end{table}
 
-The two methods should not be collapsed into one score. Semantic coverage identifies
-claims with weak counterparts, while frame divergence identifies different causal
-organisation even when related claims are present. P0 and P8 are the strongest
-findings because both methods identify them across complementary levels and their
-evidence spans broad document sets. P2 is mainly a framing gap, while P4 is mainly a
-semantic gap with limited source support. P3 provides the clearest case of
-cross-method alignment.
+% The two methods should not be collapsed into one score. Semantic coverage identifies
+% claims with weak counterparts, while frame divergence identifies different causal
+% organisation even when related claims are present. P0 and P8 are the strongest
+% findings because both methods identify them across complementary levels and their
+% evidence spans broad document sets. P2 is mainly a framing gap, while P4 is mainly a
+% semantic gap with limited source support. P3 provides the clearest case of
+% cross-method alignment.
 
-Country results remain secondary. France showed large differences around P2 and P8,
-with P2 reaching 1.6518, while Ireland was led by P7 at 0.5391. However, France and
-Ireland each contributed only three original sentiment sources to the frame
-comparison. These outputs identify where source-level investigation is most useful;
-they do not support national rankings.
+% Country results remain secondary. France showed large differences around P2 and P8,
+% with P2 reaching 1.6518, while Ireland was led by P7 at 0.5391. However, France and
+% Ireland each contributed only three original sentiment sources to the frame
+% comparison. These outputs identify where source-level investigation is most useful;
+% they do not support national rankings.
 
-Synthetic evidence also remains diagnostic. The semantic check changed most topic
-deficits only slightly, but S2 changed by approximately \(-0.057\) and S8 had no
-synthetic assignment. The synthetic frame network increased divergence from 0.2596
-to 0.3611 and altered requirements/dependencies most strongly. Synthetic data
-therefore tests sensitivity but does not validate the original causal structure.
+% Synthetic evidence also remains diagnostic. The semantic check changed most topic
+% deficits only slightly, but S2 changed by approximately \(-0.057\) and S8 had no
+% synthetic assignment. The synthetic frame network increased divergence from 0.2596
+% to 0.3611 and altered requirements/dependencies most strongly. Synthetic data
+% therefore tests sensitivity but does not validate the original causal structure.
 
-Overall, the evidence supports a selective rather than universal policy--sentiment
-gap. Policy and sentiment often discuss related AI-in-education concerns, yet they
-differ most around curriculum oversight, learning and assessment, and the causal
-organisation of institutional action versus experienced consequences. The result is
-strongest where semantic and structural evidence converge, and weaker where source
-coverage or projection confidence is limited.
+% Overall, the evidence supports a selective rather than universal policy--sentiment
+% gap. Policy and sentiment often discuss related AI-in-education concerns, yet they
+% differ most around curriculum oversight, learning and assessment, and the causal
+% organisation of institutional action versus experienced consequences. The result is
+% strongest where semantic and structural evidence converge, and weaker where source
+% coverage or projection confidence is limited.
 
-\section{LLM-Assisted Causal-Gap Interpretation}
-\label{sec:analysis-llm-causal-gap}
+% \section{LLM-Assisted Causal-Gap Interpretation}
+% \label{sec:analysis-llm-causal-gap}
 
-This section will interpret the LLM-assisted outputs reported in
-Section~\ref{sec:impl-llm-causal-gap} and relate them to the semantic and frame-based
-findings above.
+% This section will interpret the LLM-assisted outputs reported in
+% Section~\ref{sec:impl-llm-causal-gap} and relate them to the semantic and frame-based
+% findings above.
 
-% Add the validated LLM-assisted findings here.
-% Distinguish model-generated interpretation from corpus-grounded evidence.
-% Retain claim, frame, topic, country, and source identifiers for every conclusion.
+% % Add the validated LLM-assisted findings here.
+% % Distinguish model-generated interpretation from corpus-grounded evidence.
+% % Retain claim, frame, topic, country, and source identifiers for every conclusion.
