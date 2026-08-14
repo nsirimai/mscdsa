@@ -1167,47 +1167,98 @@ assess sensitivity only and do not replace the observed policy--sentiment eviden
 \section{LLM-Assisted Evidence-Grounded Gap Analysis}
 \label{sec:method-llm-gap}
 
-{\color{blue}
-The preceding causal NLP methods quantify semantic coverage and causal-frame
-divergence but do not explain why policy and sentiment claims align or differ in
-meaning. The LLM-assisted stage will therefore provide a separate explanatory
-analysis grounded directly in the shared cleaned sentence inventory, independently
-of the outputs of the preceding methods. The analysis will concern expressed causal
-or conditional meaning rather than real-world causal effects. Only original policy
-and sentiment sentences will support substantive findings; synthetic sentiment will
-remain restricted to robustness analysis.
 
-For global and sufficiently supported country scopes, source-balanced evidence
-batches will be constructed separately from policy and sentiment sources so that no
-single document dominates a comparison. Broad causal-language candidates may be
-prioritised during sampling to increase the availability of usable evidence, but this
-sampling cue will not itself constitute evidence of causality. Each sentence will
-retain its immutable identifier from the shared inventory, allowing every finding to
-be traced to the same source sentence throughout analysis and verification.
+The preceding causal NLP methods quantify semantic coverage and causal-frame divergence but do not
+explain why policy and sentiment claims align or differ in meaning. The LLM-assisted stage will
+therefore provide a separate explanatory analysis grounded directly in the shared cleaned sentence
+inventory, independently of the outputs of the preceding methods. The analysis will concern
+expressed causal or conditional meaning rather than real-world causal effects. Only original policy
+and sentiment sentences will support substantive findings; synthetic sentiment will remain
+restricted to robustness analysis.
 
-The agent will determine whether sentences express a causal or conditional
-relationship, such as a cause, prerequisite, risk, support, prevention, increase or
-decrease, or outcome. Thematic similarity will not be sufficient. For
-comparable evidence, the agent will classify the relationship as
-alignment, partial alignment, policy gap, sentiment gap, or insufficient evidence.
-A policy gap denotes a policy-to-sentiment difference and a sentiment gap the reverse
-direction. Each finding will contain a relation family, cause and effect themes, an
-explanation, evidence and counterevidence identifiers, deficit scores,
-and confidence. Alignment and insufficient-evidence outcomes prevent a gap from
-being inferred from comparisons.
+The LLM-assisted stage is exploratory and is intended to demonstrate the potential of a systematic
+agentic methodology for identifying and explaining evidence-grounded causal or conditional
+relationships that may be difficult to capture with fixed NLP rules. A comprehensive application
+would require deeper investigation across larger evidence sets, repeated runs, and extensive
+verification, which could involve a large number of paid model tokens and computational cost. The
+objective at this stage is not exhaustive gap discovery, but to establish the potential of combining
+LLM reasoning, evidence grounding, independent verification, and cross-run stability in a
+reproducible pipeline. Such an approach could extend conventional NLP analysis by supporting
+interpretation of relationships that are difficult to encode through predefined rules alone. It does
+not replace the causal NLP methods or use their outputs to generate findings. Comparison with the
+semantic causal-claim coverage method in Subsection~\ref{subsec:method-semantic-coverage} will be
+performed only after LLM findings have been generated, verified, and retained. This separation
+allows the analysis to examine whether the LLM recovers expressed relationships that fixed cue-based
+extraction does not retain.
 
-A second prompt will independently verify each proposed finding using the same
-evidence in reordered form. Verification will check the evidence identifiers,
-whether the cited sentences express the attributed relationship, direct
-policy--sentiment comparability, omitted counterevidence, relation-family and theme
-consistency, and whether the explanation follows from the cited text. Reordering
-will test whether the judgement depends on the evidence rather than its presentation
-order. The verifier will also ensure that absence from a sampled batch is not
-interpreted as absence from the corpus.
+For global and sufficiently supported country scopes, source-balanced evidence batches will be
+constructed separately from policy and sentiment sources so that no single document dominates a
+comparison. Broad causal-language candidates may be prioritised during sampling to increase the
+availability of usable comparative evidence, but this sampling cue will not itself constitute
+evidence of causality. Each sentence will retain its immutable identifier from the shared inventory,
+allowing every finding to be traced to the same source sentence throughout analysis and
+verification. Frozen topic identifiers may be attached after analysis for stratified diagnostic
+reporting, but they will not influence evidence sampling, LLM interpretation, verification, or
+finding retention.
 
-The procedure will be repeated to assess whether the same underlying findings recur.
-Because generated descriptions need not be lexically identical, findings $f$ and $g$
-from different runs will be matched using
+The agent will determine whether sentences express a causal or conditional relationship, such as a
+cause, prerequisite, risk, support, prevention, increase or decrease, or outcome. Thematic
+similarity alone will not be sufficient. For comparable evidence, the agent will classify the
+relationship as alignment, partial alignment, policy gap, sentiment gap, or insufficient evidence. A
+policy gap indicates that policy expresses a stronger or different emphasis than sentiment, while a
+sentiment gap indicates the converse. Each finding will contain a relation family, cause and effect
+themes, an explanation, evidence and counterevidence identifiers, directional deficit scores,
+evidence quality, direct comparability, and confidence. Alignment and insufficient-evidence outcomes
+prevent a gap from being inferred from a comparison.
+
+A second prompt will independently verify each proposed finding using the same evidence in reordered
+form. Verification will check the evidence identifiers, whether the cited sentences express the
+attributed relationship, direct policy--sentiment comparability, omitted counterevidence,
+relation-family and theme consistency, and whether the explanation follows from the cited text.
+Reordering will test whether the judgement depends on the evidence rather than its presentation
+order. The verifier will also ensure that absence from a sampled batch is not interpreted as absence
+from the corpus.
+
+The verifier will additionally assign an evidence-quality category. Evidence is \textit{strong} when
+both corpora directly express the same or closely corresponding causal relationship,
+\textit{adequate} when both address the same relationship but one side is less explicit or differs
+materially in cause, effect, or framing, and \textit{weak} when one side is only thematic,
+descriptive, inferred from absence, or not genuinely causal. Weak findings will not proceed to
+recurrent-finding analysis.
+
+For each verified finding $f$, the verifier will also assign directional evidence
+deficits
+$\delta_{P\rightarrow S}(f)\in[0,1]$ and
+$\delta_{S\rightarrow P}(f)\in[0,1]$. These are descriptive judgements over the
+cited evidence rather than embedding or cosine distances. A value of zero indicates
+that the source-side causal meaning is fully represented by the cited evidence from
+the comparison corpus, whereas a value of one indicates very weak coverage or a
+materially different causal meaning. The same interpretation is used in both
+directions: values from $0.00$--$0.20$ indicate substantial correspondence,
+$0.21$--$0.40$ mostly covered meaning, $0.41$--$0.60$ partial coverage,
+$0.61$--$0.80$ substantial mismatch, and $0.81$--$1.00$ very weak coverage.
+A high deficit cannot be inferred merely from the absence of evidence in a sampled
+batch.
+
+Following the consistency rationale of~\cite{wang2023selfconsistency}, the procedure
+is repeated to assess recurrence and reduce reliance on a single stochastic
+generation. Structured evaluation follows~\cite{liu2023geval}, which supports
+explicit criteria for judging outputs, while evidence grounding and faithfulness
+follow~\cite{es2024ragas} to tie interpretations to supplied text. Because
+descriptions may differ lexically across runs, findings $f$ and $g$ are compared
+using meaning and cited evidence. This provides a reproducible basis for matching
+consistent findings across runs. Following~\cite{jaccard1901etude},
+similarity between finite sets $A$ and $B$ is defined as
+\begin{equation}
+J(A,B)
+=
+\begin{cases}
+1, & A\cup B=\varnothing,\\[2pt]
+\dfrac{|A\cap B|}{|A\cup B|}, & \text{otherwise}.
+\end{cases}
+\label{eq:method-agent-jaccard}
+\end{equation}
+The cross-run finding-match score is
 \begin{equation}
 m(f,g)
 =
@@ -1218,7 +1269,7 @@ m(f,g)
 0.10\,\mathbf{1}[r_f=r_g],
 \label{eq:method-agent-match}
 \end{equation}
-where $s_{\mathrm{theme}}(f,g)\in[0,1]$ measures similarity between the
+where $s_{\mathrm{theme}}(f,g){\in}[0,1]$ measures similarity between the
 normalised cause theme, effect theme, and gap label of the two findings. It is
 computed as
 \begin{equation}
@@ -1230,12 +1281,13 @@ J(T_f,T_g),
 \right),
 \label{eq:method-agent-theme}
 \end{equation}
-where $T_f$ and $T_g$ are the sets of informative tokens extracted from the
-normalised theme descriptions of findings $f$ and $g$, $J(\cdot,\cdot)$ is their
-Jaccard similarity, and $S(F_f,F_g)\in[0,1]$ is the sequence-similarity ratio
-between their complete normalised theme strings $F_f$ and $F_g$. The factor $0.75$
-reduces the influence of lexical sequence similarity relative to direct token
-overlap. Evidence similarity is defined as
+where $T_f$ and $T_g$ are the informative-token sets extracted from the normalised
+theme descriptions of findings $f$ and $g$, and
+$S(F_f,F_g){\in}[0,1]$ is the sequence-similarity ratio between their complete
+normalised theme strings $F_f$ and $F_g$. The factor $0.75$ reduces the influence
+of lexical sequence similarity relative to direct token overlap. 
+
+Evidence similarity is
 \begin{equation}
 s_{\mathrm{evid}}(f,g)
 =
@@ -1245,125 +1297,281 @@ J(P_f,P_g)+J(S_f,S_g)
 \right],
 \label{eq:method-agent-evidence}
 \end{equation}
-where $P_f$ and $P_g$ are the sets of policy evidence identifiers cited by the two
+where $P_f$ and $P_g$ are the policy evidence-identifier sets cited by the two
 findings, and $S_f$ and $S_g$ are their corresponding sentiment evidence sets.
-Thus, policy and sentiment evidence contribute equally to the evidence-overlap
-score.
+Policy and sentiment evidence therefore contribute equally to the evidence-overlap
+score. Finally, $r_f$ and $r_g$ denote the relation families assigned to findings $f$
+and $g$, and $\mathbf{1}[r_f=r_g]$ is the relation-family agreement indicator,
+equal to $1$ when $r_f=r_g$ and $0$ otherwise.
 
-Finally, $r_f$ and $r_g$ denote the relation families assigned to findings $f$
-and $g$, and
-\[
-\mathbf{1}[r_f=r_g]
-=
-\begin{cases}
-1, & \text{if } r_f=r_g,\\
-0, & \text{otherwise},
-\end{cases}
-\]
-is an indicator of relation-family agreement.
+The coefficients $0.50$, $0.40$, and $0.10$ are heuristic weights. Theme similarity
+receives the largest weight because cause, effect, and gap meaning define the finding;
+evidence overlap receives a comparable weight to keep matches grounded in similar
+source sentences; and relation-family agreement receives a smaller weight because it
+is a coarser signal and should not establish identity alone. The weights sum to one,
+so $m(f,g)$ remains in $[0,1]$. Classification does not contribute to identity because
+its agreement is evaluated separately after matching.
 
-The coefficients $0.50$, $0.40$, and $0.10$ are predefined heuristic weights.
-Theme similarity receives the largest weight because the expressed cause, effect,
-and gap meaning defines the underlying finding; evidence overlap receives a
-comparable weight to ensure that matched findings remain grounded in similar source
-sentences; and relation-family agreement receives a smaller weight because it is a
-coarser consistency signal and should not establish finding identity alone. The
-weights sum to one, so $m(f,g)$ remains on the $[0,1]$ scale.
+Findings whose score in Equation~\ref{eq:method-agent-match} meets or exceeds the
+predefined matching threshold will be matched across runs. Cross-run matching is
+greedy and one-to-one within each run. Candidate correspondences are considered from
+highest to lowest score, and a finding and recurrent cluster can each receive at
+most one match from the same run. Unmatched findings begin new clusters.
 
-Findings whose score in Equation~\ref{eq:method-agent-match} exceeds the predefined
-matching threshold will form recurrent clusters across runs. For a cluster $C$,
-cross-run stability will be measured by the mean pairwise matching score:
+For recurrent cluster
+$C=\{f_1,\ldots,f_k\}$, cross-run finding stability is the mean pairwise matching
+score
 \begin{equation}
 S(C)
 =
-\frac{2}{|C|(|C|-1)}
-\sum_{i<j} m(f_i,f_j).
+\frac{2}{k(k-1)}
+\sum_{i<j}m(f_i,f_j).
 \label{eq:method-agent-stability}
 \end{equation}
-Higher $S(C)$ therefore indicates that repeated analyses recover more consistent
-underlying findings. A finding will be retained only when it recurs across the
-required runs and satisfies the predefined thresholds for stability, confidence,
-evidence faithfulness, classification agreement, relation agreement, and direct
-comparability.
 
+Higher $S(C)$ indicates that repeated analyses recover more consistent underlying
+findings. Let $E_i=P_i\cup S_i$ denote the combined policy and sentiment
+evidence identifiers of member $f_i$. Evidence stability is separately defined as
+
+\begin{equation}
+S_{\mathrm{evid}}(C)
+=
+\frac{2}{k(k-1)}
+\sum_{i<j}J(E_i,E_j).
+\label{eq:method-agent-evidence-stability}
+\end{equation}
+
+The first measure therefore evaluates overall finding similarity, whereas the second
+measures recurrence of the supporting evidence itself. Both pairwise measures are
+defined for $k\geq2$; singleton clusters cannot satisfy the recurrence requirement.
+
+Let $c_i\in[0,1]$ denote the confidence assigned to member $f_i$,
+$\phi_i\in[0,1]$ the evidence-faithfulness score of its verified run,
+$a_i$ its classification, $r_i$ its relation family, and
+$d_i\in\{0,1\}$ whether direct causal comparability was confirmed. Cluster-level
+mean confidence and faithfulness are
+\begin{equation}
+\overline{c}(C)
+=
+\frac{1}{k}\sum_{i=1}^{k}c_i,
+\qquad
+\overline{\phi}(C)
+=
+\frac{1}{k}\sum_{i=1}^{k}\phi_i.
+\label{eq:method-agent-cluster-means}
+\end{equation}
+For $z\in\{a,r\}$, let $\mathbb{I}(z_i=z)$ denote the indicator function, equal to
+$1$ when member $f_i$ has category $z$ and $0$ otherwise. Classification and
+relation-family agreement are then defined as
+\begin{equation}
+A_{\mathrm{class}}(C)
+=
+\max_{a}
+\frac{1}{k}
+\sum_{i=1}^{k}\mathbb{I}(a_i=a),
+\qquad
+A_{\mathrm{rel}}(C)
+=
+\max_{r}
+\frac{1}{k}
+\sum_{i=1}^{k}\mathbb{I}(r_i=r).
+\label{eq:method-agent-agreement}
+\end{equation}
+
+The share of members with confirmed direct causal comparability is
+$A_{\mathrm{comp}}(C)=k^{-1}\sum_{i=1}^{k}d_i$.
+Thus, $\overline{c}(C)$ and $\overline{\phi}(C)$ measure mean confidence and
+faithfulness, $A_{\mathrm{class}}(C)$ and $A_{\mathrm{rel}}(C)$ measure modal
+classification and relation-family agreement, and $A_{\mathrm{comp}}(C)$ measures
+the consistency of direct causal comparability across recurrent members.
+
+The directional deficits reported for a recurrent cluster are the corresponding
+means of the verified member scores:
+
+\begin{equation}
+\overline{\delta}_{P\rightarrow S}(C)
+=
+\frac{1}{k}
+\sum_{i=1}^{k}\delta_{P\rightarrow S}(f_i),
+\qquad
+\overline{\delta}_{S\rightarrow P}(C)
+=
+\frac{1}{k}
+\sum_{i=1}^{k}\delta_{S\rightarrow P}(f_i).
+\label{eq:method-agent-deficits}
+\end{equation}
+
+A recurrent cluster will be retained only when it occurs in the required number of
+usable runs and satisfies the predefined thresholds for $S(C)$,
+$\overline{c}(C)$, $\overline{\phi}(C)$,
+$A_{\mathrm{class}}(C)$, $A_{\mathrm{rel}}(C)$, and
+$A_{\mathrm{comp}}(C)$. Its representative finding must additionally have strong or
+adequate evidence quality and confirmed direct causal comparability. The modal
+classification and relation family summarise the retained cluster. Implemented
+thresholds and model settings are reported in
+Chapter~\ref{chap:implresults}.
+
+Retained LLM findings will later be compared with the causal-claim inventory from
+Subsection~\ref{subsec:method-semantic-coverage} using immutable sentence
+identifiers. This post-hoc comparison does not influence LLM generation,
+verification, clustering, or retention and is described in
+Chapter~\ref{chap:analysis}.
+
+% \paragraph{Comparison with semantic causal-claim coverage.}
+% The retained LLM findings will be compared with the causal-claim inventory generated
+% by the fixed cue-based method in Subsection~\ref{subsec:method-semantic-coverage}.
+% This comparison uses immutable sentence identifiers and does not influence LLM
+% generation, verification, clustering, or retention.
+
+% Let $\mathcal{Q}_P$ and $\mathcal{Q}_S$ denote the policy and sentiment sentence
+% identifiers retained as eligible causal claims by the semantic-coverage method.
+% For retained LLM finding $f$, let $P_f$ and $S_f$ denote its cited policy and
+% sentiment evidence sets. The proportion of cited evidence omitted by fixed cue
+% extraction is
+
+% \begin{equation}
+% O_{\mathrm{cue}}(f)
+% =
+% 1-
+% \frac{
+% |P_f\cap\mathcal{Q}_P|
+% +
+% |S_f\cap\mathcal{Q}_S|
+% }{
+% |P_f|+|S_f|
+% }.
+% \label{eq:method-agent-cue-omission}
+% \end{equation}
+
+% A value of zero means that every sentence supporting the LLM finding is also
+% available to the semantic-coverage pipeline, whereas larger values indicate that a
+% greater share of the finding's supporting evidence falls outside its fixed cue
+% inventory.
+
+% A stronger diagnostic identifies findings for which the semantic-coverage method
+% cannot construct the same evidence-grounded policy--sentiment comparison because
+% one side has no cited sentence surviving cue extraction:
+
+% \begin{equation}
+% M_{\mathrm{cue}}(f)
+% =
+% \mathbb{I}
+% \left[
+% P_f\cap\mathcal{Q}_P=\varnothing
+% \;\lor\;
+% S_f\cap\mathcal{Q}_S=\varnothing
+% \right].
+% \label{eq:method-agent-cue-missed}
+% \end{equation}
+
+% When $M_{\mathrm{cue}}(f)=1$, the finding is termed
+% \textit{cue-inaccessible}: at least one side of the relationship is supported by
+% LLM-cited causal or conditional evidence that was not retained by the predefined
+% cue-based extraction. The proportion of retained LLM findings satisfying this
+% condition is
+
+% \begin{equation}
+% R_{\mathrm{cue}}
+% =
+% \frac{1}{|\mathcal{F}|}
+% \sum_{f\in\mathcal{F}}M_{\mathrm{cue}}(f),
+% \label{eq:method-agent-cue-recovery-rate}
+% \end{equation}
+
+% where $\mathcal{F}$ denotes the set of retained empirical LLM findings.
+% This measure will be used to examine the potential of the LLM-assisted approach to
+% recover expressed causal or conditional relationships that conventional fixed
+% cue-based semantic coverage cannot evaluate using its extracted claim inventory.
+
+% Findings for which $M_{\mathrm{cue}}(f)=0$ remain useful for a different comparison:
+% both sides are available to semantic coverage, allowing the later analysis to examine
+% whether numerical semantic proximity and LLM interpretation provide consistent or
+% complementary accounts of the same evidence. These comparisons are descriptive and
+% do not treat either method as ground truth. Their empirical results and substantive
+% interpretation are reserved for Chapter~\ref{chap:analysis}.
+
+{\color{blue}
 \paragraph{Illustrative example.}
 Consider again the hypothetical sentences used in the semantic-coverage example in
-Subsection~\ref{subsec:method-semantic-coverage}. The policy sentence
-\texttt{P\_1}, ``Teacher training reduces inappropriate use of generative AI'',
-and the sentiment sentence \texttt{S\_1}, ``Lack of training increases inappropriate
-use of generative AI'', are both retained by the rule-based method because they
-contain recognised causal cues. In that example, \texttt{S\_1} is one of the three
-nearest sentiment claims to \texttt{P\_1}, and
-Equation~\ref{eq:method-semantic-coverage} gives
-$C_{P\rightarrow S}^{(3)}(P_1)=0.667$ and
-$D_{P\rightarrow S}^{(3)}(P_1)=0.333$. These measures quantify semantic proximity
-but do not explain that the two sentences express compatible causal meaning through
-opposite framing: training is associated with reduced misuse, whereas lack of
-training is associated with increased misuse. When considered independently in an
-LLM evidence batch, the same sentences may therefore be classified as alignment or
-partial alignment, with the interpretation grounded in the cited sentences and
-traceable through their evidence identifiers.
+Subsection~\ref{subsec:method-semantic-coverage}. The policy sentence \texttt{P\_1},
+``\textit{Teacher training reduces inappropriate use of generative AI}'', and the sentiment sentence
+\texttt{S\_1}, ``\textit{Lack of training increases inappropriate use of generative AI}'', are both
+retained by the rule-based method because they contain recognised causal cues. In that example,
+\texttt{S\_1} is one of the three nearest sentiment claims to \texttt{P\_1}, and
+Equation~\ref{eq:method-semantic-coverage} gives $C_{P\rightarrow S}^{(3)}(P_1)=0.667$ and
+$D_{P\rightarrow S}^{(3)}(P_1)=0.333$. These measures quantify semantic proximity but do not explain
+that the two sentences express compatible causal meaning through opposite framing: training is
+associated with reduced misuse, whereas lack of training is associated with increased misuse. When
+considered independently in an LLM evidence batch, the same sentences may therefore be classified as
+\textit{alignment} or \textit{partial alignment}, with the interpretation grounded in the cited
+sentences and traceable through their evidence identifiers.
 
-The example can also illustrate a relationship that fixed cue extraction may omit.
-Suppose the policy evidence additionally contains \texttt{P\_3}, ``Responsible
-AI-assisted assessment depends on clear institutional guidance'', while the
-sentiment evidence contains \texttt{S\_5}, ``Teachers hesitate to use AI when
-institutional guidance is unclear''. The rule-based extractor can retain
-\texttt{P\_3} through the recognised cue \textit{depends on}, whereas
-\texttt{S\_5} would not satisfy the predefined cue inventory through its
-\textit{when} construction alone. If both sentences occur in an LLM evidence batch,
-the agent may nevertheless recognise the conditional relationship expressed by
-\texttt{S\_5} and compare it with \texttt{P\_3}, provided both sentences directly
-support the interpretation. Descriptive or merely thematic sentences will instead
-receive an insufficient-evidence classification rather than being forced into a
-causal comparison.
+The example also illustrates a relationship that fixed cue extraction may omit. Suppose the policy
+evidence additionally contains \texttt{P\_3}, ``\textit{Responsible AI-assisted assessment depends
+on clear institutional guidance}'', while the sentiment evidence contains \texttt{S\_5},
+``\textit{Teachers hesitate to use AI when institutional guidance is unclear}''. The rule-based
+extractor can retain \texttt{P\_3} through the recognised cue \textit{depends on}, whereas
+\texttt{S\_5} would not satisfy the predefined cue inventory through its \textit{when} construction
+alone. If both sentences occur in an LLM evidence batch, the agent may nevertheless recognise the
+conditional relationship expressed by \texttt{S\_5} and compare it with \texttt{P\_3}, provided both
+sentences directly support the interpretation.
 
-If interpretations of \texttt{P\_3} and \texttt{S\_5} recur consistently across runs,
-their match will be evaluated using Equation~\ref{eq:method-agent-match}. Findings
-above the predefined matching threshold form recurrent clusters, whose consistency is
-measured by Equation~\ref{eq:method-agent-stability}. The example illustrates two
-roles of the LLM-assisted stage: explaining causal or conditional relationships beyond
-semantic similarity and identifying expressed relationships outside fixed cue-based
-causal extraction.
+In this case, \texttt{P\_3} is retained by the semantic-coverage method, whereas \texttt{S\_5} is
+not, making the LLM finding cue-inaccessible because its sentiment evidence cannot enter the
+semantic comparison. This does not establish correctness; the finding must still satisfy
+verification, recurrence, evidence-quality, and human-validation requirements. Descriptive or
+thematic sentences instead receive an insufficient-evidence classification. If interpretations of
+\texttt{P\_3} and \texttt{S\_5} recur across runs, their match is evaluated using
+Equation~\ref{eq:method-agent-match}, and qualifying findings form recurrent clusters measured by
+Equation~\ref{eq:method-agent-stability}. The example illustrates how the LLM-assisted stage can
+explain causal or conditional relationships beyond semantic similarity and recover relationships
+outside fixed cue-based extraction. This separation preserves methodological independence between
+the two approaches. It also supports transparent interpretation of complementary causal evidence.
 
-For robustness analysis, policy evidence in each eligible batch will be held fixed
-while observed sentiment evidence is replaced by source-balanced synthetic sentiment
-with comparable batch size and source support. Synthetic outputs will remain
-separate from substantive findings, allowing sensitivity to changes in sentiment
-evidence to be examined without altering the policy evidence.
+For robustness analysis, policy evidence in each eligible batch will be held fixed while observed
+sentiment evidence is replaced by source-balanced synthetic sentiment with comparable batch size and
+source support. Synthetic outputs will remain separate from substantive findings. For paired
+observed and synthetic packages, changes in classification and relation-family distributions will
+use the total-variation form defined in Equation~\ref{eq:method-synthetic-robustness}, with finding
+categories replacing topics.
 
-The distinction between evidential support and faithfulness follows
-\cite{es2024ragas}. Structured verification is informed by~\cite{liu2023geval},
-while repeated analysis follows the consistency rationale of
-\cite{wang2023selfconsistency}. Final evaluation will use manually reviewed candidate
-findings and report precision, recall, and $F_1$. Sampling parameters, thresholds,
-model settings, prompts, and empirical results will be reported in
-Chapter~\ref{chap:implresults}.
-}
+Let $H^{\mathrm{obs}}$ and $H^{\mathrm{syn}}$ denote observed and synthetic sets of
+classification--relation profiles. Profile change is
+$\Delta_{\mathrm{profile}}=1-J(H^{\mathrm{obs}},H^{\mathrm{syn}})$. Changes in confidence and
+evidence faithfulness are
+$\Delta\overline{c}=\overline{c}^{\,\mathrm{syn}}-\overline{c}^{\,\mathrm{obs}}$ and
+$\Delta\overline{\phi}=\overline{\phi}^{\,\mathrm{syn}}-\overline{\phi}^{\,\mathrm{obs}}$, with
+directional-deficit changes defined analogously. These measures assess sensitivity to
+sentiment-evidence changes without treating synthetic outputs as substantive findings.
 
+Final evaluation will compare machine-retained substantive findings with manually reviewed candidate
+findings and report precision, recall, and $F_1$. The manual review will assess whether the cited
+evidence supports the proposed causal or conditional comparison and whether the assigned finding
+category is justified. Sampling parameters, thresholds, model settings, prompts, empirical results,
+and the later cross-method comparison are reported in Section~\ref{chap:implresults} and
+Chapter~\ref{chap:analysis}, respectively.}
 
+\section*{Summary}
 
-\section{Summary}
-
-The methodology combines corpus construction, synthetic-data testing, three
-topic-modelling approaches, two causal NLP methods, and an LLM-assisted analysis. LDA
-provides a lexical baseline, BERTopic-style clustering a semantic grouping baseline,
-and NMF a factorisation-based representation for topic aggregation and projection.
-Semantic causal-claim coverage measures representational correspondence, while
-causal-frame networks measure structural policy--sentiment divergence.
+The methodology combines corpus construction, synthetic-data testing, three topic-modelling
+approaches, two causal NLP methods, and an LLM-assisted analysis. LDA provides a lexical baseline,
+BERTopic-style clustering a semantic grouping baseline, and NMF a factorisation-based representation
+for topic aggregation and projection. Semantic causal-claim coverage measures semantic
+correspondence, while causal-frame networks measure structural policy--sentiment divergence.
 
 The study uses publicly available or institutionally published material and retains
-source provenance throughout. Synthetic material is clearly marked, restricted to
-robustness and sensitivity testing, and excluded from empirical inference. Generated
-topic labels support interpretation without determining topic assignments.
-Country-level comparisons are interpreted according to available evidence and source
-distribution, with limited support treated cautiously rather than as representative.
+source provenance throughout. Synthetic material is marked, restricted to robustness
+and sensitivity testing, and excluded from empirical inference. Generated topic labels
+support interpretation without determining topic assignments. Country-level comparisons
+are interpreted according to available evidence and source distribution, with limited
+support treated cautiously rather than as representative. This separation preserves the
+distinction between observed evidence and validation data. It also supports transparent
+comparison across sources, countries, and analytical stages.
 
-The causal NLP methods analyse expressed causal language and structure but do not
-establish real-world causal mechanisms. The LLM-assisted stage independently adds
-evidence-grounded explanation of causal or conditional policy--sentiment
-relationships, together with verification and cross-run stability assessment, without
-replacing quantitative or human validation. Reproducibility therefore requires
-preserving source metadata, cleaned sentence inventories, model configurations,
-prompts, thresholds, evaluation outputs, and the evidence supporting each
-interpretation.
+The causal NLP methods analyse expressed causal language and structure but do not establish
+real-world causal mechanisms. Independently of their outputs, the LLM-assisted stage adds
+evidence-grounded interpretation of causal or conditional policy--sentiment relationships through
+verification and cross-run stability assessment. It complements rather than replaces quantitative
+analysis or human validation. Reproducibility therefore requires preserving source metadata, cleaned
+sentence inventories, model configurations, prompts, thresholds, evaluation outputs, and the
+evidence supporting each interpretation.

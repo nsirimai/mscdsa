@@ -1876,73 +1876,58 @@ are most evident; their substantive meaning is considered in Chapter~5.}
 \section{LLM-Assisted Causal-Gap Discovery}
 \label{sec:impl-llm-causal-gap}
 
-Following Section~\ref{sec:method-llm-gap}, the implementation stage applied
-the LLM-assisted pipeline identified as \texttt{LLM} in
-Table~\ref{tab:impl-repository-links}. The pipeline operated directly on the
-cleaned sentence inventory rather than on the outputs of the preceding causal NLP
-methods. Its purpose was exploratory: to assess the potential of LLM-assisted
-reasoning as a complementary approach to conventional NLP techniques for identifying
-and explaining source-grounded causal or conditional policy--sentiment relationships.
-A comparison between the approaches is therefore deferred to
-Chapter~\ref{chap:analysis}. This design preserved traceability between generated
-interpretations and their supporting sentences.
+Following Section~\ref{sec:method-llm-gap}, the implementation stage applied the LLM-assisted
+pipeline identified as \texttt{LLM} in Table~\ref{tab:impl-repository-links}. The pipeline operated
+directly on the cleaned sentence inventory rather than on the outputs of the causal NLP methods. Its
+purpose was exploratory: to assess the potential of LLM-assisted reasoning alongside NLP techniques
+for identifying and explaining source-grounded causal or conditional policy--sentiment
+relationships. A comparison between the approaches is deferred to Chapter~\ref{chap:analysis}. This
+design preserved traceability between interpretations and their supporting sentences.
 
-The implemented workflow used separate analyst and verifier prompts. Evidence was sampled
-independently from policy and original sentiment sources, analysed for causal or conditional
-relationships, and then verified using the same evidence in reordered form. Accepted findings were
-matched across repeated runs and retained only when the recurrence and quality requirements defined
-in Section~\ref{sec:method-llm-gap} were satisfied. Repeated execution also provided evidence about
-the consistency of generated findings. Only findings surviving both verification and recurrence
-checks entered final outputs.
+The implemented workflow used separate analyst and verifier prompts. Evidence was sampled separately from policy and original sentiment sources for each scope, analysed for causal or
+conditional relationships, and then verified using the same evidence in reordered form. Accepted
+findings were matched across repeated runs and retained only when the recurrence and quality
+requirements defined in Section~\ref{sec:method-llm-gap} were satisfied. Repeated execution also
+provided evidence about the consistency of generated findings. Only findings surviving both
+verification and recurrence checks entered final outputs.
 
 {\small
 \begin{verbatim}
 Shared cleaned sentence inventory
-  -> select global, France, or Ireland scope
-  -> construct source-balanced policy and sentiment batch
-  -> prioritise broad causal-language candidates for sampling only
-  -> analyst LLM proposes evidence-grounded relationships
-  -> verifier LLM rechecks the evidence in reordered form
-  -> reject weak, unsupported, or non-comparable findings
-  -> repeat until the target number of usable runs is obtained
-  -> match comparable findings across runs
-  -> form recurrent finding clusters
-  -> apply confidence, faithfulness, agreement, and stability filters
-  -> retain recurrent empirical findings
-  -> export findings, evidence, deficits, and stability measures
+  -> construct source-balanced policy and sentiment batches
+  -> analyst LLM identifies evidence-grounded relationships
+  -> verifier LLM rechecks evidence in reordered form
+  -> repeat analysis across multiple runs
+  -> match and cluster recurrent findings
+  -> apply quality and stability filters
+  -> retain verified empirical findings
   -> repeat with synthetic sentiment for robustness only
 \end{verbatim}
 }
 
-The implementation used \texttt{deepseek-v4-pro} for both the analyst and verifier
-roles with distinct prompts. Three evidence batches were created for each of the
-global, French, and Irish scopes. Each batch contained 24 policy and 24 original
-sentiment sentences. The broad causal-language indicator was used only to prioritise
-sampling and was not treated as evidence that a causal relationship existed.
-Table~\ref{tab:impl-llm-settings} summarises the principal executed settings.
 
+The implementation used \texttt{deepseek-v4-pro} for both the analyst and verifier roles with
+distinct prompts. Three evidence batches were created for each of the global, French, and Irish
+scopes. Each batch contained 24 policy and 24 original sentiment sentences. The broad
+causal-language indicator was used only to prioritise sampling and was not treated as evidence that
+a causal relationship existed. Table~\ref{tab:impl-llm-settings} reports the executed settings and
+thresholds using the notation defined in Section~\ref{sec:method-llm-gap}.
 
-The nine empirical packages contained 432 sampled evidence records in total. Across
-them, 32 analysis attempts were required to obtain the target 27 usable runs.
-Verification retained 88 run-level findings, which were subsequently grouped into
-58 cross-run candidate clusters. After applying recurrence, confidence,
-faithfulness, agreement, stability, evidence-quality, and direct-comparability
-requirements, 16 recurrent findings were retained for exploratory analysis.
+The nine empirical packages contained 432 sampled evidence records in total. Across them, 32
+analysis attempts were required to obtain the target 27 usable runs. Verification retained 88
+run-level findings, which were subsequently grouped into 58 cross-run candidate clusters. After
+applying recurrence, confidence, faithfulness, agreement, stability, evidence-quality, and
+direct-comparability requirements, 16 recurrent findings were retained for exploratory analysis.
 
-Table~\ref{tab:impl-llm-findings} reports their distribution by scope. France
-produced eight retained findings, while the global and Irish scopes each produced
-four. Thirteen findings were classified as partial alignment, two as sentiment
-gaps, and one as alignment. No policy-gap finding satisfied all retention criteria
-in this execution.
-
-
-The retained findings covered three relation families. Nine concerned
-enabling or supporting relationships, five concerned risks or threats, and two
-concerned requirements or dependencies. Evidence quality was assessed as strong
-for three findings and adequate for 13. Mean classification agreement across
-repeated runs was 0.958 and mean relation-family agreement was 0.927. Mean
-evidence-overlap stability was 0.795, while all retained representative findings
-satisfied direct causal comparability.
+Table~\ref{tab:impl-llm-findings} reports their distribution by scope. France produced eight
+retained findings, while the global and Irish scopes each produced four. Thirteen findings were
+classified as partial alignment, two as sentiment gaps, and one as alignment. No policy-gap finding
+satisfied all retention criteria in this execution. The retained findings covered three relation
+families. Nine concerned enabling or supporting relationships, five concerned risks or threats, and
+two concerned requirements or dependencies. Evidence quality was assessed as strong for three
+findings and adequate for 13. Mean classification agreement across repeated runs was 0.958 and mean
+relation-family agreement was 0.927. Mean evidence-overlap stability was 0.795, while all retained
+representative findings satisfied direct causal comparability.
 
 
 
@@ -1967,15 +1952,15 @@ Target usable runs per package & 3 \\
 Maximum attempts per package & 5 \\
 Causal-hint sampling target & 0.85 \\
 Minimum recurrent runs & 2 \\
-Cross-run matching threshold & 0.50 \\
-Minimum confidence & 0.60 \\
-Minimum evidence faithfulness & 0.80 \\
-Minimum classification agreement & 0.66 \\
-Minimum relation agreement & 0.50 \\
-Minimum direct-comparability share & 0.66 \\
+Matching score $m(f,g)$ & $\geq 0.50$ \\
+Mean confidence $\overline{c}(C)$ & $\geq 0.60$ \\
+Mean faithfulness $\overline{\phi}(C)$ & $\geq 0.80$ \\
+Classification agreement $A_{\mathrm{class}}(C)$ & $\geq 0.66$ \\
+Relation agreement $A_{\mathrm{rel}}(C)$ & $\geq 0.50$ \\
+Direct comparability $A_{\mathrm{comp}}(C)$ & $\geq 0.66$ \\
 \hline
 \end{tabular}
-\caption{Principal settings of the LLM-assisted causal-gap implementation.}
+\caption{Settings and retention thresholds of the LLM-assisted causal-gap implementation.}
 \label{tab:impl-llm-settings}
 \end{table}
 
@@ -1992,9 +1977,9 @@ Alignment &
 Partial &
 Policy gap &
 Sentiment gap &
-Confidence &
-Faithfulness &
-Stability \\
+Confidence $\overline{c}$ &
+Faithfulness $\overline{\phi}$ &
+Stability $S(C)$ \\
 \hline
 Global
 & 4 & 1 & 3 & 0 & 0
@@ -2031,19 +2016,65 @@ only as robustness diagnostics and were not included among the 16 empirical find
 Across the three scopes, the mean change in confidence was approximately 0.011 and
 the mean change in evidence faithfulness was approximately $-0.013$. The synthetic
 runs therefore provided a controlled sensitivity test without contributing
-substantive evidence about stakeholder sentiment.
+substantive evidence about stakeholder sentiment. Their limited changes also provide
+an initial indication that the retained evaluation signals were not highly sensitive
+to the synthetic substitution.
 
 Manual-review fields were exported for the candidate findings, but no human labels
 had been entered for this execution. Precision, recall, and $F_1$ were therefore not
 calculated at this stage. These measures will accompany the later evaluation once
-the retained findings are manually reviewed.
+the retained findings are manually reviewed. The corresponding human assessment and
+its comparison with the automated findings are presented in
+Chapter~\ref{chap:analysis}.
 
-The LLM-assisted stage is consequently treated here as an exploratory demonstration
+The LLM-assisted stage is treated here as an exploratory demonstration
 of the potential of LLM reasoning for evidence-grounded causal-gap discovery. The
 results show that candidate policy--sentiment relationships can be generated,
-independently verified, matched across repeated runs, and filtered according to
-explicit evidence and stability requirements. They do not establish that the
-LLM-assisted approach is superior to conventional causal NLP techniques. The
-substantive interpretation of these findings and their direct comparison with the
-semantic-coverage and causal-frame results are reserved for
+independently verified, matched across runs, and filtered according to
+evidence and stability requirements. An exhaustive application would extend
+this process across the full corpus rather than the sampled evidence batches used
+here. Nevertheless, the retained findings illustrate the potential of
+embedding LLM reasoning within a systematic causal-discovery workflow. They do not
+establish that the LLM-assisted approach is superior to conventional causal NLP
+techniques. The substantive interpretation of these findings and their direct
+comparison with the semantic-coverage and causal-frame results are reserved for
+Chapter~\ref{chap:analysis}.
+
+\section{Summary}
+
+This chapter implemented the methodology of Chapter~\ref{chap:method} as an
+incremental workflow from document preparation to topic modelling, causal NLP, and
+LLM-assisted analysis. PDF extraction, Markdown cleaning, structured conversion, and
+chunking preserved source provenance throughout. Synthetic sentiment remained
+explicitly separated from empirical evidence and was used only for robustness and
+sensitivity testing. Its validation showed substantial semantic proximity to the
+original sentiment material while confirming that the generated texts remained
+distinguishable.
+
+Three complementary topic-modelling approaches were implemented. LDA provided the
+lexical baseline, BERTopic-style clustering supplied complete cluster assignments,
+and NMF provided a factorisation-based representation with fixed topic identifiers
+and direct projection into the retained topic space. NMF was retained as the
+reference topic space for causal analysis because of these operational properties
+and its broader synthetic-topic coverage. Country-level outputs revealed differences
+in corpus emphasis, while synthetic projections quantified the sensitivity of the
+retained thematic structures without altering the empirical topic definitions.
+
+The two causal NLP pipelines then operated independently on the same cleaned sentence
+inventory. Semantic causal-claim coverage measured directional correspondence between
+policy and sentiment claims, while causal-frame networks compared how topics
+participated in extracted cause--effect structures. The balanced semantic deficits
+were similar in both directions, whereas the frame analysis identified differences
+in relation-family and topic-level structure. Synthetic and resampling checks were
+used to assess the sensitivity of both pipelines. These outputs describe differences
+in expressed causal structure rather than real-world causal mechanisms.
+
+Finally, the LLM-assisted stage independently examined sampled policy and sentiment
+evidence using separate analyst and verifier roles, repeated runs, and explicit
+retention criteria. Sixteen recurrent findings survived verification and stability
+requirements, demonstrating the feasibility of embedding evidence-grounded LLM
+reasoning within the causal-analysis workflow. An exhaustive application would extend
+this process across the full corpus rather than sampled evidence batches. Human
+evaluation, substantive interpretation, and direct comparison across the topic,
+causal NLP, and LLM-assisted findings are reserved for
 Chapter~\ref{chap:analysis}.
