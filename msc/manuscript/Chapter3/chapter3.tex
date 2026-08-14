@@ -804,7 +804,7 @@ For the synthetic robustness check, synthetic sentiment chunks were projected us
 the TF--IDF vectoriser and SVD model fitted on the original sentiment corpus.
 K-means then assigned each chunk to one of the retained original-sentiment topics.
 
-\begin{samepage}
+
 \begin{verbatim}
 Synthetic sentiment chunks
   -> apply the original sentiment preprocessing rules
@@ -814,7 +814,7 @@ Synthetic sentiment chunks
   -> attach the reviewed topic labels
   -> compare original and synthetic topic shares
 \end{verbatim}
-\end{samepage}
+
 
 \begin{table}[ht]
 \centering
@@ -1875,3 +1875,175 @@ are most evident; their substantive meaning is considered in Chapter~5.}
 
 \section{LLM-Assisted Causal-Gap Discovery}
 \label{sec:impl-llm-causal-gap}
+
+Following Section~\ref{sec:method-llm-gap}, the implementation stage applied
+the LLM-assisted pipeline identified as \texttt{LLM} in
+Table~\ref{tab:impl-repository-links}. The pipeline operated directly on the
+cleaned sentence inventory rather than on the outputs of the preceding causal NLP
+methods. Its purpose was exploratory: to assess the potential of LLM-assisted
+reasoning as a complementary approach to conventional NLP techniques for identifying
+and explaining source-grounded causal or conditional policy--sentiment relationships.
+A comparison between the approaches is therefore deferred to
+Chapter~\ref{chap:analysis}. This design preserved traceability between generated
+interpretations and their supporting sentences.
+
+The implemented workflow used separate analyst and verifier prompts. Evidence was sampled
+independently from policy and original sentiment sources, analysed for causal or conditional
+relationships, and then verified using the same evidence in reordered form. Accepted findings were
+matched across repeated runs and retained only when the recurrence and quality requirements defined
+in Section~\ref{sec:method-llm-gap} were satisfied. Repeated execution also provided evidence about
+the consistency of generated findings. Only findings surviving both verification and recurrence
+checks entered final outputs.
+
+{\small
+\begin{verbatim}
+Shared cleaned sentence inventory
+  -> select global, France, or Ireland scope
+  -> construct source-balanced policy and sentiment batch
+  -> prioritise broad causal-language candidates for sampling only
+  -> analyst LLM proposes evidence-grounded relationships
+  -> verifier LLM rechecks the evidence in reordered form
+  -> reject weak, unsupported, or non-comparable findings
+  -> repeat until the target number of usable runs is obtained
+  -> match comparable findings across runs
+  -> form recurrent finding clusters
+  -> apply confidence, faithfulness, agreement, and stability filters
+  -> retain recurrent empirical findings
+  -> export findings, evidence, deficits, and stability measures
+  -> repeat with synthetic sentiment for robustness only
+\end{verbatim}
+}
+
+The implementation used \texttt{deepseek-v4-pro} for both the analyst and verifier
+roles with distinct prompts. Three evidence batches were created for each of the
+global, French, and Irish scopes. Each batch contained 24 policy and 24 original
+sentiment sentences. The broad causal-language indicator was used only to prioritise
+sampling and was not treated as evidence that a causal relationship existed.
+Table~\ref{tab:impl-llm-settings} summarises the principal executed settings.
+
+
+The nine empirical packages contained 432 sampled evidence records in total. Across
+them, 32 analysis attempts were required to obtain the target 27 usable runs.
+Verification retained 88 run-level findings, which were subsequently grouped into
+58 cross-run candidate clusters. After applying recurrence, confidence,
+faithfulness, agreement, stability, evidence-quality, and direct-comparability
+requirements, 16 recurrent findings were retained for exploratory analysis.
+
+Table~\ref{tab:impl-llm-findings} reports their distribution by scope. France
+produced eight retained findings, while the global and Irish scopes each produced
+four. Thirteen findings were classified as partial alignment, two as sentiment
+gaps, and one as alignment. No policy-gap finding satisfied all retention criteria
+in this execution.
+
+
+The retained findings covered three relation families. Nine concerned
+enabling or supporting relationships, five concerned risks or threats, and two
+concerned requirements or dependencies. Evidence quality was assessed as strong
+for three findings and adequate for 13. Mean classification agreement across
+repeated runs was 0.958 and mean relation-family agreement was 0.927. Mean
+evidence-overlap stability was 0.795, while all retained representative findings
+satisfied direct causal comparability.
+
+
+
+\begin{table}[ht]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{
+>{\raggedright\arraybackslash}p{0.55\linewidth}
+>{\centering\arraybackslash}p{0.25\linewidth}}
+\hline
+Setting & Implemented value \\
+\hline
+Empirical scopes & Global, France, Ireland \\
+Batches per scope & 3 \\
+Policy sentences per batch & 24 \\
+Sentiment sentences per batch & 24 \\
+Empirical analysis packages & 9 \\
+Synthetic robustness packages & 9 \\
+Target usable runs per package & 3 \\
+Maximum attempts per package & 5 \\
+Causal-hint sampling target & 0.85 \\
+Minimum recurrent runs & 2 \\
+Cross-run matching threshold & 0.50 \\
+Minimum confidence & 0.60 \\
+Minimum evidence faithfulness & 0.80 \\
+Minimum classification agreement & 0.66 \\
+Minimum relation agreement & 0.50 \\
+Minimum direct-comparability share & 0.66 \\
+\hline
+\end{tabular}
+\caption{Principal settings of the LLM-assisted causal-gap implementation.}
+\label{tab:impl-llm-settings}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{lrrrrrrrr}
+\hline
+Scope &
+Findings &
+Alignment &
+Partial &
+Policy gap &
+Sentiment gap &
+Confidence &
+Faithfulness &
+Stability \\
+\hline
+Global
+& 4 & 1 & 3 & 0 & 0
+& 0.763 & 0.842 & 0.763 \\
+
+France
+& 8 & 0 & 8 & 0 & 0
+& 0.691 & 0.888 & 0.715 \\
+
+Ireland
+& 4 & 0 & 2 & 0 & 2
+& 0.760 & 0.833 & 0.758 \\
+
+\hline
+Overall
+& 16 & 1 & 13 & 0 & 2
+& 0.726 & 0.863 & 0.738 \\
+\hline
+\end{tabular}
+\caption{Retained recurrent LLM-assisted findings by analytical scope. Confidence,
+faithfulness, and stability are mean values for retained findings.}
+\label{tab:impl-llm-findings}
+\end{table}
+
+The corresponding mean directional deficit was 0.428 from policy to sentiment and
+0.470 from sentiment to policy. These values summarise the retained exploratory
+findings rather than the entire corpora and should not be interpreted as estimates
+of real-world causal effects or general policy--sentiment divergence.
+
+Synthetic sentiment was evaluated separately through nine corresponding robustness
+packages. Policy evidence remained fixed while original sentiment evidence was
+replaced by source-balanced synthetic sentiment. The resulting outputs were retained
+only as robustness diagnostics and were not included among the 16 empirical findings.
+Across the three scopes, the mean change in confidence was approximately 0.011 and
+the mean change in evidence faithfulness was approximately $-0.013$. The synthetic
+runs therefore provided a controlled sensitivity test without contributing
+substantive evidence about stakeholder sentiment.
+
+Manual-review fields were exported for the candidate findings, but no human labels
+had been entered for this execution. Precision, recall, and $F_1$ were therefore not
+calculated at this stage. These measures will accompany the later evaluation once
+the retained findings are manually reviewed.
+
+The LLM-assisted stage is consequently treated here as an exploratory demonstration
+of the potential of LLM reasoning for evidence-grounded causal-gap discovery. The
+results show that candidate policy--sentiment relationships can be generated,
+independently verified, matched across repeated runs, and filtered according to
+explicit evidence and stability requirements. They do not establish that the
+LLM-assisted approach is superior to conventional causal NLP techniques. The
+substantive interpretation of these findings and their direct comparison with the
+semantic-coverage and causal-frame results are reserved for
+Chapter~\ref{chap:analysis}.
