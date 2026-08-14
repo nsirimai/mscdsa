@@ -703,6 +703,82 @@ conclusions. The neighbourhood size, resampling count, evidence requirements,
 threshold procedure, and synthetic comparisons are detailed in
 Chapter~\ref{chap:implresults}.
 
+{\color{blue}
+\paragraph{Illustrative example.}
+Consider a small hypothetical set of cleaned policy and sentiment sentences. Suppose
+the policy corpus contains
+
+\begin{quote}
+\texttt{P1}: \textit{``Teacher training reduces inappropriate use of
+generative AI.''}
+
+\texttt{P2}: \textit{``Schools should publish clear guidance for AI-assisted
+assessment.''}
+\end{quote}
+
+\noindent and the sentiment corpus contains
+
+\begin{quote}
+\texttt{S1}: \textit{``Lack of training increases inappropriate use of
+generative AI.''}
+
+\texttt{S2}: \textit{``Clear guidance reduces uncertainty about
+AI use in assessment.''}
+
+\texttt{S3}: \textit{``Training enables teachers to use generative AI
+responsibly.''}
+
+\texttt{S4}: \textit{``Teachers report receiving little training
+in generative AI.''}
+\end{quote}
+
+The causal-cue rules are first applied to each sentence. In \texttt{P1}, the cue
+\textit{reduces} produces the interpretation
+\[
+\underbrace{\text{teacher training}}_{\text{cause}}
+\;\xrightarrow{\text{reduces}}\;
+\underbrace{\text{inappropriate use of generative AI}}_{\text{effect}},
+\]
+so \texttt{P1} is retained as an eligible causal claim. In contrast, \texttt{P2}
+contains no recognised causal cue and is therefore not included in the causal-claim
+comparison. The same screening is applied to sentiment: \texttt{S1}, \texttt{S2}, and
+\texttt{S3} contain the cues \textit{increases}, \textit{reduces}, and
+\textit{enables}, respectively, and are retained, whereas \texttt{S4} contains no
+recognised causal expression and is excluded. The procedure therefore moves from the
+original sentences to the eligible claim sets $P=\{\texttt{P1}\}$ and
+$S=\{\texttt{S1},\texttt{S2},\texttt{S3}\}$.
+
+Although the cause and effect spans determine claim eligibility, semantic comparison
+uses the complete cleaned sentence. The embedding of \texttt{P1} is compared with
+eligible sentiment claims using the cosine similarity in
+Equation~\ref{eq:method-cosine-general}. Suppose the similarities are
+$s(\texttt{P1},\texttt{S1})=0.72$, $s(\texttt{P1},\texttt{S2})=0.67$, and
+$s(\texttt{P1},\texttt{S3})=0.61$. If $m=3$, the three nearest sentiment claims form
+$\operatorname{NN}^{S}_{3}(\texttt{P1})$. According to
+Equation~\ref{eq:method-semantic-coverage}, the semantic coverage of \texttt{P1} is
+$C_{P\rightarrow S}^{(3)}(\texttt{P1})= (0.72+0.67+0.61)/3 = 0.667$, with coverage
+deficit $D_{P\rightarrow S}^{(3)}(\texttt{P1})=1-0.667=0.333$.
+
+The method compares eligible causal claims in both policy-to-sentiment and
+sentiment-to-policy directions. Higher coverage indicates closer semantic
+counterparts, while claims with coverage below $\tau$ are flagged for inspection.
+According to Equation~\ref{eq:method-semantic-outcomes}, claim-level coverage and
+deficit values are averaged to obtain corpus-, topic-, or country-level measures,
+together with the proportion of claims falling below $\tau$. When corpus sizes
+differ, equal-size samples are used in each direction, and
+Equation~\ref{eq:method-balanced-semantic} averages the resulting mean deficits
+across resamples. This preserves comparability across directions and reduces the
+effect of unequal claim counts.
+
+For sensitivity analysis, synthetic sentiment is processed using the same
+causal-claim extraction and semantic-matching procedure but remains separate from
+observed sentiment. Within sentiment topic $j$, its mean sentiment-to-policy deficit
+is compared with the corresponding observed deficit. For example, if the observed and
+synthetic mean deficits were $0.28$ and $0.35$, respectively, then according to
+Equation~\ref{eq:method-semantic-synthetic-change},
+$\Delta D_j=0.35-0.28=0.07$, indicating weaker semantic coverage in the synthetic
+data.
+}
 
 \subsection{Causal-Frame Network Divergence}
 \label{subsec:method-frame-network}
@@ -804,18 +880,17 @@ w_i
 \label{eq:method-frame-weight}
 \end{equation}
 
-{\color{blue}The factor $1/n_{s(i)}$ gives less weight to each frame when many
-frames come from the same source, preventing that source from having excessive
-influence. The geometric mean $\sqrt{\gamma_i^{u}\gamma_i^{v}}$ reduces the
-frame weight when either topic assignment has low confidence. Sensitivity to
-these choices will be examined using three alternatives: source balancing alone
-uses only $1/n_{s(i)}$; high-quality-only retains frames with $q_i\geq0.60$,
-where $0.60$ is a study-specific stricter cut-off chosen to select stronger
-frames than the minimum acceptance threshold; and direct-projection-only retains
-frames whose cause and effect topics are both assigned directly rather than by
-fallback. These alternatives isolate the effects of source balance, frame
-quality, and assignment method. Comparing them with the primary specification
-shows whether the divergence is sensitive to these modelling choices.}
+{\color{blue}The factor $1/n_{s(i)}$ gives less weight to frames when
+frames come from the same source, preventing excessive influence. The geometric
+mean $\sqrt{\gamma_i^{u}\gamma_i^{v}}$ reduces weight when either topic assignment
+has low confidence. Sensitivity is examined using three alternatives: source
+balancing alone uses $1/n_{s(i)}$; high-quality-only retains frames with
+$q_i\geq0.60$, a study-specific stricter cut-off selecting stronger frames than
+the minimum acceptance threshold; and direct-projection-only retains frames whose
+cause and effect topics are assigned directly rather than by fallback. These
+alternatives isolate source balance, frame quality, and assignment method.
+Comparing them with the primary specification shows whether divergence is
+sensitive to these modelling choices.}
 
 According to~\cite{gentzkow2019text,grimmer2013text}, weighted aggregation of
 coded textual units can define corpus-level distributions. {\color{blue}For each
@@ -884,9 +959,10 @@ G_t
 
 {\color{blue}The first sum measures differences when topic $t$ appears as a cause,
 and the second when it appears as an effect; larger $G_t$ values indicate a greater
-contribution to policy--sentiment divergence.} Frame counts, source support, frame
-quality, and assignment confidence accompany the divergence measures. Country-level
-networks are compared only with sufficient support in both corpora.
+contribution to policy--sentiment divergence. This decomposition distinguishes
+whether divergence is concentrated on the cause or effect side. Frame counts, source
+support, frame quality, and assignment confidence accompany the divergence measures.
+Country-level networks are compared only with sufficient support in both corpora.}
 
 The primary specification uses the frame weight $w_i$ defined above.
 {\color{blue}Robustness will be assessed against the three alternative specifications
@@ -923,77 +999,349 @@ and resampling settings are detailed in
 Subsection~\ref{subsec:impl-causal-inventory}, while the network specifications
 and results are reported in Subsection~\ref{subsec:impl-frame-networks}.
 
+
+{\color{blue}
+\paragraph{Illustrative example.}
+Consider a small hypothetical set of policy and sentiment sentences. Suppose the
+policy corpus contains
+\begin{quote}
+\texttt{P\_1}: \textit{``Responsible AI use depends on teacher training.''}
+
+\texttt{P\_2}: \textit{``Clear guidance reduces uncertainty about AI-assisted
+assessment.''}
+\end{quote}
+\noindent and the sentiment corpus contains
+\begin{quote}
+\texttt{S\_1}: \textit{``Lack of training increases uncertainty about AI use.''}
+
+\texttt{S\_2}: \textit{``Unclear guidance increases concern about AI-assisted
+assessment.''}
+\end{quote}
+
+Following the frame representation in
+Equation~\ref{eq:method-causal-frame}, the causal-cue rules first extract and
+standardise a frame from each eligible sentence. For \texttt{P\_1}, the cue
+\textit{depends on} belongs to the \textit{requires-or-depends-on} relation
+family and has reverse orientation, giving
+\[
+\underbrace{\text{teacher training}}_{\text{cause/prerequisite}}
+\;\xrightarrow{\text{requires or depends on}}\;
+\underbrace{\text{responsible AI use}}_{\text{effect/outcome}}.
+\]
+For \texttt{P\_2}, the forward cue \textit{reduces} gives
+\[
+\underbrace{\text{clear guidance}}_{\text{cause}}
+\;\xrightarrow{\text{reduces or prevents}}\;
+\underbrace{\text{uncertainty about AI-assisted assessment}}_{\text{effect}}.
+\]
+The sentiment sentences are processed in the same way. For \texttt{S\_1},
+\[
+\underbrace{\text{lack of training}}_{\text{cause}}
+\;\xrightarrow{\text{causes or increases}}\;
+\underbrace{\text{uncertainty about AI use}}_{\text{effect}},
+\]
+while \texttt{S\_2} gives
+\[
+\underbrace{\text{unclear guidance}}_{\text{cause}}
+\;\xrightarrow{\text{causes or increases}}\;
+\underbrace{\text{concern about AI-assisted assessment}}_{\text{effect}}.
+\]
+
+Repeated frames arising from overlapping passages are removed within each source.
+The cause and effect spans from both corpora are then projected onto the same
+frozen policy-topic space. This common space provides the thematic reference
+needed to compare policy and sentiment frames directly; separate sentiment-topic
+identifiers are therefore not introduced at this stage. The labels
+\texttt{P\_1}, \texttt{P\_2}, \texttt{S\_1}, and \texttt{S\_2} identify the
+source sentences, whereas $\mathcal{T}_j$ identifies a frozen policy topic used
+for spans from either corpus.
+
+Suppose, for illustration, that the relevant frozen topics are
+$\mathcal{T}_2$, representing \textit{teacher capacity and training};
+$\mathcal{T}_3$, representing \textit{guidance and governance};
+$\mathcal{T}_5$, representing \textit{responsible and safe AI use}; and
+$\mathcal{T}_6$, representing \textit{AI-assessment confidence and concerns}.
+The spans \textit{teacher training} from \texttt{P\_1} and
+\textit{lack of training} from \texttt{S\_1} are both assigned to
+$\mathcal{T}_2$ because they concern the same thematic area despite their
+different wording. Similarly, \textit{clear guidance} from \texttt{P\_2} and
+\textit{unclear guidance} from \texttt{S\_2} are assigned to
+$\mathcal{T}_3$. The corresponding effect spans are assigned to
+$\mathcal{T}_5$ or $\mathcal{T}_6$ according to their closest topic
+descriptions. The four extracted frames are therefore represented in the common
+topic space as
+\[
+\begin{aligned}
+\texttt{P\_1}:&\quad
+\mathcal{T}_2
+\xrightarrow{\text{requires or depends on}}
+\mathcal{T}_5,\\
+\texttt{P\_2}:&\quad
+\mathcal{T}_3
+\xrightarrow{\text{reduces or prevents}}
+\mathcal{T}_6,\\
+\texttt{S\_1}:&\quad
+\mathcal{T}_2
+\xrightarrow{\text{causes or increases}}
+\mathcal{T}_5,\\
+\texttt{S\_2}:&\quad
+\mathcal{T}_3
+\xrightarrow{\text{causes or increases}}
+\mathcal{T}_6.
+\end{aligned}
+\]
+
+The shared topic space exposes the structural difference: policy frames training
+and guidance as mechanisms for responsible AI use and reduced uncertainty,
+whereas sentiment frames their absence as sources of uncertainty and concern.
+This contrast reveals how the same topics are causally organised differently.
+
+To illustrate topic-assignment confidence, consider the policy frame extracted
+from \texttt{P\_1}. Suppose its cause span has best-topic similarity $0.12$ and
+margin $0.04$, while its effect span has similarity $0.14$ and margin $0.04$.
+Applying Equation~\ref{eq:method-topic-assignment-confidence}, both direct
+assignments satisfy the projection criteria, giving
+$\gamma_i^{u}
+=
+0.70(0.12/0.15)+0.30(0.04/0.05)
+=
+0.80$
+and
+$\gamma_i^{v}
+=
+0.70(0.14/0.15)+0.30(0.04/0.05)
+\approx
+0.89$.
+
+If a span does not obtain a sufficiently clear direct topic match, the fallback
+case in Equation~\ref{eq:method-topic-assignment-confidence} uses the parent
+passage topic and discounts its confidence. The frame is also evaluated for
+extraction quality. Suppose $C_i=0.75$, $B_i=0.80$, and $T_i=0.90$, with
+$\rho_i=\ell_i=1$. Using the quality-score definition above gives
+$q_i=0.48(0.75)+0.30(0.80)+0.22(0.90)=0.798$.
+If the source contributes four accepted frames, $n_{s(i)}=4$, then according to
+Equation~\ref{eq:method-frame-weight},
+$w_i=(0.798/4)\sqrt{0.80\times0.89}\approx0.169$.
+The same quality, confidence, and weighting procedure is applied to
+\texttt{P\_2}, \texttt{S\_1}, \texttt{S\_2}, and all other accepted frames.
+
+Their weights are then aggregated for each cause-topic--relation--effect-topic
+combination according to Equation~\ref{eq:method-policy-frame-distribution}.
+Suppose $\mathcal{T}_2\xrightarrow{\text{requires or
+depends on}}\mathcal{T}_5$ has a weighted share of $0.40$ in policy and $0.15$
+in sentiment. Using the signed-gap definition above,
+$\Delta_{2,r,5}=0.40-0.15=0.25$, showing stronger policy emphasis on teacher
+training as a prerequisite for responsible AI use. Conversely, suppose
+$\mathcal{T}_2\xrightarrow{\text{causes or increases}}\mathcal{T}_5$ has
+weighted shares of $0.10$ in policy and $0.35$ in sentiment. Then
+$\Delta_{2,r',5}=0.10-0.35=-0.25$, showing stronger sentiment emphasis on
+training deficiencies as a source of adverse outcomes. A similar contrast can
+occur between $\mathcal{T}_3$ and $\mathcal{T}_6$, where policy emphasises
+guidance as reducing uncertainty while sentiment emphasises unclear guidance as
+increasing concern. These differences provide local evidence of a structural
+policy--sentiment gap: the corpora address related thematic areas but emphasise
+different causal relations between them.
+
+Across all topic--relation--topic combinations, the weighted shares form the
+policy distribution $P$ and sentiment distribution $Q$. According to
+Equation~\ref{eq:method-frame-js}, Jensen--Shannon divergence measures their
+overall structural difference. For example, if $D_{\mathrm{JS}}(P,Q)=0.18$,
+policy and sentiment distribute causal relations differently across the shared
+topic space. Signed gaps show the direction of individual differences, while
+$|\Delta_{arb}|$ and relation-level gaps locate influential connections and
+relation families. Equation~\ref{eq:method-topic-gap} further uses $G_t$ to
+identify the topics contributing most strongly to the divergence. Together,
+these complementary measures show where the structural gap is most strongly concentrated.
+
+For sensitivity analysis, synthetic sentiment frames undergo the same extraction,
+projection onto the frozen policy-topic space, weighting, and aggregation procedure
+but remain separate from observed sentiment. Suppose $D_{\mathrm{JS}}(P,Q)=0.18$
+for observed sentiment and $D_{\mathrm{JS}}(P,S)=0.23$ for synthetic sentiment.
+According to Equation~\ref{eq:method-frame-synthetic-sensitivity},
+$\Delta_{\mathrm{JS}}^{\mathrm{syn}}=0.23-0.18=0.05$, indicating greater
+structural divergence between policy and synthetic sentiment. Synthetic comparisons
+assess sensitivity only and do not replace the observed policy--sentiment evidence.
+}
+
+
 \section{LLM-Assisted Evidence-Grounded Gap Analysis}
 \label{sec:method-llm-gap}
 
+{\color{blue}
+The preceding causal NLP methods quantify semantic coverage and causal-frame
+divergence but do not explain why policy and sentiment claims align or differ in
+meaning. The LLM-assisted stage will therefore provide a separate explanatory
+analysis grounded directly in the shared cleaned sentence inventory, independently
+of the outputs of the preceding methods. The analysis will concern expressed causal
+or conditional meaning rather than real-world causal effects. Only original policy
+and sentiment sentences will support substantive findings; synthetic sentiment will
+remain restricted to robustness analysis.
 
-{\color{blue}The preceding causal NLP methods quantify semantic coverage and
-causal-frame divergence but do not explain the meaning of policy--sentiment
-differences. The LLM-assisted stage therefore provides a separate explanatory
-analysis grounded in the source sentences.} Two DeepSeek-assisted
-pipelines identify and explain semantic and causal-frame gaps between policy and
-sentiment texts. Both operate on the shared cleaned sentence inventory
-rather than on outputs from the preceding causal NLP methods. Only original policy
-and sentiment sentences support substantive findings; synthetic text remains
-restricted to robustness testing.
+For global and sufficiently supported country scopes, source-balanced evidence
+batches will be constructed separately from policy and sentiment sources so that no
+single document dominates a comparison. Broad causal-language candidates may be
+prioritised during sampling to increase the availability of usable evidence, but this
+sampling cue will not itself constitute evidence of causality. Each sentence will
+retain its immutable identifier from the shared inventory, allowing every finding to
+be traced to the same source sentence throughout analysis and verification.
 
-For global and sufficiently supported country scopes, source-balanced batches are
-constructed with immutable evidence identifiers. {\color{blue}Source balancing draws
-sentences across source files so that one document does not dominate a comparison. An
-immutable evidence identifier is the fixed sentence identifier carried from the
-shared inventory; it remains unchanged when evidence is reordered, analysed, or
-verified, allowing every cited passage to be traced back to the same source
-sentence.} The semantic pipeline compares meaning and emphasis, while the
-causal-frame pipeline restricts the evidence to sentences containing explicit English
-or French causal cues and compares their cause, relation, and effect structures.
-Alignment and insufficient-evidence outcomes prevent a gap from being inferred for
-every comparison.
+The agent will determine whether sentences express a causal or conditional
+relationship, such as a cause, prerequisite, risk, support, prevention, increase or
+decrease, or outcome. Thematic similarity will not be sufficient. For
+comparable evidence, the agent will classify the relationship as
+alignment, partial alignment, policy gap, sentiment gap, or insufficient evidence.
+A policy gap denotes a policy-to-sentiment difference and a sentiment gap the reverse
+direction. Each finding will contain a relation family, cause and effect themes, an
+explanation, evidence and counterevidence identifiers, deficit scores,
+and confidence. Alignment and insufficient-evidence outcomes prevent a gap from
+being inferred from comparisons.
 
-{\color{blue}For example, consider a policy sentence \texttt{P17}, ``Teacher training
-reduces misuse of generative AI'', and a sentiment sentence \texttt{S09}, ``Lack of
-teacher training increases uncertainty about AI use''. The semantic pipeline may
-identify partial alignment because both concern teacher training but emphasise
-different outcomes. The causal-frame pipeline instead compares the structures
-``training $\rightarrow$ reduces misuse'' and ``lack of training $\rightarrow$
-increases uncertainty''. Any proposed finding must cite \texttt{P17} and
-\texttt{S09}, and the verification stage checks those same identifiers against the
-sentences.}
+A second prompt will independently verify each proposed finding using the same
+evidence in reordered form. Verification will check the evidence identifiers,
+whether the cited sentences express the attributed relationship, direct
+policy--sentiment comparability, omitted counterevidence, relation-family and theme
+consistency, and whether the explanation follows from the cited text. Reordering
+will test whether the judgement depends on the evidence rather than its presentation
+order. The verifier will also ensure that absence from a sampled batch is not
+interpreted as absence from the corpus.
 
-Each pipeline uses one agent with two prompts. The first performs contrastive
-analysis and returns a record containing the gap category, explanation,
-supporting evidence, counterevidence, and confidence. The second receives the record
-with reordered evidence and verifies the identifiers, classification,
-counterevidence, and support. {\color{blue}Reordering tests whether the judgement
-depends on the evidence rather than its presentation order.} For causal-frame
-findings, it also checks that both passages express explicit relations with
-consistent cause--effect orientation.
-
-The procedure is repeated to assess stability. Semantic findings are matched by
-classification and gap label, while causal-frame findings are matched by
-classification, relation family, cause and effect themes, and supporting evidence.
-Let $M(G_a,G_b)$ denote the number of one-to-one matches between runs $a$ and $b$.
-Stability is measured by
+The procedure will be repeated to assess whether the same underlying findings recur.
+Because generated descriptions need not be lexically identical, findings $f$ and $g$
+from different runs will be matched using
 \begin{equation}
-J_M(G_a,G_b)
+m(f,g)
 =
-\frac{M(G_a,G_b)}
-{|G_a|+|G_b|-M(G_a,G_b)}.
-\label{eq:method-agent-jaccard}
+0.50\,s_{\mathrm{theme}}(f,g)
++
+0.40\,s_{\mathrm{evid}}(f,g)
++
+0.10\,\mathbf{1}[r_f=r_g],
+\label{eq:method-agent-match}
 \end{equation}
+where $s_{\mathrm{theme}}(f,g)\in[0,1]$ measures similarity between the
+normalised cause theme, effect theme, and gap label of the two findings. It is
+computed as
+\begin{equation}
+s_{\mathrm{theme}}(f,g)
+=
+\max\!\left(
+J(T_f,T_g),
+\,0.75\,S(F_f,F_g)
+\right),
+\label{eq:method-agent-theme}
+\end{equation}
+where $T_f$ and $T_g$ are the sets of informative tokens extracted from the
+normalised theme descriptions of findings $f$ and $g$, $J(\cdot,\cdot)$ is their
+Jaccard similarity, and $S(F_f,F_g)\in[0,1]$ is the sequence-similarity ratio
+between their complete normalised theme strings $F_f$ and $F_g$. The factor $0.75$
+reduces the influence of lexical sequence similarity relative to direct token
+overlap. Evidence similarity is defined as
+\begin{equation}
+s_{\mathrm{evid}}(f,g)
+=
+\frac{1}{2}
+\left[
+J(P_f,P_g)+J(S_f,S_g)
+\right],
+\label{eq:method-agent-evidence}
+\end{equation}
+where $P_f$ and $P_g$ are the sets of policy evidence identifiers cited by the two
+findings, and $S_f$ and $S_g$ are their corresponding sentiment evidence sets.
+Thus, policy and sentiment evidence contribute equally to the evidence-overlap
+score.
 
-For semantic findings, $M$ denotes exact signature matches; for causal frames, it
-denotes matches above a predefined similarity threshold. {\color{blue}Thus, higher
-$J_M$ indicates that repeated analyses recover more of the same findings rather
-than producing substantially different interpretations.} A finding is retained only
-when it survives verification, exceeds the confidence and faithfulness thresholds,
-contains no unresolved counterevidence, and recurs across the required runs.
+Finally, $r_f$ and $r_g$ denote the relation families assigned to findings $f$
+and $g$, and
+\[
+\mathbf{1}[r_f=r_g]
+=
+\begin{cases}
+1, & \text{if } r_f=r_g,\\
+0, & \text{otherwise},
+\end{cases}
+\]
+is an indicator of relation-family agreement.
+
+The coefficients $0.50$, $0.40$, and $0.10$ are predefined heuristic weights.
+Theme similarity receives the largest weight because the expressed cause, effect,
+and gap meaning defines the underlying finding; evidence overlap receives a
+comparable weight to ensure that matched findings remain grounded in similar source
+sentences; and relation-family agreement receives a smaller weight because it is a
+coarser consistency signal and should not establish finding identity alone. The
+weights sum to one, so $m(f,g)$ remains on the $[0,1]$ scale.
+
+Findings whose score in Equation~\ref{eq:method-agent-match} exceeds the predefined
+matching threshold will form recurrent clusters across runs. For a cluster $C$,
+cross-run stability will be measured by the mean pairwise matching score:
+\begin{equation}
+S(C)
+=
+\frac{2}{|C|(|C|-1)}
+\sum_{i<j} m(f_i,f_j).
+\label{eq:method-agent-stability}
+\end{equation}
+Higher $S(C)$ therefore indicates that repeated analyses recover more consistent
+underlying findings. A finding will be retained only when it recurs across the
+required runs and satisfies the predefined thresholds for stability, confidence,
+evidence faithfulness, classification agreement, relation agreement, and direct
+comparability.
+
+\paragraph{Illustrative example.}
+Consider again the hypothetical sentences used in the semantic-coverage example in
+Subsection~\ref{subsec:method-semantic-coverage}. The policy sentence
+\texttt{P\_1}, ``Teacher training reduces inappropriate use of generative AI'',
+and the sentiment sentence \texttt{S\_1}, ``Lack of training increases inappropriate
+use of generative AI'', are both retained by the rule-based method because they
+contain recognised causal cues. In that example, \texttt{S\_1} is one of the three
+nearest sentiment claims to \texttt{P\_1}, and
+Equation~\ref{eq:method-semantic-coverage} gives
+$C_{P\rightarrow S}^{(3)}(P_1)=0.667$ and
+$D_{P\rightarrow S}^{(3)}(P_1)=0.333$. These measures quantify semantic proximity
+but do not explain that the two sentences express compatible causal meaning through
+opposite framing: training is associated with reduced misuse, whereas lack of
+training is associated with increased misuse. When considered independently in an
+LLM evidence batch, the same sentences may therefore be classified as alignment or
+partial alignment, with the interpretation grounded in the cited sentences and
+traceable through their evidence identifiers.
+
+The example can also illustrate a relationship that fixed cue extraction may omit.
+Suppose the policy evidence additionally contains \texttt{P\_3}, ``Responsible
+AI-assisted assessment depends on clear institutional guidance'', while the
+sentiment evidence contains \texttt{S\_5}, ``Teachers hesitate to use AI when
+institutional guidance is unclear''. The rule-based extractor can retain
+\texttt{P\_3} through the recognised cue \textit{depends on}, whereas
+\texttt{S\_5} would not satisfy the predefined cue inventory through its
+\textit{when} construction alone. If both sentences occur in an LLM evidence batch,
+the agent may nevertheless recognise the conditional relationship expressed by
+\texttt{S\_5} and compare it with \texttt{P\_3}, provided both sentences directly
+support the interpretation. Descriptive or merely thematic sentences will instead
+receive an insufficient-evidence classification rather than being forced into a
+causal comparison.
+
+If interpretations of \texttt{P\_3} and \texttt{S\_5} recur consistently across runs,
+their match will be evaluated using Equation~\ref{eq:method-agent-match}. Findings
+above the predefined matching threshold form recurrent clusters, whose consistency is
+measured by Equation~\ref{eq:method-agent-stability}. The example illustrates two
+roles of the LLM-assisted stage: explaining causal or conditional relationships beyond
+semantic similarity and identifying expressed relationships outside fixed cue-based
+causal extraction.
+
+For robustness analysis, policy evidence in each eligible batch will be held fixed
+while observed sentiment evidence is replaced by source-balanced synthetic sentiment
+with comparable batch size and source support. Synthetic outputs will remain
+separate from substantive findings, allowing sensitivity to changes in sentiment
+evidence to be examined without altering the policy evidence.
 
 The distinction between evidential support and faithfulness follows
 \cite{es2024ragas}. Structured verification is informed by~\cite{liu2023geval},
 while repeated analysis follows the consistency rationale of
-\cite{wang2023selfconsistency}. Final evaluation uses manually reviewed candidates
-and reports precision, recall, and $F_1$. The prompts, sampling limits, thresholds,
-model settings, and results are reported in Chapter~\ref{chap:implresults}.
+\cite{wang2023selfconsistency}. Final evaluation will use manually reviewed candidate
+findings and report precision, recall, and $F_1$. Sampling parameters, thresholds,
+model settings, prompts, and empirical results will be reported in
+Chapter~\ref{chap:implresults}.
+}
+
+
 
 \section{Summary}
 
@@ -1001,19 +1349,21 @@ The methodology combines corpus construction, synthetic-data testing, three
 topic-modelling approaches, two causal NLP methods, and an LLM-assisted analysis. LDA
 provides a lexical baseline, BERTopic-style clustering a semantic grouping baseline,
 and NMF a factorisation-based representation for topic aggregation and projection.
-Semantic coverage and causal-frame networks measure representational and structural
-policy--sentiment differences.
+Semantic causal-claim coverage measures representational correspondence, while
+causal-frame networks measure structural policy--sentiment divergence.
 
 The study uses publicly available or institutionally published material and retains
 source provenance throughout. Synthetic material is clearly marked, restricted to
-robustness testing, and excluded from empirical inference. Generated topic labels
-support interpretation without determining topic assignments. Country-level
-comparisons are interpreted according to available evidence and source distribution,
-with limited support treated cautiously rather than as representative.
+robustness and sensitivity testing, and excluded from empirical inference. Generated
+topic labels support interpretation without determining topic assignments.
+Country-level comparisons are interpreted according to available evidence and source
+distribution, with limited support treated cautiously rather than as representative.
 
-The causal NLP outputs identify differences in language, semantic coverage, and
-causal framing, but they do not establish that relationships expressed in the texts
-are true causal mechanisms. The LLM-assisted stage adds evidence-grounded explanation
-without replacing quantitative analysis. Reproducibility therefore requires
-preserving source metadata, intermediate representations, model configurations,
-evaluation outputs, and the evidence passages supporting each interpretation.
+The causal NLP methods analyse expressed causal language and structure but do not
+establish real-world causal mechanisms. The LLM-assisted stage independently adds
+evidence-grounded explanation of causal or conditional policy--sentiment
+relationships, together with verification and cross-run stability assessment, without
+replacing quantitative or human validation. Reproducibility therefore requires
+preserving source metadata, cleaned sentence inventories, model configurations,
+prompts, thresholds, evaluation outputs, and the evidence supporting each
+interpretation.

@@ -1,0 +1,14 @@
+analysis_id,scope,batch_id,run_index,finding_id,reason,run_usable,evidence_faithfulness
+global__batch_03,global,3,3,S4,confidence below threshold,True,0.9
+global__batch_03,global,3,4,S4,reportable finding lacks evidence from both corpora,True,0.8
+france__batch_01,france,1,1,S2,confidence below threshold,True,0.8
+france__batch_01,france,1,1,S3,confidence below threshold,True,0.8
+france__batch_01,france,1,1,S4,confidence below threshold,True,0.8
+france__batch_01,france,1,1,S5,confidence below threshold,True,0.8
+france__batch_03,france,3,1,S5,confidence below threshold,True,0.9
+france__batch_03,france,3,2,S3,confidence below threshold,True,0.9
+france__batch_03,france,3,2,S5,confidence below threshold,True,0.9
+france__batch_03,france,3,4,S4,confidence below threshold,True,0.9
+ireland__batch_02,ireland,2,1,S2,reportable finding lacks evidence from both corpora,False,0.75
+ireland__batch_02,ireland,2,4,S2,reportable finding lacks evidence from both corpora,True,0.9
+ireland__batch_03,ireland,3,2,S4,reportable finding lacks evidence from both corpora,True,0.8

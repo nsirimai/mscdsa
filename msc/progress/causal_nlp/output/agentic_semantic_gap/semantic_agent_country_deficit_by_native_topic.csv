@@ -1,0 +1,10 @@
+scope,direction,topic_space,native_topic,topic_code,findings,evidence_sentences,mean_agentic_semantic_deficit
+france,policy_to_sentiment,policy,2,P2,8,6,0.525
+france,policy_to_sentiment,policy,3,P3,1,1,0.5
+france,sentiment_to_policy,sentiment,6,S6,2,1,0.5333333333333333
+france,sentiment_to_policy,sentiment,7,S7,1,1,0.5
+france,sentiment_to_policy,sentiment,8,S8,5,6,0.47222222222222227
+ireland,policy_to_sentiment,policy,5,P5,3,3,0.2833333333333334
+ireland,policy_to_sentiment,policy,6,P6,1,1,0.2333333333333333
+ireland,sentiment_to_policy,sentiment,1,S1,1,1,0.2333333333333333
+ireland,sentiment_to_policy,sentiment,5,S5,1,1,0.4000000000000001

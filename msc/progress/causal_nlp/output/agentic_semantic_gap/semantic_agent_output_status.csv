@@ -1,0 +1,14 @@
+file,exists,rows,status
+semantic_agent_evidence.csv,True,432,available
+semantic_agent_stability.csv,True,9,available
+semantic_agent_candidates.csv,True,58,available
+semantic_agent_findings.csv,True,16,available
+semantic_agent_finding_evidence.csv,True,34,available
+semantic_agent_human_review.csv,True,58,available
+semantic_agent_direction_summary.csv,True,5,available
+semantic_agent_robustness_summary.csv,True,9,available
+semantic_agent_robustness_by_scope.csv,True,3,available
+semantic_agent_deficit_by_native_topic.csv,True,13,available
+semantic_agent_native_topic_connections.csv,True,10,available
+semantic_agent_country_deficit_by_native_topic.csv,True,9,available
+semantic_agent_directional_deficits.csv,True,32,available
