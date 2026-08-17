@@ -1,18 +1,20 @@
 \documentclass[oneside,11pt, hidelinks]{Classes/ProjectPDF}
 
 % Next 12 lines add the words 'Table' and 'Filgure' to the list of tables and figures 
+% List of Figures and List of Tables formatting
 \usepackage{tocloft}
-\newlength{\mylen}
-% Code for Figures 
+
+% Figures
 \renewcommand{\cftfigpresnum}{\figurename\enspace}
-\renewcommand{\cftfigaftersnum}{:} 
-\settowidth{\mylen}{\cftfigpresnum\cftfigaftersnum} 
-\addtolength{\cftfignumwidth}{\mylen}
-% Code for Tables 
-\renewcommand{\cfttabpresnum}{\tablename\enspace}  
-\renewcommand{\cfttabaftersnum}{:} 
-\settowidth{\mylen}{\cfttabpresnum\cfttabaftersnum}  
-\addtolength{\cfttabnumwidth}{\mylen} 
+\renewcommand{\cftfigaftersnum}{:\enspace}
+\setlength{\cftfigindent}{0pt}
+\setlength{\cftfignumwidth}{7.5em}
+
+% Tables
+\renewcommand{\cfttabpresnum}{\tablename\enspace}
+\renewcommand{\cfttabaftersnum}{:\enspace}
+\setlength{\cfttabindent}{0pt}
+\setlength{\cfttabnumwidth}{7.5em}
 % End of List of tables and figures formatting  
 
 
