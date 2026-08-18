@@ -149,8 +149,11 @@ Workflow stage & Technique & ID & Repository path \\
 \hline
 \end{tabular}
 
-\caption{Principal implementation locations relative to the project directory at \href{https://github.com/nsirimai/mscdsa/tree/main/msc}
-{\texttt{\detokenize{github.com/nsirimai/mscdsa/tree/main/msc/}}}.}
+\caption{
+\href{https://github.com/nsirimai/mscdsa/tree/main/msc}
+{\texttt{\detokenize{github.com/nsirimai/mscdsa/tree/main/msc/}}}:
+principal implementation locations.
+}
 \label{tab:impl-repository-links}
 \end{table}
 
@@ -198,13 +201,13 @@ when the sentiment corpus was closer in size to the French and Irish policy
 collection.
 
 As discussed in Subsection~\ref{subsec:method-source-roles}, the synthetic material
-remained separate from empirical evidence and was used only for controlled robustness
-and downstream sensitivity analysis. A ChatGPT prompt, {\color{blue}refined against
-predefined evaluation metrics}, generated Markdown files in two formats:
-public-sentiment comments and press-release-style texts. The content covered themes
-already present in the original European sentiment corpus, including AI literacy,
-teacher training, privacy, trust, transparency, student support, responsible use,
-equity, and public confidence.
+remained separate from empirical evidence and was used for robustness and sensitivity
+analysis. {\color{blue}The ChatGPT prompt referenced in
+Table~\ref{tab:impl-repository-links} was compiled from European policy--sentiment
+character imbalance and themes across corpora, then refined using lexical, semantic,
+and classifier-based metrics}. It generated public-sentiment comments and
+press-release-style Markdown texts covering AI literacy, teacher training, privacy,
+trust, transparency, student support, responsible use, equity, and public confidence.
 
 Several constraints were applied to prevent contamination of the empirical corpus.
 The synthetic files excluded numbers, percentages, fabricated survey results, tables,
@@ -255,22 +258,20 @@ modelling, semantic comparison, and causal analysis without further cleaning or
 rewriting the text.
 
 Policy and sentiment reports often contain several themes. As discussed in
-Subsection~\ref{subsec:method-chunking}, representing an entire report as one
-TF--IDF vector, embedding, or topic-modelling input may merge unrelated subjects.
-The implementation follows Hearst's segmentation approach
-\cite{hearst1997texttiling}, which divides documents into multi-paragraph chunks
-representing local subtopics. It also reflects later work showing that
-representation quality depends on chunk length and surrounding context
-\cite{gunther2024latechunking,duarte2024lumberchunker}.
+Subsection~\ref{subsec:method-chunking}, representing an entire report as one TF--IDF
+vector, embedding, or topic-modelling input may merge unrelated subjects. The
+implementation follows Hearst's segmentation approach \cite{hearst1997texttiling},
+which divides documents into multi-paragraph chunks representing local subtopics. It
+also reflects later work showing that representation quality depends on chunk length
+and surrounding context \cite{gunther2024latechunking,duarte2024lumberchunker}.
 
 The chunking pipeline retained Markdown headings as local context and preserved
-source and chunk metadata. Chunks used a target length of 350 words with a
-50-word overlap and a minimum-size threshold.
-{\color{blue}These values were study-specific design choices rather than settings
-prescribed by the cited literature. The 350-word target retained enough text for a
-short multi-paragraph argument without merging many unrelated themes, while the
-50-word overlap preserved continuity when an argument crossed a chunk boundary
-without excessive repetition.}
+source and chunk metadata. Chunks used a target length of 350 words with a 50-word
+overlap and a minimum-size threshold. These values were study-specific design choices
+rather than settings prescribed by the cited literature. The 350-word target retained
+enough text for a short multi-paragraph argument without merging many unrelated
+themes, while the 50-word overlap preserved continuity when an argument crossed a
+chunk boundary without excessive repetition.
 
 As discussed in Subsection~\ref{subsec:method-chunking}, shorter chunks support
 embedding-based analysis by limiting the combination of unrelated themes.
@@ -278,10 +279,10 @@ Sentence-BERT encodes text as dense semantic vectors compared through cosine
 similarity, following Reimers and Gurevych~\cite{reimers2019sentence}. The resulting
 chunk-level CSV files were retained as outputs of \texttt{SC2}.
 
-{\color{blue} Evidence for improved comparability is provided in the next subsection, where
+Evidence for improved comparability is provided in the next subsection, where
 Table~\ref{tab:impl-synthetic-validation} shows higher chunk-level TF--IDF and
 embedding centroid similarities and lower Fr\'echet and MMD distances than
-document-level evaluation.} Each chunk remained linked to its source document and
+document-level evaluation. Each chunk remained linked to its source document and
 heading context, preserving traceability. This supports the chunking rationale in
 Subsection~\ref{subsec:method-chunking} without treating segmentation as universally
 superior.
@@ -487,12 +488,12 @@ and resources.
 
 Country-level word clouds were generated for the Irish and French policy collections.
 The Irish corpus contained frequent references to children, rights, development,
-learning, guidance, strategy, and resources. {\color{blue}These terms reflect
-educational support, governance, and learner protection.}
+learning, guidance, strategy, and resources. These terms reflect
+educational support, governance, and learner protection.
 The French corpus included both French and English vocabulary, with terms related
 to usage, tools, pedagogical practice, evaluation, research, innovation, and public
-institutions. {\color{blue}This indicates a focus on implementation, institutional
-coordination, and pedagogical AI use.}
+institutions. This indicates a focus on implementation, institutional
+coordination, and pedagogical AI use.
 
 \begin{figure}[ht]
 \centering
@@ -546,10 +547,10 @@ indicators determined country assignment, while remaining reports were assigned
 to \textit{Other European}. Manual overrides covered ambiguous source names.
 Figure~\ref{fig:impl-sentiment-exploration} shows that the exploration retained
 500 original-report chunks: 45 from France, 168 from Ireland, and 287 from
-Other European sources. {\color{blue}The exploratory grouping compared
+Other European sources. The exploratory grouping compared
 source balance and recurring vocabulary across the French, Irish, and
 European subsets, while retaining provenance for interpretation and avoiding
-claims of national representativeness.} In corpus-level analyses, the European
+claims of national representativeness. In corpus-level analyses, the European
 sentiment corpus provided a shared contextual baseline for France and Ireland,
 reflecting limited national evidence and broadly convergent sentiment patterns
 across European sources.
@@ -585,12 +586,14 @@ research question and define the topic spaces used by the causal NLP methods.
 \subsection{Shared Topic-Labelling and Robustness Procedures}
 \label{subsec:impl-topic-labelling}
 
-As defined in Subsections~\ref{subsec:method-bertopic} and
-\ref{subsec:method-nmf}, BERTopic and NMF used
-{\color{blue}the instruction-tuned SLM} \texttt{Qwen/Qwen2.5-1.5B-Instruct}, only after fitting. It generated labels from keywords and
-representative chunks, which were reviewed before use. The SLM did not alter
-assignments, shares, scores, or distributions.
+As defined in Subsections~\ref{subsec:method-bertopic} and \ref{subsec:method-nmf},
+BERTopic and NMF used the SLM \texttt{Qwen/Qwen2.5-1.5B-Instruct},
+only after fitting. It generated labels from keywords and chunks,
+which were reviewed before use. The SLM did not alter assignments, shares, scores, or
+distributions. This kept topic discovery separate from label generation. The
+following pipeline summarises this labelling procedure.
 
+{\small
 \begin{verbatim}
 Fitted BERTopic or NMF topics
   -> extract top keywords and representative chunks
@@ -598,7 +601,7 @@ Fitted BERTopic or NMF topics
   -> generate a short topic phrase and prototype sentence
   -> attach the final label without changing topic assignments
 \end{verbatim}
-
+}
 
 Synthetic sentiment remained separately labelled and was used only for sensitivity
 and robustness checks. As discussed in
@@ -611,13 +614,16 @@ set of themes rather than forcing it into topics discovered from the original
 reports. The comparison therefore examined changes in the discovered structures
 rather than directly aligned topic shares.
 
-BERTopic and NMF instead fitted their empirical sentiment models only on original
+BERTopic and NMF fitted their empirical sentiment models only on original
 chunks and then assigned synthetic chunks to the retained topic spaces. Freezing the
 original topics prevented synthetic material from changing the clusters, factors, or
-topic definitions. It also enabled direct comparison of topic coverage and shares,
+topic definitions. It enabled comparison of topic coverage and shares,
 showing which empirical themes were over-represented, under-represented, or absent in
-the synthetic corpus.
+the synthetic corpus. This isolates robustness effects from changes in empirical
+topic discovery. The following pipeline summarises this robustness procedure.
 
+
+{\small
 \begin{verbatim}
 Original sentiment chunks
   -> fit the empirical topic model
@@ -630,32 +636,32 @@ Synthetic sentiment chunks
   -> compare topic coverage and topic shares
   -> export sensitivity and robustness results
 \end{verbatim}
-
+}
 
 \subsection{LDA Lexical Baseline}
 \label{subsec:impl-lda}
 
 LDA provided a lexical topic representation. As defined in
 Subsection~\ref{subsec:method-lda}, cleaned chunks were converted into document--term
-matrices. Candidate counts were assessed using coherence and diversity. Policy
-models were fitted globally and by country; sentiment corpora separately.
-{\color{blue}Gensim used \texttt{alpha="auto"} and \texttt{eta="auto"}, learning the
-document--topic and topic--word priors from the corpus during fitting.} LDA served as
-the baseline for later topic-modelling pipeline comparisons.
+matrices. Candidate counts were assessed using coherence and diversity. Policy models
+were fitted globally and by country; sentiment corpora separately. Gensim used
+\texttt{alpha="auto"} and \texttt{eta="auto"}, learning the document--topic and
+topic--word priors from the corpus during fitting. LDA served as the baseline for
+later topic-modelling pipeline comparisons. This provides a consistent lexical
+reference for semantic models.
 
-
+{\small
 \begin{verbatim}
 Policy or sentiment chunks
   -> select the corpus or country subset
-  -> lowercase, tokenise, and remove stopwords
-  -> lemmatise the retained tokens
+  -> lowercase, tokenise, remove stopwords, and lemmatise retained tokens
   -> remove weak, short, or repeated chunks
   -> build a dictionary and document-term matrix
   -> fit candidate LDA topic models
   -> compare coherence and topic diversity
   -> retain and export the selected model
 \end{verbatim}
-
+}
 
 
 \begin{figure}[!htbp]
@@ -680,8 +686,8 @@ Policy or sentiment chunks
   \caption{Synthetic sentiment search.}
   \label{fig:impl-lda-synthetic-search}
 \end{subfigure}
-\caption{LDA coherence and diversity diagnostics for the policy, original-sentiment,
-and synthetic-sentiment models.}
+\caption{LDA coherence and diversity diagnostics for the policy (a),
+original-sentiment (b), and synthetic-sentiment (c) models.}
 \label{fig:impl-lda-searches}
 \end{figure}
 
@@ -711,26 +717,28 @@ utilisation, d\'{e}ploiement \\
 
 
 
-Of 1,843 policy chunks, 1,724 were retained: {\color{blue}115 were removed because
-fewer than 30 processed tokens remained after cleaning and lemmatisation, and four
-exact processed-text duplicates were excluded.} The retained global
-{\color{blue}model} contained four topics, with coherence of 0.7021 and diversity
-of 0.9000. Figure~\ref{fig:impl-lda-searches} presents the
-{\color{blue}candidate searches}, while
-Table~\ref{tab:impl-lda-policy-topics} lists the retained
-{\color{blue}topics}.
+Of 1,843 policy chunks, 1,724 were retained: 115 were removed because fewer than 30
+processed tokens remained after cleaning and lemmatisation, and four exact
+processed-text duplicates were excluded. The retained global model contained four
+topics, with coherence of 0.7021 and diversity of 0.9000.
+Figure~\ref{fig:impl-lda-searches} presents the candidate searches, while
+Table~\ref{tab:impl-lda-policy-topics} lists the retained topics.
 
-{\color{blue}Country-specific models retained three topics for Australia, two for
-France and Ireland, and seven for the USA. Principal terms also varied across
-countries. Australian topics emphasised cognitive, privacy, assessment, risk; French
-topics research, innovation, pedagogical deployment; Irish topics regulation, safety,
-assessment, literacy; USA topics privacy, bias, equity, assessment, guidance.}
+Country-specific models retained three topics for Australia, two for France and
+Ireland, and seven for the USA. Principal terms varied across countries:
+
+\begin{itemize}
+  \item Australia: cognitive, privacy, assessment, risk;
+  \item France: research, innovation, pedagogical deployment;
+  \item Ireland: regulation, safety, assessment, literacy;
+  \item USA: privacy, bias, equity, assessment, guidance.
+\end{itemize}
 
 
 For sentiment, the original corpus was modelled separately before synthetic data
-were added. {\color{blue}Figure~\ref{fig:impl-lda-searches} shows two topics for the
+were added. Figure~\ref{fig:impl-lda-searches} shows two topics for the
 original corpus and four for the combined corpus, indicating that synthetic
-augmentation altered the recovered thematic structure.}
+augmentation altered the recovered thematic structure.
 Table~\ref{tab:impl-lda-sentiment-comparison} records the resulting topic counts
 and main terms.
 
@@ -767,14 +775,15 @@ granular cluster.
 \label{subsec:impl-bertopic}
 
 As defined in Subsection~\ref{subsec:method-bertopic}, the BERTopic-style
-configuration combined TF--IDF, truncated {\color{blue}Singular Value Decomposition
-(SVD)}, K-means, and class-based TF--IDF. {\color{blue}\cite{deerwester1990indexing} use SVD to reduce high-dimensional representations
-to latent components. \cite{macqueen1967methods} introduced K-means, which
-partitions vectors around $k$ centroids.} K-means replaced density-based clustering
-to provide fixed topic counts, complete assignments, stable identifiers, reproducible
-country distributions, and synthetic projection. Class-based TF--IDF produced
-representative terms. BERTopic supplied the cluster-level representation, while
-transformer embeddings, UMAP, and HDBSCAN were excluded.
+configuration combined TF--IDF, truncated Singular Value Decomposition (SVD),
+K-means, and class-based TF--IDF. \cite{deerwester1990indexing} use SVD to reduce
+high-dimensional representations to latent components. \cite{macqueen1967methods}
+introduced K-means, which partitions vectors around $k$ centroids. K-means replaced
+density-based clustering to provide fixed topic counts, complete assignments, stable
+identifiers, reproducible country distributions, and synthetic projection.
+Class-based TF--IDF produced representative terms. BERTopic supplied the
+cluster-level representation, while transformer embeddings, UMAP, and HDBSCAN were
+excluded.
 
 Earlier transformer-based trials did not produce a more stable topic structure during
 model selection. This result aligns with~\cite{antoniak2018evaluating}, who show that
@@ -784,6 +793,10 @@ language-specific signals. In this heterogeneous corpus, they also captured
 institutional style and report format alongside policy distinctions rather than
 purely semantic topic content.
 
+The following pipeline summarises the BERTopic workflow from cleaned empirical
+chunks to retained topics, reviewed labels, and exported distributions.
+
+{\small
 \begin{verbatim}
 Policy or original sentiment chunks
   -> clean, tokenise, and filter the text
@@ -797,12 +810,14 @@ Policy or original sentiment chunks
   -> generate and review SLM topic phrases
   -> export assignments, labels, and topic distributions
 \end{verbatim}
+}
 
 For the synthetic robustness check, synthetic sentiment chunks were projected using
 the TF--IDF vectoriser and SVD model fitted on the original sentiment corpus.
 K-means then assigned each chunk to one of the retained original-sentiment topics.
+The following pipeline summarises this projection and comparison procedure.
 
-
+{\small
 \begin{verbatim}
 Synthetic sentiment chunks
   -> apply the original sentiment preprocessing rules
@@ -812,7 +827,7 @@ Synthetic sentiment chunks
   -> attach the reviewed topic labels
   -> compare original and synthetic topic shares
 \end{verbatim}
-
+}
 
 \begin{table}[ht]
 \centering
@@ -838,34 +853,31 @@ The policy search compared eight- and nine-topic candidates. The eight-topic
 solution obtained a combined score of 0.6921, compared with 0.6576 for the
 nine-topic solution, and was retained for the reported outputs after comparative
 metric review. Table~\ref{tab:impl-bertopic-policy-candidates} gives the candidate
-metrics.
+metrics. Figure~\ref{fig:impl-bertopic-policy} also shows how retained topics vary
+across countries.
 
-\begin{figure}[!htbp]
+\begin{figure}[ht]
 \centering
 \begin{minipage}[t]{0.49\linewidth}
  \centering
- \includegraphics[width=\linewidth]
+ \includegraphics[scale=.28]
  {bert_policy_global_topic_selection_metrics.png}
- \vspace{-0.5em}
+ \vspace{-0.5em}\\
  {\scriptsize (a) Candidate diagnostics.}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\linewidth}
  \centering
- \includegraphics[width=\linewidth]
+ \includegraphics[scale=.21]
  {bert_policy_global_topic_distribution_by_country.png}
- \vspace{-0.5em}
+ \vspace{-0.5em}\\
  {\scriptsize (b) Topic distribution by country.}
 \end{minipage}
 \caption{Policy BERTopic results for the retained eight-topic model.}
 \label{fig:impl-bertopic-policy}
 \end{figure}
 
-The retained topic shares and reviewed report labels are listed in
-Table~\ref{tab:impl-bertopic-policy-topics}. The labels were produced after
-clustering from the keywords and representative chunks and did not affect the model
-outputs.
 
-\begin{table}[!htbp]
+\begin{table}[ht]
 \centering
 \small
 \begin{tabular}{
@@ -890,12 +902,26 @@ Topic & Share & Reviewed topic label \\
 \label{tab:impl-bertopic-policy-topics}
 \end{table}
 
-The global model supplied a shared country--topic matrix, while separate country
-models produced local topic structures. Australia retained six topics, France eight,
-Ireland four, and the USA seven. Table~\ref{tab:impl-bertopic-policy-countries}
-reports the principal country-level outputs used in subsequent comparisons.
+The retained topic shares and reviewed report labels are listed in
+Table~\ref{tab:impl-bertopic-policy-topics}. Figure~\ref{fig:impl-bertopic-policy}(a)
+shows the candidate diagnostics, while Figure~\ref{fig:impl-bertopic-policy}(b)
+shows the topic distribution by country. The labels were produced after clustering
+from the keywords and representative chunks and did not affect the model outputs.
+The global model supplied a shared country--topic matrix, while country models
+produced local structures. Australia retained six topics, France eight, Ireland four,
+and the USA seven. Table~\ref{tab:impl-bertopic-policy-countries} reports the main
+country-level outputs used in later comparisons:
+\begin{itemize}
+  \item Australia: granular coverage of strategy, curriculum, training, integrity,
+  and cognitive effects;
+  \item France: strategy, curriculum, training, integrity, and cognitive effects;
+  \item Ireland: concentrated on governance and digital-learning implementation;
+  \item USA: assessment, tool oversight, teacher preparation, and privacy.
+\end{itemize}
+These outputs describe cross-country differences in corpus emphasis rather than
+national policy maturity or effectiveness.
 
-\begin{table}[!htbp]
+\begin{table}[ht]
 \centering
 \footnotesize
 \begin{tabular}{
@@ -925,24 +951,13 @@ oversight (17.1\%); curriculum and teacher training (16.7\%); student privacy
 \label{tab:impl-bertopic-policy-countries}
 \end{table}
 
-
-The country-level models reveal differences in thematic concentration across the
-national corpora. Ireland produced the most concentrated structure, with governance
-and digital-learning implementation accounting for most chunks, whereas France and
-Australia required more granular topic spaces covering strategy, curriculum,
-training, integrity, and cognitive effects. The USA showed a broader distribution
-across assessment, tool oversight, teacher preparation, and privacy. These outputs
-describe differences in corpus emphasis and should not be interpreted as direct
-measures of national policy maturity or effectiveness.
-
 \subsubsection*{Sentiment BERTopic Results}
 
 The original sentiment search compared eight-, nine-, and ten-topic candidates. The
-nine-topic solution had the highest coherence and combined score, with
-{\color{blue}qualitative review confirming clearer topic separation.}
+nine-topic solution had the highest coherence and combined score, with qualitative
+review confirming clearer topic separation.
 Figure~\ref{fig:impl-bertopic-sentiment-results}(a) shows selection diagnostics;
-candidate metrics appear in
-Table~\ref{tab:impl-bertopic-sentiment-candidates}.
+candidate metrics appear in Table~\ref{tab:impl-bertopic-sentiment-candidates}.
 
 Synthetic chunks were assigned to the retained nine-topic original-sentiment space.
 Their topic shares and differences across both sets are shown in
@@ -1068,23 +1083,22 @@ Topic & Short label & Original & Synthetic & Difference (\%) \\
 \end{table}
 
 BERTopic supplied a clustering-based comparison and topic space for the synthetic
-check. {\color{blue}The mean absolute difference between original and synthetic
-topic shares was 8.4 percentage points}, and two sentiment topics received no
-synthetic assignments. NMF was then implemented {\color{blue}as a
-factorisation-based model to test whether the representation provided broader
-thematic continuity.}
+check. The mean absolute difference between original and synthetic topic shares was
+8.4 percentage points, and two sentiment topics received no synthetic assignments.
+NMF was then implemented as a factorisation-based model to test whether the
+representation provided broader thematic continuity.
 
 \subsection{NMF Factorisation Results}
 \label{subsec:impl-nmf}
 
 As defined in Subsection~\ref{subsec:method-nmf}, NMF factorised TF--IDF into
-document--topic and topic--term matrices. {\color{blue}NNDSVDa initialisation,
-which fills zero entries of NNDSVD with the input-matrix mean, followed the
-SVD-based approach of Boutsidis and Gallopoulos~\cite{boutsidis2008svd}.
-Coordinate descent was used to optimise the factor matrices, as described
-by Hsieh and Dhillon~\cite{hsieh2011fast}, while Frobenius loss measured
-reconstruction error, following the NMF formulation of Lee and
-Seung~\cite{lee1999learning}.} A seed of 42 and 1000 iterations were used.
+document--topic and topic--term matrices. NNDSVDa initialisation, which fills zero
+entries of NNDSVD with the mean, followed the SVD-based approach
+of~\cite{boutsidis2008svd}. Coordinate descent was used to optimise the
+matrices, as described by~\cite{hsieh2011fast}, while Frobenius loss measured
+reconstruction error, using the NMF formulation of~\cite{lee1999learning}. A
+seed of 42 and 1000 iterations were used. The following pipeline summarises the NMF
+fitting and labelling workflow.
 
 {\small
 \begin{verbatim}
@@ -1102,10 +1116,10 @@ Policy or original sentiment chunks
 \end{verbatim}
 }
 
-For the synthetic check defined in
-Subsection~\ref{subsec:method-synthetic-robustness}, synthetic sentiment was
-transformed using the TF--IDF vectoriser and NMF model fitted on original sentiment.
-Each synthetic chunk was assigned to its highest-weight topic.
+The pipeline below details synthetic projection into the retained NMF topic space.
+For the synthetic check in Subsection~\ref{subsec:method-synthetic-robustness},
+synthetic sentiment was transformed using the TF--IDF vectoriser and NMF model fitted
+on original sentiment, then assigned to its highest-weight topic.
 
 {\small
 \begin{verbatim}
@@ -1137,7 +1151,7 @@ Topics & Coherence & Silhouette & Balance & Diversity & Score \\
 \label{tab:impl-nmf-policy-candidates}
 \end{table}
 
-\begin{figure}[!htbp]
+\begin{figure}[ht]
 \centering
 \vspace*{-.25cm}
 \begin{minipage}[t]{0.49\linewidth}
@@ -1156,25 +1170,41 @@ Topics & Coherence & Silhouette & Balance & Diversity & Score \\
 \end{minipage}
 \caption{Policy NMF results for the retained nine-topic model.}
 \label{fig:impl-nmf-policy}
-\vspace*{-.25cm}
 \end{figure}
 
 
 \subsubsection*{Policy NMF Results}
 
 The policy search compared eight-, nine-, and ten-topic candidates. The nine-topic
-solution obtained the highest coherence and combined score and was retained.
-{\color{blue}Qualitative review also supported nine topics: it separated
-privacy and ethical governance from educator guidance and professional development,
-whereas eight merged these themes and ten introduced further fragmentation.}
-The candidate results are shown in Figure~\ref{fig:impl-nmf-policy} and
-Table~\ref{tab:impl-nmf-policy-candidates}. The retained policy-topic shares and
-reviewed SLM-assisted labels are listed in
-Table~\ref{tab:impl-nmf-policy-topics}.
-\begin{table}[!htbp]
+solution obtained the highest coherence and combined score and was retained. The
+retained solution balanced statistical fit with thematic separation. Qualitative
+review also supported nine topics: it separated privacy and ethical governance from
+educator guidance and professional development, whereas eight merged these themes and
+ten introduced further fragmentation. This selection preserved distinct policy themes
+without over-fragmenting the corpus. The candidate results are shown in
+Figure~\ref{fig:impl-nmf-policy} and Table~\ref{tab:impl-nmf-policy-candidates}.
+
+
+The global NMF model supplied the country--topic matrix, while national models
+captured local structures. Australia retained three topics, France seven, Ireland
+four, and the USA seven. National models exposed local emphases hidden by global
+aggregation within each national corpus. Table~\ref{tab:impl-nmf-policy-countries}
+reports the country-level outputs. Country models therefore complemented rather than
+replaced the global matrix. Australia showed the strongest concentration around
+ethics guidance and staff training. Ireland was more evenly distributed across
+teacher competence, child protection, public oversight, and academic integrity, while
+France and the USA required broader seven-topic structures spanning pedagogy,
+strategy, regulation, privacy, equity, and assessment. These patterns reflect corpus
+emphasis rather than national policy quality or maturity.
+
+
+\begin{table}[ht]
 \centering
 \small
-\begin{tabular}{>{\raggedright\arraybackslash}p{0.08\linewidth}>{\raggedright\arraybackslash}p{0.12\linewidth}>{\raggedright\arraybackslash}p{0.68\linewidth}}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{0.08\linewidth}
+  >{\centering\arraybackslash}p{0.12\linewidth}
+  >{\raggedright\arraybackslash}p{0.68\linewidth}}
 \hline
 Topic & Share & Reviewed topic label \\
 \hline
@@ -1191,16 +1221,10 @@ Topic & Share & Reviewed topic label \\
 \end{tabular}
 \caption{Global policy NMF topics and reviewed labels.}
 \label{tab:impl-nmf-policy-topics}
-\vspace*{-.25cm}
 \end{table}
 
-\vspace*{-.25cm}
-The global NMF model supplied the country--topic matrix, while separate national
-models produced local topic structures. Australia retained three topics, France
-seven, Ireland four, and the USA seven. Table~\ref{tab:impl-nmf-policy-countries}
-reports the country-level outputs.
 
-\begin{table}[!htbp]
+\begin{table}[ht]
 \centering
 \footnotesize
 \begin{tabular}{
@@ -1229,14 +1253,7 @@ equity, and assessment-bias topics. \\
 \label{tab:impl-nmf-policy-countries}
 \end{table}
 
-The country-level NMF models show clear differences in thematic concentration.
-Australia produced the most concentrated structure, with ethics guidance and staff
-training accounting for more than half of the corpus. Ireland divided more evenly
-across teacher competence, child protection, public oversight, and academic
-integrity. France and the USA required broader seven-topic structures covering
-pedagogy, curriculum, strategy, regulation, privacy, equity, and assessment. These
-patterns reflect differences in corpus emphasis rather than direct measures of
-national policy quality or maturity.
+
 
 \subsubsection*{Sentiment NMF Results}
 
@@ -1259,31 +1276,6 @@ shift was smaller and coverage broader than BERTopic's 8.4-percentage-point shif
 seven-of-nine coverage. The fitted NMF matrices were exported for the causal NLP
 pipelines.
 
-\begin{table}[!htbp]
-\centering
-\small
-\begin{tabular}{
->{\raggedright\arraybackslash}p{0.08\linewidth}
->{\raggedright\arraybackslash}p{0.12\linewidth}
->{\raggedright\arraybackslash}p{0.68\linewidth}
-}
-\hline
-Topic & Share & Reviewed topic label \\
-\hline
-0 & 0.081 & Young people's AI impact on education and well-being \\
-1 & 0.158 & Student engagement and teacher adaptation to AI \\
-2 & 0.073 & GenAI detection and assessment confusion \\
-3 & 0.198 & Educator training and ethical AI integration \\
-4 & 0.121 & Youth workers' perspectives on AI integration \\
-5 & 0.147 & Teachers' experience and knowledge in AI integration \\
-6 & 0.086 & Public perceptions of AI and youth employment \\
-7 & 0.073 & Online-learning intention clarity and classroom relevance \\
-8 & 0.064 & French views on digital technologies, youth, and education \\
-\hline
-\end{tabular}
-\caption{Original sentiment NMF topics and reviewed labels.}
-\label{tab:impl-nmf-sentiment-topics}
-\end{table}
 
 
 
@@ -1319,7 +1311,34 @@ Topic & Share & Reviewed topic label \\
 
 \begin{table}[!htbp]
 \centering
-\scriptsize
+\small
+\begin{tabular}{
+>{\centering\arraybackslash}p{0.08\linewidth}
+>{\centering\arraybackslash}p{0.12\linewidth}
+>{\raggedright\arraybackslash}p{0.68\linewidth}
+}
+\hline
+Topic & Share & Reviewed topic label \\
+\hline
+0 & 0.081 & Young people's AI impact on education and well-being \\
+1 & 0.158 & Student engagement and teacher adaptation to AI \\
+2 & 0.073 & GenAI detection and assessment confusion \\
+3 & 0.198 & Educator training and ethical AI integration \\
+4 & 0.121 & Youth workers' perspectives on AI integration \\
+5 & 0.147 & Teachers' experience and knowledge in AI integration \\
+6 & 0.086 & Public perceptions of AI and youth employment \\
+7 & 0.073 & Online-learning intention clarity and classroom relevance \\
+8 & 0.064 & French views on digital technologies, youth, and education \\
+\hline
+\end{tabular}
+\caption{Original sentiment NMF topics and reviewed labels.}
+\label{tab:impl-nmf-sentiment-topics}
+\end{table}
+
+
+\begin{table}[!htbp]
+\centering
+\small
 \begin{tabular}{
 >{\centering\arraybackslash}p{0.06\linewidth}
 >{\raggedright\arraybackslash}p{0.45\linewidth}
@@ -1328,15 +1347,15 @@ rrr
 \hline
 Topic & Short label & Original & Synthetic & Difference \\
 \hline
-0 & Young people and well-being & 8.1\% & 7.9\% & $-0.2$ pp \\
-1 & Student engagement and teacher adaptation & 15.8\% & 10.4\% & $-5.4$ pp \\
-2 & GenAI assessment confusion & 7.3\% & 0.5\% & $-6.8$ pp \\
-3 & Educator training and ethics & 19.8\% & 28.2\% & $+8.4$ pp \\
-4 & Youth-worker perspectives & 12.1\% & 11.9\% & $-0.2$ pp \\
-5 & Teacher experience and knowledge & 14.7\% & 9.4\% & $-5.3$ pp \\
-6 & Public perception and employment & 8.6\% & 22.8\% & $+14.2$ pp \\
-7 & Online-learning intention clarity & 7.3\% & 8.9\% & $+1.6$ pp \\
-8 & French digital-technology views & 6.4\% & 0.0\% & $-6.4$ pp \\
+0 & Young people and well-being & 8.1\% & 7.9\% & $-0.2$ \\
+1 & Student engagement and teacher adaptation & 15.8\% & 10.4\% & $-5.4$ \\
+2 & GenAI assessment confusion & 7.3\% & 0.5\% & $-6.8$ \\
+3 & Educator training and ethics & 19.8\% & 28.2\% & $+8.4$ \\
+4 & Youth-worker perspectives & 12.1\% & 11.9\% & $-0.2$ \\
+5 & Teacher experience and knowledge & 14.7\% & 9.4\% & $-5.3$ \\
+6 & Public perception and employment & 8.6\% & 22.8\% & $+14.2$ \\
+7 & Online-learning intention clarity & 7.3\% & 8.9\% & $+1.6$ \\
+8 & French digital-technology views & 6.4\% & 0.0\% & $-6.4$ \\
 \hline
 \end{tabular}
 \caption{Original and synthetic sentiment shares in the fitted NMF space.}
@@ -1411,7 +1430,11 @@ convergence diagnostics. \\
 \begin{table}[!htbp]
 \centering
 \small
-\begin{tabular}{>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.12\linewidth}>{\raggedright\arraybackslash}p{0.34\linewidth}}
+\begin{tabular}{
+  >{\raggedright\arraybackslash}p{0.20\linewidth}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\centering\arraybackslash}p{0.12\linewidth}
+  >{\raggedright\arraybackslash}p{0.34\linewidth}}
 \hline
 Model & Candidate comparison & Retained topics & Reported observation \\
 \hline
@@ -1456,19 +1479,6 @@ causal-frame network outputs, and synthetic sensitivity checks. The broader asse
 of these results and their cross-method implications is reserved for
 Chapter~\ref{chap:analysis}.
 
-\subsection{Shared Sentence Inventory and Extraction Scale}
-\label{subsec:impl-causal-inventory}
-
-As defined in Subsection~\ref{subsec:method-shared-causal-cleaning}, both pipelines
-imported the cleaning module and verified the sentence-inventory
-hash. The filter retained units containing 6--110 words.
-{\color{blue} A causal claim linked plausible cause/effect spans through one of six relation families: \texttt{causes\_or\_increases}, \texttt{reduces\_or\_prevents},
-\texttt{enables\_or\_supports}, \texttt{requires\_or\_depends\_on},
-\texttt{risks\_or\_threatens}, and \texttt{expected\_to\_improve}}. The semantic workflow retained one claim per eligible
-sentence; the frame workflow extracted relation occurrences and removed
-within-document duplicates. Tables~\ref{tab:impl-causal-scale} and~\ref{tab:impl-causal-settings}
-report the resulting analytical units and principal implementation settings.
-
 \begin{table}[!htbp]
 \centering
 \small
@@ -1482,19 +1492,17 @@ Semantic causal claims & 3,930 & 761 & 761 \\
 Validated causal frames & 3,196 & 655 & 674 \\
 \hline
 \end{tabular}
-\caption{Shared causal sentence inventory and method-specific extraction scale.}
-\label{tab:impl-causal-scale}
+\caption{Shared cleaned sentence inventory and method-specific extraction scale.}\label{tab:impl-causal-scale}
 \end{table}
 
 \begin{table}[!htbp]
-\vspace*{-.25cm}
-    \centering
+\centering
 \scriptsize
 \setlength{\tabcolsep}{3.5pt}
 \renewcommand{\arraystretch}{1.06}
 \begin{tabular}{
 >{\raggedright\arraybackslash}p{0.20\linewidth}
->{\raggedright\arraybackslash}p{0.32\linewidth}
+>{\raggedright\arraybackslash}p{0.34\linewidth}
 >{\raggedright\arraybackslash}p{0.37\linewidth}
 }
 \hline
@@ -1532,23 +1540,58 @@ Retains valid relations whose short spans cannot be assigned directly. \\
 
 Network sensitivity &
 Four specifications and 250 source resamples &
-Measures variation under weighting, source composition, frame quality, and projection
-rules. \\
+Measures variation under weighting, source composition, quality, and projection rules.\\
 \hline
 \end{tabular}
 \caption{Settings for the semantic-coverage and causal-frame pipelines.}
 \label{tab:impl-causal-settings}
 \end{table}
 
-All claims and frames retained source-sentence identifiers, preserving
-traceability to the cleaned corpus. The frame workflow retained all six relation
-families and removed publication residue and repeated within-document relations.
-Accepted frames met the quality score of $0.40$. {\color{blue}Span-topic projection
-required similarity of at least $0.02$ and a $0.003$ margin over the next-best
-topic, limiting weak or ambiguous assignments.} Uncertain projections used the
-source-document topic fallback defined in
-Subsection~\ref{subsec:method-frame-network}. Projection status, similarity, margin,
-and fallback use were retained for inspection.
+\subsection{Shared Sentence Inventory and Extraction Scale}
+\label{subsec:impl-causal-inventory}
+
+As defined in Subsection~\ref{subsec:method-shared-causal-cleaning}, both pipelines
+imported the cleaning module and verified the sentence-inventory hash. Preparation
+normalised text, segmented sentences, removed source residue, and retained sentences
+containing 6--110 words. Within-document duplicate sentences were removed before
+either pipeline. The semantic workflow retained one claim per eligible sentence; the
+frame workflow extracted relation occurrences. Cross-document repetition remained
+available for corpus-level comparison. Source, document, chunk, and sentence
+identifiers were preserved. Validation checked residue, duplicates, and
+cleaning-version consistency. The shared inventory therefore provided a reproducible
+basis for comparison. The pipeline below summarises preparation;
+Tables~\ref{tab:impl-causal-scale} and~\ref{tab:impl-causal-settings} report units
+and settings.
+
+{\small
+\begin{verbatim}
+Combined chunk corpus
+  -> normalise and repair extracted text
+  -> segment chunks into sentence units
+  -> remove source residue and invalid-length sentences
+  -> remove within-document duplicate sentences
+  -> assign source and corpus metadata
+  -> validate and version the shared sentence inventory
+  -> provide identical inputs to both causal pipelines
+\end{verbatim}
+}
+
+All claims and frames retained source-sentence identifiers, preserving traceability
+to the cleaned corpus. Shared preparation removed publication residue, while the
+frame workflow removed repeated within-document relations. Accepted frames met a
+minimum quality score of $0.40$, based on cue reliability, span completeness,
+balance, content, and length described in
+Subsection~\ref{subsec:method-frame-network}. Span-topic projection required
+similarity of at least $0.02$ and a $0.003$ margin over the next-best topic. {\color{blue} These
+thresholds were fixed before interpreting the policy--sentiment differences. The
+quality threshold excluded weakly formed frames, while the projection thresholds
+required minimum similarity and separation before direct topic assignment.} Uncertain
+projections used the source-document topic fallback defined in
+Subsection~\ref{subsec:method-frame-network}. Their influence was examined through
+the frame-quality and projection specifications. These settings were not tuned to
+maximise divergence. Fallback assignments remained identifiable in exported
+diagnostics.
+
 
 \subsection{Semantic Causal-Claim Coverage Results}
 \label{subsec:impl-semantic-coverage}
@@ -1556,31 +1599,30 @@ and fallback use were retained for inspection.
 The semantic workflow followed Subsection~\ref{subsec:method-semantic-coverage} (see
 \texttt{CN1} in Table~\ref{tab:impl-repository-links}). Each claim was compared with
 its three nearest claims in the opposite corpus (\(k=3\)), and coverage and deficit
-were calculated using Equation~\ref{eq:method-semantic-coverage}. Using three
-neighbours provided a balanced local comparison: it reduced dependence on a single
-close match without averaging over a broad set of weaker claims. The same value was
-applied in both directions to ensure a consistent comparison.
+were calculated using Equation~\ref{eq:method-semantic-coverage}. As motivated in
+Subsection~\ref{subsec:method-semantic-coverage}, a small neighbourhood reduces
+dependence on a single close match while keeping the comparison local.
+{\color{blue}This neighbourhood provided more than one semantic counterpart while
+limiting averaging over increasingly weaker matches. It was fixed before interpreting
+the results and applied in both directions. It avoids relying on one anomalous match.
+Three neighbours preserve a local semantic comparison. Larger neighbourhoods could
+dilute coverage with less similar claims.} Each neighbour contributed equally to the
+coverage mean. Similarity was computed from normalised multilingual sentence
+embeddings for cross-lingual semantic comparability across corpora. The pipeline
+summarises the semantic-coverage workflow.
 
 {\small
 \begin{verbatim}
 Shared cleaned sentence inventory
   -> identify eligible sentences and extract one auditable claim
   -> encode claims with multilingual sentence embeddings
-  -> compare each claim with its three nearest opposite-corpus claims
+  -> compare three nearest opposite-corpus claims and calculate coverage deficits
   -> balance both directions through equal-size resampling
-  -> calculate directional similarity and coverage deficits
   -> aggregate results globally, by topic, and by country
-  -> flag lower-coverage claims using the inspection threshold
+  -> flag low-coverage claims using the inspection threshold
   -> project synthetic claims and compare coverage results
 \end{verbatim}
 }
-
-The directional comparison used 50 equal-size resamples of 761 claims. Following
-Equation~\ref{eq:method-balanced-semantic}, policy-to-sentiment mean similarity was
-0.6415, producing a mean deficit of 0.3585. Sentiment-to-policy mean similarity was
-0.6325, producing a mean deficit of 0.3675. The reverse-direction deficit exceeded
-the forward-direction deficit by approximately \(0.0089\).
-Table~\ref{tab:impl-semantic-global} reports the balanced outputs.
 
 \begin{table}[!htbp]
 \centering
@@ -1599,18 +1641,43 @@ Sentiment $\rightarrow$ policy & 0.6325 & 0.3675 & [0.3644, 0.3712] \\
 \end{table}
 
 
+The inventories contained 3,930 policy and 761 sentiment causal claims, motivating 50
+equal-size resamples of 761 claims, reducing dependence on one policy subset.
+Following Subsection~\ref{subsec:method-semantic-coverage} and
+Equation~\ref{eq:method-balanced-semantic}, policy-to-sentiment mean similarity was
+0.6415 (deficit 0.3585), versus 0.6325 (deficit 0.3675) sentiment-to-policy, a
+difference of \(0.0089\). Table~\ref{tab:impl-semantic-global} reports the outputs.
 As reported in Table~\ref{tab:impl-causal-settings}, the inspection threshold was
-\(\tau=0.511861\), {\color{blue}the value below which the lowest 10\% of pooled
-empirical scores fell.} It selected low-coverage claims for review {\color{blue}and
-closer manual inspection}. The audit contained 160 comparisons, but {\color{blue}some
-records lacked a completed label stating whether the paired claims matched.}
-Threshold counts were therefore used only for inspection, while similarity scores and
-deficits remained the pipeline measures. This avoided treating an unchecked cut-off
-as evidence of accuracy. {\color{blue}The percentile was a screening rule, not a
-validated decision boundary. It flagged relatively weak matches rather than
-classifying causal correctness.}
+\(\tau=0.511861\), the value below which the lowest 10\% of pooled empirical scores
+fell. It selected low-coverage claims for review and closer manual inspection. The
+audit contained 160 comparisons, but some records lacked a completed label stating
+whether the paired claims matched. Threshold counts were therefore used only for
+inspection, while similarity scores and deficits remained the pipeline measures. This
+avoided treating an unchecked cut-off as evidence of accuracy. The percentile was a
+screening rule, not a validated decision boundary. It flagged relatively weak matches
+rather than classifying causal correctness.
 
-\begin{figure}[ht]
+
+As shown in Figure~\ref{fig:impl-semantic-results}(b), P8 (AI curriculum development
+and school oversight) had the largest balanced policy-to-sentiment deficit at 0.3960,
+followed by P0 (AI-assisted learning-assessment protocols) at 0.3763, P4 (cognitive
+offloading in AI-assisted education) at 0.3729, and P1 (AI child protection and
+rights) at 0.3677. In the full claim inventory, P8 contained 431 claims from 26
+documents, P0 contained 604 claims from 29 documents, and P4 contained 211 claims
+from six documents. P3 (AI competency-framework and curriculum development) had the
+smallest policy-to-sentiment deficit at 0.3079. P8 and P0 therefore had broader
+document support than P4. Among sentiment topics, S7 (online-learning intention
+clarity and classroom relevance) had the largest balanced sentiment-to-policy deficit
+at 0.4377, followed by S2 (GenAI detection and assessment confusion) at 0.4161 and S6
+(public perceptions of AI and youth employment) at 0.4030. S7 and S2 drew on two
+documents each, while S6 drew on three. {\color{blue} Table~\ref{tab:impl-semantic-native-topics}
+lists all frozen NMF topics, their directional balanced deficits, and source support.
+Higher deficits indicate weaker cross-corpus semantic counterparts.
+Native policy and sentiment topic spaces remained separate.
+These values identify comparatively weak semantic coverage within the corresponding
+topic strata.}
+
+\begin{figure}[!htbp]
 \centering
 
 \begin{subfigure}[t]{0.49\textwidth}
@@ -1623,7 +1690,7 @@ classifying causal correctness.}
 \hfill
 \begin{subfigure}[t]{0.49\textwidth}
  \centering
- \includegraphics[width=\linewidth]
+ \includegraphics[scale=.115]
  {global_semantic_deficit_by_topic_id.png}
  \caption{Balanced native-topic deficits.}
  \label{fig:impl-semantic-topic-deficits}
@@ -1633,7 +1700,7 @@ classifying causal correctness.}
 
 \begin{subfigure}[t]{0.49\textwidth}
  \centering
- \includegraphics[scale=.15]
+ \includegraphics[scale=.13]
  {country_policy_to_sentiment_deficit_by_topic_id.png}
  \caption{Country policy-to-sentiment deficits.}
  \label{fig:impl-semantic-country-forward}
@@ -1641,7 +1708,7 @@ classifying causal correctness.}
 \hfill
 \begin{subfigure}[t]{0.49\textwidth}
  \centering
- \includegraphics[scale=.15]
+ \includegraphics[scale=.13]
  {country_sentiment_to_policy_deficit_by_topic_id.png}
  \caption{Country sentiment-to-policy deficits.}
  \label{fig:impl-semantic-country-reverse}
@@ -1655,51 +1722,87 @@ larger deficits.}
 \label{fig:impl-semantic-results}
 \end{figure}
 
-
-
-As shown in Figure~\ref{fig:impl-semantic-results}(b), P8 (AI curriculum
-development and school oversight) had the largest balanced policy-topic deficit at
-0.3960, followed by P0 (AI-assisted learning-assessment protocols) at 0.3763, P4
-(cognitive offloading in AI-assisted education) at 0.3729, and P1 (AI child
-protection and rights) at 0.3677. P8 contained 431 claims from 26 documents, P0
-contained 604 claims from 29 documents, and P4 drew on six documents. P3 (AI
-competency-framework and curriculum development) had the smallest deficit at
-0.3079. The P8 and P0 values had broader document support, whereas P4 reflected a
-narrower source base. Among sentiment topics, the largest deficits occurred for S7
-(online-learning intention clarity and classroom relevance), S2 (GenAI detection and
-assessment confusion), and S6 (public perceptions of AI and youth employment).
-These results locate the strongest semantic gaps in curriculum oversight, assessment,
-and selected sentiment themes, with differing levels of support.
-
-Synthetic claims were projected into the original semantic analysis only as a
-sensitivity check. Following Equation~\ref{eq:method-semantic-synthetic-change},
-most native sentiment-topic deficits changed by small amounts, while S2 changed by
-approximately \(-0.057\). No synthetic claims were assigned to S8, so no change was
-calculated for that topic. Synthetic outputs remained separate from the original
-coverage results.
+\begin{table}[!htbp]
+  \vspace*{-.2cm}
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{
+>{\centering\arraybackslash}p{0.07\linewidth}
+>{\raggedright\arraybackslash}p{0.55\linewidth}
+>{\centering\arraybackslash}p{0.11\linewidth}
+>{\centering\arraybackslash}p{0.08\linewidth}
+>{\centering\arraybackslash}p{0.07\linewidth}
+}
+\hline
+Topic & Reviewed NMF topic label & Deficit & Claims & Docs \\
+\hline
+P0 & AI-assisted learning-assessment protocols & 0.3763 & 604 & 29 \\
+P1 & AI child protection and rights & 0.3677 & 275 & 17 \\
+P2 & AI usage and pedagogy in school governance & 0.3533 & 192 & 5 \\
+P3 & AI competency-framework and curriculum development & 0.3079 & 493 & 13 \\
+P4 & Cognitive offloading in AI-assisted education & 0.3729 & 211 & 6 \\
+P5 & Digital-learning frameworks and assessment policies & 0.3628 & 490 & 19 \\
+P6 & AI ethical guidelines and school-data protection & 0.3639 & 683 & 41 \\
+P7 & AI educator guidance and professional development & 0.3382 & 551 & 27 \\
+P8 & AI curriculum development and school oversight & 0.3960 & 431 & 26 \\
+\hline
+S0 & Young people's AI impact on education and well-being & 0.3836 & 69 & 4 \\
+S1 & Student engagement and teacher adaptation to AI & 0.3607 & 138 & 7 \\
+S2 & GenAI detection and assessment confusion & 0.4161 & 49 & 2 \\
+S3 & Educator training and ethical AI integration & 0.3400 & 220 & 8 \\
+S4 & Youth workers' perspectives on AI integration & 0.3571 & 104 & 2 \\
+S5 & Teachers' experience and knowledge in AI integration & 0.3641 & 81 & 5 \\
+S6 & Public perceptions of AI and youth employment & 0.4030 & 46 & 3 \\
+S7 & Online-learning intention clarity and classroom relevance & 0.4377 & 39 & 2 \\
+S8 & French views on digital technologies, youth, and education & 0.3983 & 15 & 3 \\
+\hline
+\end{tabular}
+\caption{Balanced directional semantic-coverage deficits and source support across
+the frozen policy and sentiment NMF topics. Policy-topic rows report
+\(P_x\rightarrow S\) deficits, while sentiment-topic rows report
+\(S_x\rightarrow P\) deficits.}
+\label{tab:impl-semantic-native-topics}
+\end{table}
 
 The country-level results are shown in
 Figure~\ref{fig:impl-semantic-results}(c)--(d). France had its largest
-policy-to-sentiment deficits for P0 and P6, although some cells contained claims
-from only one to three documents. Ireland had broader source support, with P8
-producing its largest forward deficit and S7 its largest reverse-direction deficit.
-Empty cells indicate that no eligible claims were available for the
-comparison.
+policy-to-sentiment deficits for P0 and P6, although some cells contained claims from
+only one to three documents. Ireland had broader source support, with P8 producing
+its largest forward deficit and S7 its largest reverse-direction deficit. Empty cells
+indicate that no eligible claims were available for the comparison.
+
+Synthetic claims were projected into the original semantic analysis only as a
+sensitivity check. Following Equation~\ref{eq:method-semantic-synthetic-change}, most
+native sentiment-topic deficits changed by small amounts, while S2 changed by
+approximately \(-0.057\). No synthetic claims were assigned to S8, so no change was
+calculated for that topic. Synthetic outputs remained separate from the original
+coverage results.
 
 \subsection{Causal-Frame Network Results}
 \label{subsec:impl-frame-networks}
 
 The causal-frame workflow followed
 Subsection~\ref{subsec:method-frame-network}
-(see \texttt{CN2} in Table~\ref{tab:impl-repository-links}). It extracted cause,
-relation, and effect spans, calculated frame-quality scores, projected both spans into
-the frozen policy NMF space, and constructed weighted policy and sentiment networks.
+(\texttt{CN2}, Table~\ref{tab:impl-repository-links}). It extracted cause,
+relation, and effect spans, scored frames, projected spans into frozen policy NMF
+space, and constructed weighted networks. Relations were normalised into six families:
+\scalebox{0.8}{\texttt{causes\_or\_increases}},
+\scalebox{0.8}{\texttt{reduces\_or\_prevents}},
+\scalebox{0.8}{\texttt{enables\_or\_supports}},
+\scalebox{0.8}{\texttt{requires\_or\_depends\_on}},
+\scalebox{0.8}{\texttt{risks\_or\_threatens}}, and
+\scalebox{0.8}{\texttt{expected\_to\_improve}}.
+{\color{blue}Families were defined by shared causal meaning across cues.}
+These grouped cues into relation types for network comparison.
+The pipeline below summarises the workflow.
+
 
 {\small
 \begin{verbatim}
 Shared cleaned sentence inventory
-  -> detect English and French causal cues
-  -> extract cause, relation, and effect spans
+  -> detect English/French causal cues and extract cause-relation-effect spans
   -> validate frames and calculate quality scores
   -> remove repeated relations within each document
   -> project cause and effect spans to frozen policy NMF topics
@@ -1710,15 +1813,14 @@ Shared cleaned sentence inventory
 }
 
 Using Equation~\ref{eq:method-frame-js}, the quality-weighted network produced
-\(D_{\mathrm{JS}}=0.2596\). The source-balanced, high-quality-frame, and
-directly projected-span specifications produced 0.2425, 0.2738, and 0.2964,
-respectively. Across 250 source-level resamples, mean divergence was 0.3359, with
-a 2.5th--97.5th percentile range of 0.2663--0.4157. This range reflects variation
-in source composition rather than a conventional confidence interval.
-Table~\ref{tab:impl-frame-robustness} reports the four specifications.
-{\color{blue}Divergence remained across specifications, suggesting no single
-weighting choice explained the result. The higher projected-only value suggests
-that excluding fallback assignments increased network differences.}
+\(D_{\mathrm{JS}}=0.2596\). The source-balanced, high-quality-frame, and directly
+projected-span specifications produced 0.2425, 0.2738, and 0.2964, respectively.
+Across 250 source-level resamples, mean divergence was 0.3359, with a 2.5th--97.5th
+percentile range of 0.2663--0.4157. This range reflects variation in source
+composition rather than a confidence interval. Table~\ref{tab:impl-frame-robustness}
+reports the four specifications. Divergence remained across specifications,
+suggesting no weighting choice explained the result. The higher projected-only value
+suggests that excluding fallback assignments increased network differences.
 
 \begin{table}[!htbp]
 \centering
@@ -1768,15 +1870,15 @@ Reliable projected spans only & 1,540 & 294 & 0.2964 \\
 \caption{Global causal-frame matrices in the frozen policy NMF topic space.
 Panels~(a) and~(b) show policy and sentiment frame shares projected onto the common
 \(P0\)--\(P8\) axes. Panel~(c) shows their signed differences, where blue indicates
-greater policy weight and orange greater sentiment weight, {\color{blue}highlighting
-the strongest contrasts}.}
+greater policy weight and orange greater sentiment weight, highlighting
+the strongest contrasts}.
 \label{fig:impl-frame-matrices}
 \end{figure}
 
 Document-topic fallback was used for approximately 31--35\% of cause and effect span
-assignments, depending on corpus and span role. {\color{blue}Exact zero-similarity
+assignments, depending on corpus and span role. Exact zero-similarity
 assignments were cases where a span had no measurable similarity to any policy
-topic.} They were absent from sentiment and accounted for approximately 0.1\% of
+topic. They were absent from sentiment and accounted for approximately 0.1\% of
 policy assignments. The reliable-projection specification excluded fallback
 assignments and retained only spans meeting the similarity and margin rules.
 
@@ -1787,10 +1889,10 @@ connection and greater weight in several cells ending in P1. The signed matrix i
 panel~(c) locates these differences directly: positive cells indicate greater policy
 weight and negative cells greater sentiment weight. This view complements the global
 divergence by identifying the topic pairs contributing to the structural difference.
-{\color{blue}In practice, these patterns indicate which topic-to-topic causal links
+In practice, these patterns indicate which topic-to-topic causal links
 received relatively greater weight in each corpus. They describe differences in the
 extracted frame distributions, rather than establishing stronger real-world causal
-relationships between the topics.}
+relationships between the topics.
 
 
 
@@ -1838,9 +1940,9 @@ most for causes/increases, which accounted for 36.8\% of sentiment frame weight 
 37.2\% in sentiment; 12.9\% to expected improvement, compared with 6.3\%; and 9.4\%
 to requirements/dependencies, compared with 6.8\%. Risk/threat relations accounted
 for 3.8\% of policy weight and 4.1\% of sentiment weight.
-{\color{blue}These shares suggest different emphases in the extracted relation
+These shares suggest different emphases in the extracted relation
 families rather than differences in causal strength. Representative causal links
-underlying these patterns are examined in Chapter~5.}
+underlying these patterns are examined in Section~\ref{sec:analysis-gap}.
 
 
 The synthetic-frame check produced \(D_{\mathrm{JS}}=0.3611\), compared with 0.2596
@@ -1851,9 +1953,9 @@ Following Equation~\ref{eq:method-topic-gap}, P0 had the largest topic-level gap
 0.3109, followed by P2 at 0.3099 and P8 at 0.2959. P6 and P7 produced gaps of 0.2641
 and 0.2609, while P3 produced the smallest value at 0.1301. These results are shown
 in Figure~\ref{fig:impl-frame-results}(b). The leading topic-level outputs drew on
-54--60 source documents. {\color{blue}Larger gaps indicate greater differences in
+54--60 source documents. Larger gaps indicate greater differences in
 how topics participate in extracted cause--effect links. Specific links contributing
-to these differences are discussed in Chapter~5.}
+to these differences are discussed in Section~\ref{sec:analysis-gap}.
 
 The topic-level measure \(G_t\) is an unnormalised sum of incoming and outgoing
 absolute differences. It is non-negative but is not bounded above by one and is
@@ -1863,8 +1965,8 @@ Ireland, and the pooled Other European group. France had its largest values for 
 and P8, with P2 reaching 1.6518. Ireland had its largest value for P7 at 0.5391,
 followed by P0 and P5 at approximately 0.397. The pooled Other European group had its
 largest value for P3 at 0.7929. France and Ireland each contained three original
-sentiment sources. {\color{blue}These values identify where structural differences
-are most evident; their substantive meaning is considered in Chapter~5.}
+sentiment sources. These values identify where structural differences
+are most evident; their substantive meaning is considered in Section~\ref{sec:analysis-gap}.
 
 % The substantive interpretation and assessment of the directional, topic-level,
 % country-level, relation-family, source-support, and global network differences are
