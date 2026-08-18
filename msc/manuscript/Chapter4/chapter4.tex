@@ -4,56 +4,58 @@
 \graphicspath{{Chapter4/img/}}
 \setlength{\emergencystretch}{2em}
 
-
 This chapter interprets the causal NLP and LLM-assisted results reported in
 Sections~\ref{sec:impl-causal-nlp} and~\ref{sec:impl-llm-causal-gap}. Data
-preparation, synthetic validation, exploratory analysis, and topic modelling are
-not repeated as independent analytical sections because they do not themselves
+preparation, synthetic validation, exploratory analysis, and topic modelling were
+not repeated as independent analytical sections because they did not themselves
 establish the policy--sentiment causal gap. Their role was to define the evidence
 boundary, preserve provenance, construct comparable analytical units, and provide
-the frozen NMF topic spaces used by the causal pipelines. They therefore form the
+the frozen topic spaces used by the causal pipelines. They therefore formed the
 measurement foundation for the analysis rather than separate answers to the
 research question.
 
 The term \textit{causal gap} refers here to differences in expressed causal or
-conditional language and its organisation across policy and sentiment evidence.
-It does not establish real-world causal effects, policy effectiveness, or policy
-failure. The analysis asks whether policy and sentiment express comparable causal
-claims and whether they organise related topics through similar causes, mechanisms,
-requirements, risks, and outcomes.
+conditional language and its organisation across policy and sentiment evidence. It
+does not establish real-world causal effects, policy effectiveness, or policy
+failure. This distinction kept interpretation aligned with the study's defined
+methodological and evidential scope. The analysis examined whether policy and
+sentiment expressed comparable causal claims and whether they organised related
+topics through similar causes, mechanisms, requirements, risks, and outcomes.
 
-Three complementary perspectives are considered. Semantic causal-claim coverage
-measures whether extracted claims have close counterparts in the opposite corpus.
-Causal-frame networks examine how causes and effects are organised across topics
-and relation families. The LLM-assisted stage operates independently on the shared
-sentence inventory and provides a smaller complementary interpretation layer.
-Agreement across methods strengthens an interpretation, while disagreement helps
-identify differences in their analytical reach.
-
+Three complementary perspectives were considered. Semantic causal-claim coverage
+measured whether extracted claims had close counterparts in the opposite corpus.
+Causal-frame networks examined how causes and effects were organised across topics
+and relation families. The LLM-assisted stage operated independently on the shared
+sentence inventory and provided a smaller complementary interpretation layer.
+Together, these perspectives distinguished coverage gaps from structural causal
+differences. Agreement across methods strengthened an interpretation, while
+disagreement helped identify differences in their analytical reach.
 
 \section{Interpretation of the Policy--Sentiment Causal Gap}
 \label{sec:analysis-gap}
 
-
 \subsection{Semantic Coverage}
+\label{subsec:analysis-semantic-coverage}
 
-The balanced global deficits were 0.3585 for policy-to-sentiment coverage and
-0.3675 in the reverse direction. Their difference of approximately 0.0089 is too
-small to support a strong directional asymmetry. The more relevant result is that
-both directions retain a substantial residual deficit. Policy and sentiment
-therefore share considerable semantic content, but neither corpus provides complete
-counterparts for the causal claims expressed in the other.
+As reported in Table~\ref{tab:impl-semantic-global}, the balanced global deficits
+were 0.3585 for policy-to-sentiment coverage and 0.3675 in the reverse direction.
+Their difference of approximately 0.0089 was too small to support a strong
+directional asymmetry. The more relevant result was that both directions retained
+a substantial residual deficit. Policy and sentiment therefore shared considerable
+semantic content, but neither corpus provided complete counterparts for the causal
+claims expressed in the other.
 
-The topic-level results locate this difference more clearly. P8, representing AI
-curriculum development and school oversight, had the largest policy-topic deficit
-at 0.3960. P0, representing AI-assisted learning and assessment protocols, followed
-at 0.3763 and was supported by 604 claims from 29 documents. P4 reached 0.3729 but
-drew on only six documents and is therefore a narrower result. P3, representing AI
-competency-framework and curriculum development, had the lowest deficit at 0.3079.
-Among sentiment topics, the largest deficits concerned online-learning clarity,
-GenAI assessment confusion, and public perceptions of AI and youth employment.
-The semantic gap is consequently concentrated around particular concerns rather
-than distributed uniformly across the corpora.
+Table~\ref{tab:impl-semantic-native-topics} located these differences more clearly
+at topic level. P8, representing AI curriculum development and school oversight,
+had the largest policy-topic deficit at 0.3960. P0, representing AI-assisted
+learning and assessment protocols, followed at 0.3763 and was supported by 604
+claims from 29 documents. P4 reached 0.3729 but drew on only six documents and was
+therefore a narrower result. P3, representing AI competency-framework and curriculum
+development, had the lowest deficit at 0.3079. Among sentiment topics, the largest
+deficits concerned online-learning clarity, GenAI assessment confusion, and public
+perceptions of AI and youth employment. The semantic gap was consequently
+concentrated around particular concerns rather than distributed uniformly across
+the corpora.
 
 Source support is important for interpreting these rankings. P8 and P0 have broad
 documentary support, whereas the P4 result depends on a much smaller source base.
@@ -76,32 +78,34 @@ to focus on student learning.''}
 \end{quote}
 
 Both sentences are retained as causal claims and concern an enabling relationship
-between AI, reduced teacher workload, and released time. However, neither sentence
-is the recorded top semantic match of the other. The semantic pipeline instead
+between AI, reduced teacher workload, and released time. However, neither sentence is
+the recorded top semantic match of the other. The semantic pipeline instead
 identifies other nearby claims with high embedding similarity. This is not an error
-in the coverage measure: nearest-neighbour coverage asks whether related claims
-exist in the opposite corpus, not whether a particular pair provides the most
-informative causal comparison. The example therefore illustrates the boundary of
-semantic similarity. It measures proximity efficiently across thousands of claims,
-but does not itself explain why two pieces of evidence constitute alignment, partial
-alignment, or a gap.
+in the coverage measure: nearest-neighbour coverage asks whether related claims exist
+in the opposite corpus, not whether a particular pair provides the most informative
+causal comparison. The example therefore illustrates, at the sentence level, the
+boundary of semantic similarity. It measures proximity efficiently across thousands
+of claims, but does not itself explain why two pieces of evidence constitute
+alignment, partial alignment, or a gap.
 
-The synthetic semantic check supports a similarly cautious interpretation. Most
-sentiment-topic deficits changed only slightly after synthetic substitution, although
-S2 changed by approximately \(-0.057\), and no synthetic claims were assigned to S8.
-Synthetic evidence therefore provides a sensitivity test but cannot confirm the
-empirical causal structure or substitute for missing observed evidence.
-
+As reported in Subsection~\ref{subsec:impl-semantic-coverage}, the synthetic semantic
+check supported a similarly cautious interpretation. Most sentiment-topic deficits
+changed only slightly after synthetic substitution, although S2 changed by
+approximately \(-0.057\), and no synthetic claims were assigned to S8. Synthetic
+evidence therefore provided a sensitivity test but could not confirm the empirical
+causal structure or substitute for missing observed evidence.
 
 \subsection{Causal-Frame Evidence}
+\label{subsec:analysis-causal-frame}
 
-The causal-frame network adds a different level of analysis by examining the
-organisation of extracted cause--relation--effect structures rather than only the
-semantic proximity of complete claims. The primary quality-weighted network produced
+The causal-frame network added an analytical perspective by examining the
+organisation of cause--relation--effect structures rather than only the
+semantic proximity of claims. As reported in
+Table~\ref{tab:impl-frame-robustness}, the primary quality-weighted network produced
 a Jensen--Shannon divergence of 0.2596. The source-balanced, high-quality-only, and
 directly projected-span specifications produced values from 0.2425 to 0.2964.
-The persistence of divergence across these alternatives indicates that the observed
-structural difference is not produced by one weighting or projection choice alone.
+Persistence across these specifications indicated that the structural
+difference was not produced by one weighting or projection choice alone.
 
 This result remains subject to the topic-assignment mechanism. Approximately
 31--35\% of cause and effect span assignments used document-topic fallback.
@@ -113,67 +117,88 @@ reflects sensitivity to source composition rather than a conventional confidence
 interval, while showing that the measured divergence persisted across the source
 resamples.
 
-The relation-family distributions clarify what this structural difference
-represents. Causes/increases accounted for 36.8\% of sentiment frame weight but
-24.7\% of policy weight. Policy instead assigned greater weight to enables/supports
-(41.9\% versus 37.2\%), expected improvement (12.9\% versus 6.3\%), and
-requirements/dependencies (9.4\% versus 6.8\%). Risk/threat shares were similar at
-3.8\% and 4.1\%. These differences suggest that policy more often expresses
+As shown in Figure~\ref{fig:impl-frame-results}(a), the relation-family
+distributions clarified what this difference represented. The \textit{causes or
+increases} family accounted for 36.8\% of sentiment frame weight but 24.7\% of
+policy weight. Policy assigned greater weight to the \textit{enables or supports}
+family (41.9\% versus 37.2\%), the \textit{expected to improve} family
+(12.9\% versus 6.3\%), and the \textit{requires or depends on} family
+(9.4\% versus 6.8\%). The \textit{risks or threatens} family had similar shares
+at 3.8\% and 4.1\%. These differences suggested that policy more often expressed
 institutional mechanisms, support, prerequisites, and intended outcomes, whereas
-sentiment places relatively greater emphasis on experienced or anticipated causes
-and consequences.
+sentiment placed greater emphasis on experienced or anticipated causes and
+consequences.
 
-The underlying evidence makes this distinction more concrete. A policy frame within
-P0 states that approved generative-AI tools may be used to
-\textit{``enhance teaching, learning and administration''}. Other policy evidence
-describes AI as potentially improving teaching work by reducing administrative
-burdens. Such statements reflect the stronger policy weight in
-\texttt{expected\_to\_improve} and \texttt{enables\_or\_supports}. By contrast,
-sentiment evidence includes statements that AI deployment has
+As reflected in Figure~\ref{fig:impl-frame-results}(a), the evidence made this
+distinction concrete. A policy frame within P0 stated that approved generative-AI
+tools may be used to \textit{``enhance teaching, learning and administration''}.
+Other policy evidence described AI as improving teaching work by reducing
+administrative burdens. Such statements reflected the stronger policy weight in the
+\textit{expected to improve} and \textit{enables or supports} families. By contrast,
+sentiment evidence included statements that AI deployment had
 \textit{``caused actual harm to people's rights''} through technological biases.
-This corresponds more closely to the greater sentiment weight in
-\texttt{causes\_or\_increases}. The aggregate difference is therefore also visible
-in the causal roles assigned to individual pieces of evidence.
+This corresponded more closely to the greater sentiment weight in the
+\textit{causes or increases} family. The aggregate difference was therefore also
+visible in the causal roles assigned to pieces of evidence.
 
-The matrix outputs further illustrate this organisation. The P1-to-P1
-\texttt{causes\_or\_increases} relation had substantially greater sentiment weight
-than policy weight, consistent with stronger sentiment expression of consequences
-around rights and protection. Conversely, P0-to-P0
-\texttt{expected\_to\_improve} was more prominent in policy, reflecting intended
-educational and administrative benefits. A broader P0-to-P0
-\texttt{enables\_or\_supports} difference also drew on substantially more policy
-sources than sentiment sources. These cells illustrate how similar topics can occur
-in both corpora while being assigned different causal roles.
+As reflected in Figure~\ref{fig:impl-frame-matrices}, the matrix outputs illustrated
+this organisation. The P1-to-P1 \textit{causes or increases} relation had greater
+sentiment weight than policy weight, consistent with stronger sentiment expression
+of consequences around rights and protection. Conversely, the P0-to-P0
+\textit{expected to improve} relation was more prominent in policy, reflecting
+intended educational and administrative benefits. A P0-to-P0
+\textit{enables or supports} difference also drew on more policy sources than
+sentiment sources. These cells illustrated how similar topics could occur in both
+corpora while being assigned different causal roles.
 
 The largest individual matrix differences should nevertheless be interpreted with
 source support in mind. Some high-difference cells draw on relatively few sentiment
 sources and are therefore better treated as targets for qualitative inspection than
 as independent conclusions. Network magnitude alone does not establish the
-substantive importance or representativeness of a particular relation.
+substantive importance or representativeness of a particular relation. This caution
+was especially important for sparsely supported sentiment cells. Such cells were
+interpreted as evidence prompts, not conclusions.
 
-At topic level, P0 had the largest combined structural gap at 0.3109, followed
-closely by P2 at 0.3099 and P8 at 0.2959. P6 and P7 followed at 0.2641 and 0.2609,
-whereas P3 had the smallest gap at 0.1301. The leading P0, P2, and P8 results drew
-on evidence distributed across approximately 54--60 source documents, reducing the
-likelihood that their prominence is attributable to one isolated document.
+As shown in Figure~\ref{fig:impl-frame-results}(b), and using the policy-topic labels
+reported in Table~\ref{tab:impl-semantic-native-topics}, P0 (\textit{AI-Assisted
+Learning Assessment Protocols}) had the largest combined structural gap at 0.3109,
+followed closely by P2 (\textit{AI Usage and Pedagogy in School Governance}) at
+0.3099 and P8 (\textit{AI Curriculum Development and School Oversight}) at 0.2959. P6
+and P7 followed at 0.2641 and 0.2609, whereas P3 had the smallest gap at 0.1301. The
+leading P0, P2, and P8 results drew on evidence distributed across approximately
+54--60 source documents, indicating that these patterns were not confined to isolated
+documents.
 
-Country-level frame differences remain secondary. France showed its largest
-differences around P2 and P8, with P2 reaching 1.6518. Ireland was led by P7 at
-0.5391, followed by P0 and P5 at approximately 0.397. France and Ireland each
-contained only three original sentiment sources in the frame comparison. These
-values therefore identify where structural differences are most visible in the
-available evidence but cannot support national rankings or claims of representative
-public opinion.
+The country-level comparison revealed different areas of policy--sentiment structural
+divergence across topic areas. As shown in Figure~\ref{fig:impl-frame-results}(c),
+France had its largest difference around P2 (\textit{AI Usage and Pedagogy in School
+Governance}), reaching 1.6518, followed by P8 (\textit{AI Curriculum Development and
+School Oversight}). French policy and sentiment evidence therefore differed most in
+how causal relations were organised around school governance, pedagogy, curriculum,
+and oversight. Ireland was led by P7 (\textit{AI Educator Guidance and Professional
+Development}) at 0.5391, followed by P0 (\textit{AI-Assisted Learning Assessment
+Protocols}) and P5 (\textit{Digital Learning Frameworks and Assessment Policies}) at
+approximately 0.397. The Irish differences were consequently concentrated more around
+educator guidance, professional development, learning, and assessment. France and
+Ireland each contained only three original sentiment sources, so these contrasts
+identify where differences were most visible in the available evidence rather than
+supporting national rankings or representative claims.
 
-Finally, the synthetic-frame network increased Jensen--Shannon divergence from
-0.2596 to 0.3611, with the requirements/dependencies family changing most strongly.
-The greater synthetic sensitivity of the frame network compared with semantic
-coverage suggests that causal organisation responds differently to changes in the
-sentiment evidence. The two pipelines are therefore capturing related but distinct
-properties of the corpora.
+Finally, Table~\ref{tab:impl-frame-gap-summary} shows that the synthetic-frame
+network increased Jensen--Shannon divergence from 0.2596 to 0.3611, while the
+\textit{requires or depends on} family showed the largest relation-gap change.
+Compared with the smaller changes observed in semantic coverage, this sensitivity
+check indicated that the frame network responded differently to synthetic sentiment
+substitution. The two pipelines therefore reflected different aspects of the corpus
+comparison under this test.
 
+Overall, causal-frame evidence revealed persistent differences between policy and
+sentiment. Policy placed greater emphasis on support, requirements, and intended
+outcomes. Sentiment more often foregrounded experienced consequences, harms, and
+causal concerns. France and Ireland showed distinct topic concentrations, with limited evidence due to only three sentiment sources each.
+ Thus, findings identify structural patterns without establishing
+representative national conclusions.
 
-\subsection{Cross-Method Interpretation}
 
 \begin{table}[!htbp]
 \centering
@@ -207,32 +232,44 @@ Strongest alignment across both causal measures. \\
 \label{tab:analysis-causal-synthesis}
 \end{table}
 
+\subsection{Cross-Method Interpretation}
+
+
 The two causal NLP methods should not be collapsed into one score. Semantic coverage
 identifies claims for which close counterparts are weaker or less available, whereas
 frame divergence identifies differences in causal organisation even when semantically
 related claims are present. Their agreement is therefore more informative than
 directly comparing their numerical values.
 
-P0 and P8 provide the clearest convergent evidence. Both have relatively high
-semantic deficits and large structural gaps, and both draw on broad source support.
-The result suggests that learning, assessment, curriculum development, and oversight
-are not simply discussed at different frequencies: policy and sentiment also differ
-in the causal roles and relationships through which these subjects are expressed.
+P0 (\textit{AI-Assisted Learning Assessment Protocols}) and P8 (\textit{AI Curriculum
+Development and School Oversight}) provide the clearest convergent evidence. In both
+topics, policy claims had relatively weak semantic counterparts in sentiment, while
+policy and sentiment also organised their causal relationships differently. With
+broad source support, this suggests that learning, assessment, curriculum
+development, and oversight differ not only in what policy and sentiment express, but
+also in how causes, requirements, support mechanisms, and consequences are connected.
+This convergence points to policy--sentiment misalignment in implementation.
+The differences concern how educational priorities become operationalised causally.
 
-P2 illustrates a different situation. Its semantic gap is less dominant, but its
-frame gap is large, indicating that related content can be present while its
-cause--effect organisation differs. P4 shows the converse pattern: a relatively
-high semantic deficit with narrower source support and less structural prominence.
-P3 consistently appears as the closest point of correspondence across both methods.
+P2 (\textit{AI Usage and Pedagogy in School Governance}) illustrates a different
+pattern. Policy claims had closer semantic counterparts in sentiment than for P0 or
+P8, yet policy and sentiment differed strongly in their cause--effect organisation.
+Related concerns were therefore present in both corpora but framed through different
+causal relationships. P4 (\textit{Cognitive Offloading in AI-Assisted Education})
+showed weaker semantic correspondence with sentiment, but this result had narrower
+source support and less structural prominence. By contrast, P3 (\textit{AI Competency
+Framework and Curriculum Development}) showed the closest policy--sentiment
+correspondence across both semantic content and causal organisation.
 
-The overall causal NLP result is therefore selective rather than universal. Policy
-and sentiment frequently address related AI-in-education concerns, but differences
-become more visible around learning and assessment, curriculum oversight, and the
-organisation of institutional mechanisms versus experienced consequences. These
-results establish where the empirical gap is concentrated. They also expose an
-important methodological boundary because both causal NLP pipelines depend on the
-predefined cue extraction that determines which sentences enter causal analysis.
-The LLM-assisted stage provides a complementary way to examine this boundary.
+Taken together, the causal NLP findings point to concentrated rather than pervasive
+divergence. Policy and sentiment often engaged with the same AI-in-education
+concerns, yet their correspondence weakened around learning and assessment,
+curriculum oversight, and the framing of institutional mechanisms against experienced
+consequences. The empirical difference was therefore thematic and structural, not
+corpus-wide. This pattern also marked a methodological limit: both causal NLP
+pipelines inherited the predefined cue inventory governing sentence inclusion. The
+LLM-assisted stage consequently examined whether source-grounded relationships
+emerged beyond that rule-based boundary.
 
 
 \section{LLM-Assisted Causal-Gap Interpretation}
@@ -245,15 +282,74 @@ direct-comparability requirements. Thirteen were classified as partial alignment
 two as sentiment gaps, and one as alignment. Their role here is to illustrate where
 evidence-grounded LLM reasoning adds information beyond the two causal NLP pipelines.
 
-The clearest contribution concerns the limits of fixed cue extraction. Across the
-16 retained findings, 31 unique sentences were cited as policy or sentiment
+The contribution concerns the limits of fixed cue extraction. Across the
+16 retained findings, 31 sentences were cited as policy or sentiment
 evidence, of which 18 were absent from the semantic causal-claim inventory.
 Fifteen findings contained at least one cited sentence not retained by the
 cue-based method. This does not establish superior LLM recall, because the findings
 still require human validation, but it shows that the approaches have different
-access to the shared evidence.
+access to the evidence.
 
-\begin{table}[!htbp]
+A representative missed relation is 007943, shown in
+Table~\ref{tab:analysis-llm-diagnostic-evidence}:
+
+\begin{quote}
+\textit{``When teachers engage in continuous professional growth, classroom practice
+evolves and improves.''}
+\end{quote}
+
+The sentence expresses a conditional relationship and contributed to an
+Ireland finding, yet it was not retained by the causal-cue extraction.
+Table~\ref{tab:analysis-llm-cue-diagnostics} shows that sentiment evidence
+017246, stating that AI use could \textit{``undermine the credibility of
+our examination system''}, contributed to a sentiment-gap finding but was
+absent from the semantic claim inventory. These cases show how less formulaic causal
+or conditional language can remain outside predefined extraction rules.
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{
+>{\raggedright\arraybackslash}p{0.13\linewidth}
+>{\raggedright\arraybackslash}p{0.12\linewidth}
+>{\raggedright\arraybackslash}p{0.68\linewidth}}
+\hline
+Evidence & Corpus & Cleaned evidence text \\
+\hline
+
+\texttt{007943} &
+Policy &
+\textit{``When teachers engage in continuous professional growth, classroom
+practice evolves and improves.''} \\
+
+\texttt{017246} &
+Sentiment &
+\textit{``The use of AI in our education system among students has the potential
+to undermine the credibility of our examination system, a system that, for all
+its flaws, is as objective and fair as any that has ever been designed.''} \\
+
+\texttt{018320} &
+Sentiment &
+\textit{``Enhancing student engagement its best, artificial intelligence can
+provide personal learning and act as a study coach.' (School director in Finland,
+translation) 37 At the same time, students emphasised the importance of teachers
+in providing personal feedback and guidance, ensuring that AI complements and
+does not replace traditional teaching by a human being.''} \\
+
+\texttt{011227} &
+Policy &
+\textit{``Quelles potentialités, quels risques et limites dans l'usage de
+l'IA ?''} \\
+
+\hline
+\end{tabular}
+\caption{Cleaned sentence evidence underlying the four diagnostic cases in
+Table~\ref{tab:analysis-llm-cue-diagnostics}.}
+\label{tab:analysis-llm-diagnostic-evidence}
+\end{table}
+
+\begin{table}[ht]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3.5pt}
@@ -291,27 +387,10 @@ cue-based semantic coverage.}
 \label{tab:analysis-llm-cue-diagnostics}
 \end{table}
 
-A representative missed relation is \texttt{clean\_sentence\_007943}:
-
-\begin{quote}
-\textit{``When teachers engage in continuous professional growth, classroom
-practice evolves and improves.''}
-\end{quote}
-
-The sentence expresses a conditional relationship and contributed to a recurrent
-Ireland finding, yet it was not retained by the fixed causal-cue extraction.
-Similarly, the sentiment statement that AI use could
-\textit{``undermine the credibility of our examination system''} contributed to a
-recurrent sentiment-gap finding but was absent from the semantic claim inventory.
-These cases show how less formulaic causal or conditional language can remain
-outside predefined extraction rules.
-
-The comparison also exposes a possible precision limitation. The sentence
-
+The comparison also exposes a possible precision limitation. The sentence 011227
 \begin{quote}
 \textit{``Quelles potentialités, quels risques et limites dans l'usage de l'IA ?''}
 \end{quote}
-
 was extracted because \textit{limites} was interpreted as a causal cue, despite the
 sentence functioning as a question rather than an expressed cause--effect claim. It
 nevertheless received relatively high semantic coverage, while the LLM repeatedly
@@ -327,73 +406,66 @@ shared enabling relationship and classifies it as partial alignment, illustratin
 the difference between measuring semantic proximity and explaining the relationship
 expressed by the evidence.
 
-These observations support treating the LLM stage as complementary to the causal NLP
-methods. Fixed cue-based analysis provides reproducible corpus-wide measurement,
-while LLM reasoning can interpret less formulaic relationships and identify
-questionable cue-based extractions. These results provide evidence of possible
-recall and precision limitations in fixed extraction rather than establishing LLM
-superiority. The LLM outputs remain exploratory and require human review, and an
-exhaustive application would need to extend beyond the sampled evidence batches used
-here.
+These observations position the LLM stage as an interpretive complement to causal NLP
+rather than a replacement. Fixed cue-based analysis offers reproducible corpus-wide
+measurement, whereas LLM reasoning can surface less formulaic relationships and
+challenge questionable cue-based extractions. The comparison therefore reveals
+possible recall and precision boundaries in fixed extraction without demonstrating
+LLM superiority. Its outputs remain exploratory, require human review, and would need
+broader coverage before supporting exhaustive application beyond the sampled evidence
+batches used here.
 
 
 \section{Integrated Interpretation}
 
-Taken together, the semantic and causal-frame analyses provide the main evidence for
-a selective policy--sentiment causal gap. Semantic coverage shows substantial
-correspondence alongside persistent residual deficits, while the frame network shows
-that related subjects can also occupy different causal roles. The gap therefore
-concerns both the availability of comparable claims and the organisation of their
-cause--effect structures.
+Taken together, semantic coverage and causal-frame analysis support a selective
+policy--sentiment gap. Semantic coverage showed correspondence alongside persistent
+deficits in both comparison directions. The frame network showed comparable subjects
+occupying different causal roles across corpora. Together, both methods identified
+thematic correspondence alongside structural differences in framing. The strongest
+conclusions emerged where semantic and structural evidence converged across sources.
+Learning, assessment, curriculum oversight, and governance showed particularly
+persistent differences overall. Other concerns differed mainly through either
+semantic correspondence or causal organisation. Some areas instead showed closer
+correspondence across both analytical perspectives overall. A combined score would
+therefore conceal distinct forms of policy--sentiment divergence. Relation-family
+results further revealed contrasting causal emphases between policy and sentiment.
+Policy stressed enabling mechanisms and requirements; sentiment foregrounded causes
+and consequences.
 
-The strongest conclusions occur where the two causal NLP methods converge. P0 and
-P8 rank highly under both analyses and draw on comparatively broad source support.
-P2 is distinguished mainly by frame organisation, whereas P4 is primarily a semantic
-coverage result with narrower documentary support. P3 shows the closest
-correspondence under both measures. A single combined score would obscure these
-different forms of divergence.
-
-The relation-family results further clarify this pattern. Policy gives relatively
-greater weight to enabling mechanisms, institutional requirements, and intended
-improvements, while sentiment gives greater weight to expressed causes and
-consequences. This does not imply that policy is intrinsically positive or sentiment
-negative. Rather, the corpora frequently assign different causal roles to related
-AI-in-education concerns.
-
-The LLM-assisted stage adds supporting sentence-level evidence. Some causal or
-conditional relationships used in recurrent LLM findings never enter the fixed cue
-inventory, while some cue-extracted claims appear questionable when their complete
-linguistic meaning is considered. The LLM can also provide explicit interpretations
-for evidence pairs that semantic similarity represents only numerically. Its role is
-therefore complementary to, rather than a replacement for, the two principal causal
-NLP analyses.
-
-Overall, the evidence supports a policy--sentiment gap that is selective,
-structured, and method-dependent. The strongest differences concern learning and
-assessment, curriculum development and oversight, and the organisation of
-institutional mechanisms relative to experienced or anticipated consequences.
-These results concern expressed causal discourse and should not be interpreted as
-evidence of real-world causal effects, policy effectiveness, or national policy
-performance.
+The LLM-assisted stage added sentence-level evidence and interpretation to these
+findings. Some meaningful relationships remained outside the fixed causal-cue
+inventory entirely. Conversely, some cue-extracted claims appeared questionable under
+fuller linguistic interpretation. The LLM also explained evidence relationships
+represented only numerically by similarity. Its role therefore complemented, rather
+than replaced, the causal NLP analyses. Overall, the evidence supported a selective,
+structured, method-dependent policy--sentiment causal gap. Strongest differences
+concerned educational priorities and their associated institutional mechanisms. They
+also reflected experienced or anticipated consequences expressed within sentiment
+evidence. These findings described causal discourse rather than demonstrating
+real-world causal effects. They did not establish policy effectiveness, failure, or
+national performance differences.
 
 
-\section{Summary}
+\section*{Summary}
 
-The analysis identifies substantial semantic correspondence between policy and
+The analysis identified substantial semantic correspondence between policy and
 sentiment alongside selective differences in causal-claim coverage and causal-frame
-organisation. P0 and P8 provide the strongest convergent evidence, while P3 shows
-the closest alignment across the two causal NLP methods. Relation-family results
-indicate greater policy emphasis on enabling mechanisms, requirements, and intended
-improvement, and greater sentiment emphasis on expressed causes and consequences.
+organisation. The strongest convergent evidence concerned learning, assessment,
+curriculum development, and oversight, while other areas showed closer correspondence
+across the two causal NLP methods. Relation-family results indicated greater policy
+emphasis on enabling mechanisms, requirements, and intended improvement, and greater
+sentiment emphasis on expressed causes and consequences.
 
-The LLM-assisted stage provides a smaller complementary interpretation layer.
-Representative cases show that less formulaic causal or conditional relationships
-may remain outside fixed cue extraction, while superficial cue matches can also
-produce questionable causal candidates. The LLM additionally explains relationships
-that nearest-neighbour similarity represents only through numerical proximity.
+The LLM-assisted stage provided a complementary interpretation layer. Representative
+cases showed that less formulaic causal or conditional relationships could remain
+outside fixed cue extraction, while superficial cue matches could also produce
+questionable causal candidates. The LLM explained relationships that
+nearest-neighbour similarity represented only through numerical proximity.
 
-These findings do not establish real-world causality or LLM superiority. Instead,
-they show the value of combining reproducible semantic and structural causal NLP
-measurements with evidence-grounded LLM interpretation and human inspection. The
-resulting analysis preserves the distinction between corpus-level causal discourse,
-sentence-level interpretation, and actual causal effects.
+These findings did not establish real-world causality or systematic LLM superiority.
+Instead, they demonstrated the value of combining reproducible semantic and
+structural causal NLP measurements with evidence-grounded LLM interpretation, while
+retaining the need for human review. The resulting analysis preserved the distinction
+between corpus-level causal discourse, sentence-level interpretation, and actual
+causal effects.

@@ -1475,8 +1475,8 @@ linkable to causal claims and frames.
 Following Section~\ref{sec:method-causal-nlp}, two independent causal NLP pipelines
 were implemented on the shared cleaned sentence inventory. This section reports their
 implemented settings, extracted analytical units, semantic-coverage outputs,
-causal-frame network outputs, and synthetic sensitivity checks. The broader assessment
-of these results and their cross-method implications is reserved for
+causal-frame network outputs, and synthetic sensitivity checks. The broader
+assessment of these results and their cross-method implications is reserved for
 Chapter~\ref{chap:analysis}.
 
 \begin{table}[!htbp]
@@ -1501,7 +1501,7 @@ Validated causal frames & 3,196 & 655 & 674 \\
 \setlength{\tabcolsep}{3.5pt}
 \renewcommand{\arraystretch}{1.06}
 \begin{tabular}{
->{\raggedright\arraybackslash}p{0.20\linewidth}
+>{\raggedright\arraybackslash}p{0.22\linewidth}
 >{\raggedright\arraybackslash}p{0.34\linewidth}
 >{\raggedright\arraybackslash}p{0.37\linewidth}
 }
@@ -1614,7 +1614,7 @@ summarises the semantic-coverage workflow.
 {\small
 \begin{verbatim}
 Shared cleaned sentence inventory
-  -> identify eligible sentences and extract one auditable claim
+  -> retain the first valid auditable claim per eligible sentence
   -> encode claims with multilingual sentence embeddings
   -> compare three nearest opposite-corpus claims and calculate coverage deficits
   -> balance both directions through equal-size resampling
@@ -1642,40 +1642,40 @@ Sentiment $\rightarrow$ policy & 0.6325 & 0.3675 & [0.3644, 0.3712] \\
 
 
 The inventories contained 3,930 policy and 761 sentiment causal claims, motivating 50
-equal-size resamples of 761 claims, reducing dependence on one policy subset.
-Following Subsection~\ref{subsec:method-semantic-coverage} and
-Equation~\ref{eq:method-balanced-semantic}, policy-to-sentiment mean similarity was
-0.6415 (deficit 0.3585), versus 0.6325 (deficit 0.3675) sentiment-to-policy, a
-difference of \(0.0089\). Table~\ref{tab:impl-semantic-global} reports the outputs.
-As reported in Table~\ref{tab:impl-causal-settings}, the inspection threshold was
-\(\tau=0.511861\), the value below which the lowest 10\% of pooled empirical scores
-fell. It selected low-coverage claims for review and closer manual inspection. The
-audit contained 160 comparisons, but some records lacked a completed label stating
-whether the paired claims matched. Threshold counts were therefore used only for
-inspection, while similarity scores and deficits remained the pipeline measures. This
-avoided treating an unchecked cut-off as evidence of accuracy. The percentile was a
-screening rule, not a validated decision boundary. It flagged relatively weak matches
-rather than classifying causal correctness.
+equal-size resamples of 761 claims, reducing dependence on one policy subset. As
+reported in Table~\ref{tab:impl-semantic-global}, policy-to-sentiment mean similarity
+was 0.6415 (deficit 0.3585), versus 0.6325 (deficit 0.3675) sentiment-to-policy, a
+difference of \(0.0089\), following Subsection~\ref{subsec:method-semantic-coverage}
+and Equation~\ref{eq:method-balanced-semantic}. As reported in
+Table~\ref{tab:impl-causal-settings}, the inspection threshold was \(\tau=0.511861\),
+the value below which the lowest 10\% of pooled empirical scores fell. It identified
+low-coverage claims as candidates for later manual inspection. The audit contained
+160 comparisons, but some records lacked a completed label stating whether the paired
+claims matched. Threshold counts were therefore used only for inspection, while
+similarity scores and deficits remained the pipeline measures. This avoided treating
+the unchecked cut-off as evidence of accuracy. The percentile remained a screening
+rule, not a validated decision boundary. Its substantive interpretation is discussed
+further in detail in Subsection~\ref{subsec:analysis-semantic-coverage}.
 
-
-As shown in Figure~\ref{fig:impl-semantic-results}(b), P8 (AI curriculum development
-and school oversight) had the largest balanced policy-to-sentiment deficit at 0.3960,
-followed by P0 (AI-assisted learning-assessment protocols) at 0.3763, P4 (cognitive
-offloading in AI-assisted education) at 0.3729, and P1 (AI child protection and
-rights) at 0.3677. In the full claim inventory, P8 contained 431 claims from 26
-documents, P0 contained 604 claims from 29 documents, and P4 contained 211 claims
-from six documents. P3 (AI competency-framework and curriculum development) had the
-smallest policy-to-sentiment deficit at 0.3079. P8 and P0 therefore had broader
-document support than P4. Among sentiment topics, S7 (online-learning intention
-clarity and classroom relevance) had the largest balanced sentiment-to-policy deficit
-at 0.4377, followed by S2 (GenAI detection and assessment confusion) at 0.4161 and S6
-(public perceptions of AI and youth employment) at 0.4030. S7 and S2 drew on two
-documents each, while S6 drew on three. {\color{blue} Table~\ref{tab:impl-semantic-native-topics}
-lists all frozen NMF topics, their directional balanced deficits, and source support.
-Higher deficits indicate weaker cross-corpus semantic counterparts.
-Native policy and sentiment topic spaces remained separate.
-These values identify comparatively weak semantic coverage within the corresponding
-topic strata.}
+{\color{blue} Table~\ref{tab:impl-semantic-native-topics} lists frozen NMF
+topics, their directional balanced deficits, and source support. Higher deficits
+indicate weaker cross-corpus semantic counterparts. Native policy and sentiment topic
+spaces remained separate. The table identifies weak semantic
+coverage across topic strata.} Figure~\ref{fig:impl-semantic-results}(b)
+shows that P8 (AI curriculum development and school oversight) had the largest
+balanced policy-to-sentiment deficit at 0.3960, followed by P0 (AI-assisted
+learning-assessment protocols) at 0.3763, P4 (cognitive offloading in AI-assisted
+education) at 0.3729, and P1 (AI child protection and rights) at 0.3677. In the full
+claim inventory, P8 contained 431 claims from 26 documents, P0 contained 604 claims
+from 29 documents, and P4 contained 211 claims from six documents. P3 (AI
+competency-framework and curriculum development) had the smallest policy-to-sentiment
+deficit at 0.3079. P8 and P0 had broader document support than P4. Among
+sentiment topics, S7 (online-learning intention clarity and classroom relevance) had
+the largest balanced sentiment-to-policy deficit at 0.4377, followed by S2 (GenAI
+detection and assessment confusion) at 0.4161 and S6 (public perceptions of AI and
+youth employment) at 0.4030. S7 and S2 drew on two documents each, while S6 drew on
+three. The implications of these topic-level differences are examined in
+Subsection~\ref{subsec:analysis-semantic-coverage}.
 
 \begin{figure}[!htbp]
 \centering
@@ -1777,26 +1777,22 @@ Synthetic claims were projected into the original semantic analysis only as a
 sensitivity check. Following Equation~\ref{eq:method-semantic-synthetic-change}, most
 native sentiment-topic deficits changed by small amounts, while S2 changed by
 approximately \(-0.057\). No synthetic claims were assigned to S8, so no change was
-calculated for that topic. Synthetic outputs remained separate from the original
-coverage results.
+calculated for that topic. These separate synthetic results were interpreted further
+in Subsection~\ref{subsec:analysis-semantic-coverage}.
 
 \subsection{Causal-Frame Network Results}
 \label{subsec:impl-frame-networks}
 
-The causal-frame workflow followed
-Subsection~\ref{subsec:method-frame-network}
-(\texttt{CN2}, Table~\ref{tab:impl-repository-links}). It extracted cause,
-relation, and effect spans, scored frames, projected spans into frozen policy NMF
-space, and constructed weighted networks. Relations were normalised into six families:
-\scalebox{0.8}{\texttt{causes\_or\_increases}},
-\scalebox{0.8}{\texttt{reduces\_or\_prevents}},
-\scalebox{0.8}{\texttt{enables\_or\_supports}},
-\scalebox{0.8}{\texttt{requires\_or\_depends\_on}},
-\scalebox{0.8}{\texttt{risks\_or\_threatens}}, and
-\scalebox{0.8}{\texttt{expected\_to\_improve}}.
-{\color{blue}Families were defined by shared causal meaning across cues.}
-These grouped cues into relation types for network comparison.
-The pipeline below summarises the workflow.
+The causal-frame workflow followed Subsection~\ref{subsec:method-frame-network} (see
+\texttt{CN2}, Table~\ref{tab:impl-repository-links}). It extracted cause, relation,
+and effect spans, scored frames, projected spans into frozen policy NMF space, and
+constructed weighted networks. Relations were normalised into six families:
+\textit{causes or increases}, \textit{reduces or prevents},
+\textit{enables or supports}, \textit{requires or depends on},
+\textit{risks or threatens}, and \textit{expected to improve}.
+{\color{blue}The families were predefined by grouping cues with shared causal meaning.}
+These grouped cues into relation types for network comparison. The pipeline summarises
+the workflow.
 
 
 {\small
@@ -1868,10 +1864,11 @@ Reliable projected spans only & 1,540 & 294 & 0.2964 \\
 \end{subfigure}
 
 \caption{Global causal-frame matrices in the frozen policy NMF topic space.
-Panels~(a) and~(b) show policy and sentiment frame shares projected onto the common
-\(P0\)--\(P8\) axes. Panel~(c) shows their signed differences, where blue indicates
-greater policy weight and orange greater sentiment weight, highlighting
-the strongest contrasts}.
+Panels~(a) and~(b) show policy and sentiment frame shares on the same
+\(P0\)--\(P8\) cause--effect axes; sentiment spans are projected into this policy
+topic space rather than retaining their native \(S0\)--\(S8\) assignments.
+Panel~(c) shows signed share differences, where blue indicates greater policy
+weight and orange greater sentiment weight.}
 \label{fig:impl-frame-matrices}
 \end{figure}
 
@@ -1939,34 +1936,68 @@ most for causes/increases, which accounted for 36.8\% of sentiment frame weight 
 24.7\% of policy weight. Policy assigned 41.9\% to enables/supports, compared with
 37.2\% in sentiment; 12.9\% to expected improvement, compared with 6.3\%; and 9.4\%
 to requirements/dependencies, compared with 6.8\%. Risk/threat relations accounted
-for 3.8\% of policy weight and 4.1\% of sentiment weight.
-These shares suggest different emphases in the extracted relation
-families rather than differences in causal strength. Representative causal links
-underlying these patterns are examined in Section~\ref{sec:analysis-gap}.
+for 3.8\% of policy weight and 4.1\% of sentiment weight. These shares suggest
+different emphases in the relation families rather than differences in
+causal strength. Causal links underlying these patterns are examined
+in Subsection~\ref{subsec:analysis-causal-frame}.
 
 
 The synthetic-frame check produced \(D_{\mathrm{JS}}=0.3611\), compared with 0.2596
 for the original sentiment network, a difference of approximately 0.1015. The
-requirements/dependencies family produced the largest relation-share change under
+\textit{requires or depends on} family produced the largest relation-gap change under
 synthetic input. Synthetic frames remained separate from the original network.
 Following Equation~\ref{eq:method-topic-gap}, P0 had the largest topic-level gap at
 0.3109, followed by P2 at 0.3099 and P8 at 0.2959. P6 and P7 produced gaps of 0.2641
 and 0.2609, while P3 produced the smallest value at 0.1301. These results are shown
 in Figure~\ref{fig:impl-frame-results}(b). The leading topic-level outputs drew on
-54--60 source documents. Larger gaps indicate greater differences in
-how topics participate in extracted cause--effect links. Specific links contributing
-to these differences are discussed in Section~\ref{sec:analysis-gap}.
+54--60 source documents. Larger gaps indicate greater differences in how topics
+participate in extracted cause--effect links. Table~\ref{tab:impl-frame-gap-summary}
+summarises the principal frame-gap and synthetic-sensitivity results. Specific links
+contributing to these differences are discussed in Subsection~\ref{subsec:analysis-causal-frame}.
 
-The topic-level measure \(G_t\) is an unnormalised sum of incoming and outgoing
-absolute differences. It is non-negative but is not bounded above by one and is
-therefore interpreted separately from the global Jensen--Shannon divergence. The
-country outputs are shown in Figure~\ref{fig:impl-frame-results}(c) for France,
-Ireland, and the pooled Other European group. France had its largest values for P2
-and P8, with P2 reaching 1.6518. Ireland had its largest value for P7 at 0.5391,
-followed by P0 and P5 at approximately 0.397. The pooled Other European group had its
-largest value for P3 at 0.7929. France and Ireland each contained three original
-sentiment sources. These values identify where structural differences
-are most evident; their substantive meaning is considered in Section~\ref{sec:analysis-gap}.
+\begin{table}[!htbp]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{
+>{\raggedright\arraybackslash}p{0.20\linewidth}
+>{\raggedright\arraybackslash}p{0.24\linewidth}
+>{\centering\arraybackslash}p{0.15\linewidth}
+>{\raggedright\arraybackslash}p{0.30\linewidth}}
+\hline
+Scope & Leading result & Gap/divergence & Source support or comparison \\
+\hline
+Global & P0 & 0.3109 & 60 source documents \\
+Global & P2 & 0.3099 & 54 source documents \\
+Global & P8 & 0.2959 & 58 source documents \\
+Global minimum & P3 & 0.1301 & Smallest topic-level gap \\
+\hline
+France & P2 & 1.6518 & 3 sentiment sources \\
+Ireland & P7 & 0.5391 & 3 sentiment sources \\
+Other & P3 & 0.7929 & Largest pooled-group gap \\
+\hline
+Original network & \(D_{\mathrm{JS}}\) & 0.2596 & Original sentiment \\
+Synthetic network & \(D_{\mathrm{JS}}\) & 0.3611 & Change \(=+0.1015\) \\
+Synthetic sensitivity &
+\textit{requires or depends on} &
+\(+0.3349\) &
+Largest relation-gap change \\
+\hline
+\end{tabular}
+\caption{Summary of principal causal-frame topic gaps, country-level differences,
+and synthetic sensitivity results.}
+\label{tab:impl-frame-gap-summary}
+\end{table}
+
+The topic-level measure \(G_t\) sums incoming and outgoing absolute differences and
+is interpreted separately from the bounded Jensen--Shannon divergence.
+Figure~\ref{fig:impl-frame-results}(c) shows country-level outputs for France,
+Ireland, and the pooled Other European group. France was highest for P2
+(\(1.6518\)) and P8, Ireland for P7 (\(0.5391\)), followed by P0 and P5
+(\(\approx0.397\)), and the pooled group for P3 (\(0.7929\)). France and Ireland
+each contained three original sentiment sources. These values locate the strongest
+structural differences; their interpretation is deferred to
+Subsection~\ref{subsec:analysis-causal-frame}.
 
 % The substantive interpretation and assessment of the directional, topic-level,
 % country-level, relation-family, source-support, and global network differences are
@@ -1975,59 +2006,53 @@ are most evident; their substantive meaning is considered in Section~\ref{sec:an
 \section{LLM-Assisted Causal-Gap Discovery}
 \label{sec:impl-llm-causal-gap}
 
-Following Section~\ref{sec:method-llm-gap}, the implementation stage applied the LLM-assisted
-pipeline identified as \texttt{LLM} in Table~\ref{tab:impl-repository-links}. The pipeline operated
-directly on the cleaned sentence inventory rather than on the outputs of the causal NLP methods. Its
-purpose was exploratory: to assess the potential of LLM-assisted reasoning alongside NLP techniques
-for identifying and explaining source-grounded causal or conditional policy--sentiment
-relationships. A comparison between the approaches is deferred to Chapter~\ref{chap:analysis}. This
-design preserved traceability between interpretations and their supporting sentences.
+Following Section~\ref{sec:method-llm-gap}, the implementation stage applied the
+LLM-assisted pipeline identified as \texttt{LLM} in
+Table~\ref{tab:impl-repository-links}. The pipeline operated directly on the cleaned
+sentence inventory and did not use partial or complete outputs from the causal NLP
+methods. Its purpose was exploratory: to assess the potential of LLM-assisted
+reasoning alongside NLP techniques for identifying and explaining source-grounded
+causal or conditional policy--sentiment relationships. Comparison between the
+approaches is deferred to Chapter~\ref{chap:analysis}. This design preserved
+traceability between interpretations and their supporting sentences.
 
-The implemented workflow used separate analyst and verifier prompts. Evidence was sampled separately from policy and original sentiment sources for each scope, analysed for causal or
-conditional relationships, and then verified using the same evidence in reordered form. Accepted
-findings were matched across repeated runs and retained only when the recurrence and quality
-requirements defined in Section~\ref{sec:method-llm-gap} were satisfied. Repeated execution also
-provided evidence about the consistency of generated findings. Only findings surviving both
-verification and recurrence checks entered final outputs.
+The implemented workflow used separate analyst and verifier prompts. Evidence was
+sampled separately from policy and original sentiment sources for each scope,
+analysed for causal or conditional relationships, and then verified using the same
+evidence in reordered form. Accepted findings were matched across repeated runs and
+retained only when the recurrence and quality requirements defined in
+Section~\ref{sec:method-llm-gap} were satisfied. Repeated execution also provided
+evidence about the consistency of generated findings. Only findings surviving both
+verification and recurrence checks entered final outputs. The pipeline below
+summarises this workflow.
 
 {\small
 \begin{verbatim}
 Shared cleaned sentence inventory
-  -> construct source-balanced policy and sentiment batches
-  -> analyst LLM identifies evidence-grounded relationships
-  -> verifier LLM rechecks evidence in reordered form
-  -> repeat analysis across multiple runs
-  -> match and cluster recurrent findings
+  -> sample source-balanced policy and sentiment batches by scope
+  -> run analyst and verifier on each sampled batch
+  -> repeat analysis across batches and multiple runs
+  -> match and cluster recurrent findings across runs
   -> apply quality and stability filters
   -> retain verified empirical findings
-  -> repeat with synthetic sentiment for robustness only
+  -> repeat batch sampling with synthetic sentiment for robustness only
 \end{verbatim}
 }
 
 
-The implementation used \texttt{deepseek-v4-pro} for both the analyst and verifier roles with
-distinct prompts. Three evidence batches were created for each of the global, French, and Irish
-scopes. Each batch contained 24 policy and 24 original sentiment sentences. The broad
-causal-language indicator was used only to prioritise sampling and was not treated as evidence that
-a causal relationship existed. Table~\ref{tab:impl-llm-settings} reports the executed settings and
-thresholds using the notation defined in Section~\ref{sec:method-llm-gap}.
-
-The nine empirical packages contained 432 sampled evidence records in total. Across them, 32
-analysis attempts were required to obtain the target 27 usable runs. Verification retained 88
-run-level findings, which were subsequently grouped into 58 cross-run candidate clusters. After
-applying recurrence, confidence, faithfulness, agreement, stability, evidence-quality, and
-direct-comparability requirements, 16 recurrent findings were retained for exploratory analysis.
-
-Table~\ref{tab:impl-llm-findings} reports their distribution by scope. France produced eight
-retained findings, while the global and Irish scopes each produced four. Thirteen findings were
-classified as partial alignment, two as sentiment gaps, and one as alignment. No policy-gap finding
-satisfied all retention criteria in this execution. The retained findings covered three relation
-families. Nine concerned enabling or supporting relationships, five concerned risks or threats, and
-two concerned requirements or dependencies. Evidence quality was assessed as strong for three
-findings and adequate for 13. Mean classification agreement across repeated runs was 0.958 and mean
-relation-family agreement was 0.927. Mean evidence-overlap stability was 0.795, while all retained
-representative findings satisfied direct causal comparability.
-
+The implementation used \texttt{deepseek-v4-pro} for both the analyst and verifier
+roles with distinct prompts. Three evidence batches were created for each of the
+global, French, and Irish scopes. Each batch contained 24 policy and 24 original
+sentiment sentences. The broad causal-language indicator was used only to prioritise
+sampling and was not treated as evidence that a causal relationship existed.
+Table~\ref{tab:impl-llm-settings} reports the executed settings and thresholds using
+the notation defined in Section~\ref{sec:method-llm-gap}. The nine empirical packages
+contained 432 sampled evidence records in total. Across them, 32 analysis attempts
+were required to obtain the target 27 usable runs. Verification retained 88 run-level
+findings, which were subsequently grouped into 58 cross-run candidate clusters. After
+applying recurrence, confidence, faithfulness, agreement, stability,
+evidence-quality, and direct-comparability requirements, 16 recurrent findings were
+retained for exploratory analysis.
 
 
 \begin{table}[ht]
@@ -2059,7 +2084,11 @@ Relation agreement $A_{\mathrm{rel}}(C)$ & $\geq 0.50$ \\
 Direct comparability $A_{\mathrm{comp}}(C)$ & $\geq 0.66$ \\
 \hline
 \end{tabular}
-\caption{Settings and retention thresholds of the LLM-assisted causal-gap implementation.}
+\caption{Settings and retention thresholds of the LLM-assisted causal-gap
+implementation. The matching score, cluster-level confidence and faithfulness,
+and classification and relation-family agreement follow
+Equations~\ref{eq:method-agent-match}, \ref{eq:method-agent-cluster-means},
+and~\ref{eq:method-agent-agreement}, respectively.}
 \label{tab:impl-llm-settings}
 \end{table}
 
@@ -2103,43 +2132,54 @@ faithfulness, and stability are mean values for retained findings.}
 \label{tab:impl-llm-findings}
 \end{table}
 
-The corresponding mean directional deficit was 0.428 from policy to sentiment and
-0.470 from sentiment to policy. These values summarise the retained exploratory
-findings rather than the entire corpora and should not be interpreted as estimates
-of real-world causal effects or general policy--sentiment divergence.
-
-Synthetic sentiment was evaluated separately through nine corresponding robustness
-packages. Policy evidence remained fixed while original sentiment evidence was
-replaced by source-balanced synthetic sentiment. The resulting outputs were retained
-only as robustness diagnostics and were not included among the 16 empirical findings.
-Across the three scopes, the mean change in confidence was approximately 0.011 and
-the mean change in evidence faithfulness was approximately $-0.013$. The synthetic
-runs therefore provided a controlled sensitivity test without contributing
-substantive evidence about stakeholder sentiment. Their limited changes also provide
-an initial indication that the retained evaluation signals were not highly sensitive
-to the synthetic substitution.
+Table~\ref{tab:impl-llm-findings} reports their distribution by scope. France
+produced eight retained findings, while the global and Irish scopes each produced
+four. Thirteen findings were classified as partial alignment, two as sentiment gaps,
+and one as alignment. No policy-gap finding satisfied all retention criteria in this
+execution. The retained findings covered three relation families. Nine concerned
+enabling or supporting relationships, five concerned risks or threats, and two
+concerned requirements or dependencies. Evidence quality was assessed as strong for
+three findings and adequate for 13. Mean classification agreement across repeated
+runs was 0.958 and mean relation-family agreement was 0.927. Mean evidence-overlap
+stability was 0.795, while all retained representative findings satisfied direct
+causal comparability. The corresponding mean directional deficit was 0.428 from
+policy to sentiment and 0.470 from sentiment to policy. These values summarise the
+retained exploratory findings rather than the entire corpora and should not be
+interpreted as estimates of real-world causal effects or general policy--sentiment
+divergence.
 
 Manual-review fields were exported for the candidate findings, but no human labels
 had been entered for this execution. Precision, recall, and $F_1$ were therefore not
-calculated at this stage. These measures will accompany the later evaluation once
-the retained findings are manually reviewed. The corresponding human assessment and
-its comparison with the automated findings are presented in
-Chapter~\ref{chap:analysis}.
+calculated at this stage. These measures will accompany the later evaluation once the
+retained findings are manually reviewed. The corresponding human assessment and its
+comparison with the automated findings are presented in
+Section~\ref{sec:analysis-llm-causal-gap}.
 
-The LLM-assisted stage is treated here as an exploratory demonstration
-of the potential of LLM reasoning for evidence-grounded causal-gap discovery. The
-results show that candidate policy--sentiment relationships can be generated,
-independently verified, matched across runs, and filtered according to
-evidence and stability requirements. An exhaustive application would extend
-this process across the full corpus rather than the sampled evidence batches used
-here. Nevertheless, the retained findings illustrate the potential of
-embedding LLM reasoning within a systematic causal-discovery workflow. They do not
-establish that the LLM-assisted approach is superior to conventional causal NLP
-techniques. The substantive interpretation of these findings and their direct
-comparison with the semantic-coverage and causal-frame results are reserved for
-Chapter~\ref{chap:analysis}.
+Following the synthetic-robustness procedure in Section~\ref{sec:method-llm-gap},
+synthetic sentiment was evaluated separately through nine corresponding robustness
+packages. Policy evidence remained fixed while original sentiment evidence was
+replaced by source-balanced synthetic sentiment. The resulting outputs were retained
+only as robustness diagnostics and were not included among the 16 empirical findings.
+Using the mean confidence and faithfulness measures defined in
+Equation~\ref{eq:method-agent-cluster-means}, the mean changes across the three
+scopes were approximately \(\Delta\overline{c}=0.011\) and
+\(\Delta\overline{\phi}=-0.013\), respectively. The synthetic runs therefore provided
+a controlled sensitivity test without contributing substantive evidence about
+stakeholder sentiment.
 
-\section{Summary}
+The LLM-assisted stage is treated here as an exploratory demonstration of the
+potential of LLM reasoning for evidence-grounded causal-gap discovery. The results
+show that candidate policy--sentiment relationships can be generated, independently
+verified, matched across runs, and filtered according to evidence and stability
+requirements. An exhaustive application would extend this process across the full
+corpus rather than the sampled evidence batches used here. Nevertheless, the retained
+findings illustrate the potential of embedding LLM reasoning within a systematic
+causal-discovery workflow. They do not establish that the LLM-assisted approach is
+superior to conventional causal NLP techniques. The substantive interpretation of
+these findings and their direct comparison with the semantic-coverage and
+causal-frame results are reserved for Section~\ref{sec:analysis-llm-causal-gap}.
+
+\section*{Summary}
 
 This chapter implemented the methodology of Chapter~\ref{chap:method} as an
 incremental workflow from document preparation to topic modelling, causal NLP, and
@@ -2171,7 +2211,7 @@ in expressed causal structure rather than real-world causal mechanisms.
 Finally, the LLM-assisted stage independently examined sampled policy and sentiment
 evidence using separate analyst and verifier roles, repeated runs, and explicit
 retention criteria. Sixteen recurrent findings survived verification and stability
-requirements, demonstrating the feasibility of embedding evidence-grounded LLM
+requirements, illustrating the feasibility of embedding evidence-grounded LLM
 reasoning within the causal-analysis workflow. An exhaustive application would extend
 this process across the full corpus rather than sampled evidence batches. Human
 evaluation, substantive interpretation, and direct comparison across the topic,

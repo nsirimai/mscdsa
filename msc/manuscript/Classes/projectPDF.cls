@@ -48,13 +48,13 @@
                  bookmarksopen = true,
                  bookmarksnumbered = true,
                  breaklinks = true,
-                 linktocpage,
+                 linktoc=all,
                  pagebackref,
                  colorlinks = false,
                  linkcolor = black,
                  urlcolor  = black,
-                citecolor = black,
-                anchorcolor = black,
+                 citecolor = black,
+                 anchorcolor = black,
                  hyperindex = true,
                  hyperfigures
                  ]{hyperref} 

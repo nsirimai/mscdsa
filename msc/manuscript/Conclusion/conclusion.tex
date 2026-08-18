@@ -1,3 +1,121 @@
 \chapter{Conclusion and Perspectives}
-\label{chpt:conc}
+\label{chap:conc}
 \graphicspath{Conclusion/img/}
+
+
+\section{Conclusion}
+
+This study investigated how a multi-layered NLP framework could identify,
+analyse, and explain differences between AI-in-education policy and stakeholder
+evidence surrounding its implementation. Rather than treating the policy--practice
+gap as a measurable quantity, the study examined one observable layer of that
+gap through policy and sentiment discourse. The framework combined corpus
+construction, topic modelling, semantic causal-claim coverage, causal-frame networks,
+synthetic-data sensitivity analysis, and exploratory LLM-assisted interpretation.
+
+The topic-modelling stage established the thematic structure required for subsequent
+analysis. LDA, BERTopic-style clustering, and NMF provided complementary views of the
+corpora, while NMF supplied the reference topic space used by the causal analyses.
+These methods showed that policy and sentiment frequently addressed comparable
+AI-in-education concerns, but thematic presence alone did not establish equivalent
+interpretation or emphasis. This motivated the analysis of causal language and the
+relationships connecting educational concerns.
+
+The two causal NLP methods provided the principal evidence for a selective
+policy--sentiment causal gap. Semantic coverage showed substantial correspondence
+between the corpora alongside persistent differences in the availability of close
+causal-claim counterparts. Causal-frame analysis further showed that comparable
+subjects could occupy different causal roles. Policy placed greater emphasis on
+enabling mechanisms, institutional requirements, and intended improvements, whereas
+sentiment more often foregrounded expressed causes and consequences. The strongest
+differences concerned learning and assessment, curriculum development and oversight,
+and the organisation of institutional mechanisms around these concerns. The findings
+therefore indicated structured differences rather than a uniform separation between
+policy and sentiment.
+
+The LLM-assisted stage provided a complementary interpretation of this evidence.
+It identified causal or conditional relationships that could remain outside fixed
+cue extraction and provided explicit explanations for evidence relationships that
+semantic similarity represented numerically. It also exposed cases where superficial
+cue matching produced questionable causal candidates. These observations did not
+establish LLM superiority. Instead, they illustrated the benefit of combining
+reproducible corpus-level NLP measurements with evidence-grounded interpretation
+while retaining human review.
+
+Overall, the research question was addressed by demonstrating that a multi-layered
+NLP framework can locate thematic correspondence, measure differences in causal-claim
+coverage, reveal structural differences in causal framing, and connect these patterns
+back to traceable sentence-level evidence. Its principal contribution lies in
+distinguishing different forms of policy--sentiment divergence rather than reducing
+them to a single gap score. The resulting evidence concerns expressed causal
+discourse and provides a computational view of one dimension of the broader
+policy--practice problem; it does not demonstrate real-world causal effects,
+implementation outcomes, or policy effectiveness.
+
+\section{Limitations}
+
+Three limitations are most relevant to the interpretation of the findings. First,
+policy and sentiment evidence were unevenly distributed across countries, with
+substantially less original sentiment evidence available at national level.
+This constrained country-level comparison, particularly for Ireland and France.
+The imbalance also limited direct comparison of policy priorities with stakeholder
+responses within the same national contexts. Moreover, stakeholder discourse captures
+perceptions, concerns, and experiences rather than direct classroom implementation.
+The available evidence therefore reflects how policy is received and discussed,
+but not how consistently it is enacted in educational practice. The
+policy--sentiment gap consequently represents one observable dimension of the broader
+policy--practice gap.
+
+Second, the causal NLP results remain dependent on modelling choices. Semantic
+coverage relies on predefined causal cues, sentence embeddings, and
+nearest-neighbour similarity, while causal-frame analysis depends on relation-family
+definitions, topic projection, and fallback rules. Less formulaic causal relationships may therefore
+remain outside the extracted claim inventory, and some frame assignments required
+document-topic fallback. Robustness analyses showed that the main structural
+differences persisted across alternative specifications, but these methodological
+dependencies remain.
+
+Third, the LLM-assisted analysis was exploratory and operated on sampled evidence
+rather than the complete corpus. Its findings relied on automated analyst and
+verifier judgements, without a completed human-labelled evaluation of precision,
+recall, or classification accuracy. The LLM results should therefore be treated as
+evidence-grounded interpretations requiring further human validation. Synthetic
+sentiment was similarly restricted to sensitivity testing and did not contribute to
+the empirical conclusions.
+
+\section{Perspectives}
+
+Future research could first expand the empirical evidence base. Larger and more
+balanced stakeholder corpora could include teachers, students, parents, school
+leaders, and policy implementers across additional countries. Longitudinal evidence
+would also make it possible to examine whether policy--sentiment relationships change
+as AI guidance, regulation, technologies, and educational practices evolve. Direct
+implementation evidence, including institutional reports, interviews, surveys, and
+classroom studies, would provide an important bridge from the policy--sentiment layer
+examined here toward the broader policy--practice gap.
+
+A second direction concerns methodological extension. Causal extraction could move
+beyond a fixed cue inventory through multilingual contextual models with improved
+cross-lingual semantic generalisation across diverse contexts while preserving the
+provenance and auditability provided by the current pipeline. Human annotation of
+causal claims and frame relationships would enable systematic evaluation of
+extraction precision and recall. Topic and causal-frame assignments could likewise
+be assessed against manually validated reference sets, strengthening the empirical
+basis for comparing modelling choices.
+
+The LLM-assisted component also offers a clear extension path. Applying the
+analyst--verifier procedure across the complete corpus, followed by structured human
+evaluation, would allow its contribution to be assessed more rigorously against the
+causal NLP methods. Future work could examine where LLM interpretation consistently
+adds evidence unavailable to fixed extraction, where it introduces unsupported
+inferences, and how human review can be incorporated efficiently without weakening
+traceability or reproducibility.
+
+More broadly, the framework could support continuous comparison between evolving AI
+policy and stakeholder evidence. Rather than treating policy analysis as a static
+snapshot, future systems could identify emerging concerns, changes in causal framing,
+and areas where institutional guidance no longer corresponds closely to reported
+experience. Combined with representative empirical data and human validation, this
+would extend the present framework from retrospective discourse analysis toward a
+more systematic instrument for studying how AI-in-education governance develops in
+practice.
